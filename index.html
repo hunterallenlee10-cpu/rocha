@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocha Family Auto Sales</title>
+<meta name="description" content="Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle. 261861 Highway 101, Sequim, WA 98382 — Sales: 360-797-1202.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f6bff'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='bold' fill='white' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-soft:#0e1424;
+    --surface:#121a2e;
+    --card:#141d33;
+    --card-edge:rgba(255,255,255,.07);
+    --text:#eef2fb;
+    --muted:#9aa7c2;
+    --accent:#2f6bff;
+    --accent-2:#4f8cff;
+    --accent-soft:rgba(47,107,255,.14);
+    --glow:rgba(47,107,255,.35);
+    --radius:18px;
+    --font-display:'Sora',sans-serif;
+    --font-body:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+
+  /* ---------- Top utility bar ---------- */
+  .topbar{
+    background:linear-gradient(90deg,#101736,#0c1226);
+    border-bottom:1px solid var(--card-edge);
+    font-size:13.5px;
+    color:var(--muted);
+  }
+  .topbar .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;min-height:42px;flex-wrap:wrap;padding-block:6px;
+  }
+  .topbar-group{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .topbar-item{display:flex;align-items:center;gap:8px;white-space:nowrap}
+  .topbar-item svg{width:15px;height:15px;flex:none;stroke:var(--accent-2)}
+  .topbar-item strong{color:var(--text);font-weight:600}
+  .topbar-social{display:flex;gap:10px}
+  .topbar-social a{
+    display:grid;place-items:center;width:28px;height:28px;border-radius:8px;
+    background:rgba(255,255,255,.06);transition:background .2s,transform .2s;
+  }
+  .topbar-social a:hover{background:var(--accent);transform:translateY(-1px)}
+  .topbar-social svg{width:14px;height:14px;fill:var(--text)}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,26,.72);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s,background .3s;
+  }
+  header.site.scrolled{border-bottom-color:var(--card-edge);background:rgba(10,14,26,.92)}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand-mark{
+    width:46px;height:46px;border-radius:13px;flex:none;
+    background:linear-gradient(135deg,var(--accent),#1e3fa8);
+    display:grid;place-items:center;
+    box-shadow:0 6px 20px -6px var(--glow);
+  }
+  .brand-mark svg{width:28px;height:28px;stroke:#fff}
+  .brand-name{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:.01em;line-height:1.2}
+  .brand-name span{color:var(--accent-2)}
+  .brand-sub{font-size:11.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  nav.main{display:flex;align-items:center;gap:4px}
+  nav.main a{
+    font-weight:600;font-size:14.5px;color:var(--muted);
+    padding:9px 15px;border-radius:10px;
+    transition:color .2s,background .2s;
+  }
+  nav.main a:hover,nav.main a.active{color:var(--text);background:rgba(255,255,255,.06)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:9px;
+    background:linear-gradient(135deg,var(--accent),#1e4fd6);
+    color:#fff!important;font-weight:700;font-size:14.5px;
+    padding:11px 20px;border-radius:12px;margin-left:10px;
+    box-shadow:0 8px 24px -8px var(--glow);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--glow)}
+  .nav-cta svg{width:16px;height:16px;stroke:#fff}
+  .nav-toggle{
+    display:none;background:none;border:1px solid var(--card-edge);
+    border-radius:10px;width:44px;height:44px;cursor:pointer;
+    place-items:center;color:var(--text);
+  }
+  .nav-toggle svg{width:22px;height:22px;stroke:currentColor}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:96px 0 80px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(680px 420px at 82% 8%,rgba(47,107,255,.22),transparent 62%),
+      radial-gradient(560px 380px at 8% 88%,rgba(79,140,255,.12),transparent 60%);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent-2);background:var(--accent-soft);
+    border:1px solid rgba(47,107,255,.3);
+    padding:8px 16px;border-radius:999px;margin-bottom:22px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
+  h1{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(34px,4.6vw,54px);line-height:1.12;letter-spacing:-.02em;
+    margin-bottom:20px;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(92deg,var(--accent-2),#8ab4ff 60%,#c4d7ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-lead{color:var(--muted);font-size:17.5px;max-width:52ch;margin-bottom:32px}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:var(--font-body);font-weight:700;font-size:15.5px;
+    padding:15px 28px;border-radius:14px;border:none;cursor:pointer;
+    transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;
+  }
+  .btn svg{width:18px;height:18px;stroke:currentColor}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),#1e4fd6);color:#fff;
+    box-shadow:0 10px 30px -8px var(--glow);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -10px var(--glow)}
+  .btn-ghost{
+    background:rgba(255,255,255,.05);color:var(--text);
+    border:1px solid var(--card-edge);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
+  .hero-badges{display:flex;gap:26px;flex-wrap:wrap}
+  .hero-badge{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--muted);font-weight:500}
+  .hero-badge svg{width:19px;height:19px;stroke:var(--accent-2);flex:none}
+  .hero-badge strong{color:var(--text);font-weight:600}
+
+  .hero-visual{position:relative}
+  .hero-card{
+    position:relative;border-radius:24px;overflow:hidden;
+    border:1px solid var(--card-edge);
+    background:linear-gradient(160deg,#16214040,#0d132600),var(--surface);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
+  }
+  .hero-card svg.scene{width:100%;height:auto}
+  .hero-card-tag{
+    position:absolute;top:18px;left:18px;
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(10,14,26,.72);backdrop-filter:blur(8px);
+    border:1px solid var(--card-edge);border-radius:999px;
+    padding:8px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);
+  }
+  .hero-card-tag .dot{width:7px;height:7px;border-radius:50%;background:#39d98a;box-shadow:0 0 8px #39d98a}
+  .hero-float{
+    position:absolute;right:-14px;bottom:-20px;z-index:2;
+    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
+    padding:15px 20px;display:flex;align-items:center;gap:13px;
+    box-shadow:0 20px 50px -18px rgba(0,0,0,.8);
+  }
+  .hero-float svg{width:26px;height:26px;stroke:var(--accent-2);flex:none}
+  .hero-float b{display:block;font-family:var(--font-display);font-size:15px}
+  .hero-float span{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- Quick action tiles ---------- */
+  .tiles{padding:26px 0 0}
+  .tiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:-38px;position:relative;z-index:2}
+  .tile{
+    display:flex;align-items:center;gap:16px;
+    background:linear-gradient(150deg,#1a2547,#121a2e 70%);
+    border:1px solid var(--card-edge);border-radius:var(--radius);
+    padding:22px 24px;transition:transform .25s,border-color .25s,box-shadow .25s;
+  }
+  .tile:hover{transform:translateY(-4px);border-color:rgba(47,107,255,.45);box-shadow:0 18px 40px -18px var(--glow)}
+  .tile-icon{
+    width:52px;height:52px;border-radius:14px;flex:none;
+    background:var(--accent-soft);border:1px solid rgba(47,107,255,.3);
+    display:grid;place-items:center;
+  }
+  .tile-icon svg{width:25px;height:25px;stroke:var(--accent-2)}
+  .tile b{font-family:var(--font-display);font-size:16px;display:block;letter-spacing:.01em}
+  .tile span{font-size:13.5px;color:var(--muted)}
+  .tile-arrow{margin-left:auto;color:var(--muted);transition:transform .25s,color .25s}
+  .tile:hover .tile-arrow{transform:translateX(4px);color:var(--accent-2)}
+  .tile-arrow svg{width:18px;height:18px;stroke:currentColor}
+
+  /* ---------- Sections ---------- */
+  section{padding:88px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+  .kicker{
+    font-size:12.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent-2);display:flex;align-items:center;gap:10px;margin-bottom:12px;
+  }
+  .kicker::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.2vw,38px);letter-spacing:-.015em;line-height:1.18}
+  .sec-head p{color:var(--muted);max-width:46ch}
+
+  /* ---------- Price chips ---------- */
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px}
+  .chip{
+    font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--muted);
+    background:rgba(255,255,255,.045);border:1px solid var(--card-edge);
+    padding:10px 19px;border-radius:999px;cursor:pointer;
+    transition:all .2s;
+  }
+  .chip:hover{color:var(--text);border-color:rgba(47,107,255,.5)}
+  .chip.active{
+    background:linear-gradient(135deg,var(--accent),#1e4fd6);color:#fff;
+    border-color:transparent;box-shadow:0 8px 22px -8px var(--glow);
+  }
+
+  /* ---------- Vehicle cards ---------- */
+  .cars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .car{
+    background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .25s,border-color .25s,box-shadow .25s,opacity .3s;
+  }
+  .car:hover{transform:translateY(-6px);border-color:rgba(47,107,255,.4);box-shadow:0 22px 50px -20px rgba(0,0,0,.8)}
+  .car.hidden{display:none}
+  .car-media{position:relative;aspect-ratio:16/9.5;overflow:hidden}
+  .car-media svg{width:100%;height:100%;transition:transform .4s ease}
+  .car:hover .car-media svg{transform:scale(1.045)}
+  .car-year{
+    position:absolute;top:12px;left:12px;
+    background:rgba(10,14,26,.7);backdrop-filter:blur(6px);
+    border:1px solid var(--card-edge);border-radius:9px;
+    font-family:var(--font-display);font-weight:700;font-size:13px;
+    padding:5px 11px;letter-spacing:.05em;
+  }
+  .car-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
+  .car h3{font-family:var(--font-display);font-weight:700;font-size:16.5px;line-height:1.3;letter-spacing:.01em;margin-bottom:8px}
+  .car-miles{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:16px}
+  .car-miles svg{width:15px;height:15px;stroke:var(--accent-2);flex:none}
+  .car-foot{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid var(--card-edge);padding-top:15px}
+  .car-price{font-family:var(--font-display);font-weight:800;font-size:21px;color:var(--accent-2)}
+  .car-price sup{font-size:12px;color:var(--muted);font-weight:600}
+  .car-fees{font-size:11.5px;color:var(--muted)}
+  .cars-note{margin-top:26px;font-size:13px;color:var(--muted)}
+  .cars-cta{margin-top:34px;text-align:center}
+
+  /* ---------- Welcome / About ---------- */
+  .about{
+    background:
+      radial-gradient(700px 420px at 100% 0%,rgba(47,107,255,.1),transparent 60%),
+      var(--bg-soft);
+    border-block:1px solid var(--card-edge);
+  }
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+  .about-copy p{color:var(--muted);font-size:16.5px;margin-top:20px}
+  .about-copy p strong{color:var(--text);font-weight:600}
+  .about-panel{display:grid;gap:16px}
+  .about-item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
+    padding:20px 22px;transition:transform .25s,border-color .25s;
+  }
+  .about-item:hover{transform:translateX(6px);border-color:rgba(47,107,255,.4)}
+  .about-item .tile-icon{width:46px;height:46px;border-radius:12px}
+  .about-item .tile-icon svg{width:22px;height:22px}
+  .about-item b{font-family:var(--font-display);font-size:15.5px;display:block;margin-bottom:3px}
+  .about-item span{font-size:13.5px;color:var(--muted)}
+
+  /* ---------- Apply ---------- */
+  .apply-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:start}
+  .apply-info p{color:var(--muted);margin:18px 0 28px;max-width:48ch}
+  .apply-points{display:grid;gap:14px;margin-bottom:32px}
+  .apply-point{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+  .apply-point svg{width:20px;height:20px;stroke:#39d98a;flex:none}
+  .apply-call{
+    display:inline-flex;align-items:center;gap:14px;
+    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
+    padding:16px 22px;
+  }
+  .apply-call svg{width:24px;height:24px;stroke:var(--accent-2)}
+  .apply-call span{font-size:12.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:700;display:block}
+  .apply-call b{font-family:var(--font-display);font-size:19px;letter-spacing:.02em}
+  form.apply{
+    background:var(--card);border:1px solid var(--card-edge);border-radius:22px;
+    padding:34px;box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px;letter-spacing:.02em}
+  .field input,.field select,.field textarea{
+    width:100%;background:rgba(255,255,255,.045);
+    border:1px solid var(--card-edge);border-radius:12px;
+    color:var(--text);font-family:var(--font-body);font-size:15px;
+    padding:13px 15px;transition:border-color .2s,box-shadow .2s;
+  }
+  .field textarea{resize:vertical;min-height:88px}
+  .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239aa7c2' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+  .field select option{background:var(--card);color:var(--text)}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(47,107,255,.22);
+  }
+  form.apply .btn{width:100%;margin-top:8px}
+  .form-note{font-size:12.5px;color:var(--muted);margin-top:14px;text-align:center}
+  .form-success{
+    display:none;text-align:center;padding:36px 10px;
+  }
+  .form-success svg{width:54px;height:54px;stroke:#39d98a;margin:0 auto 18px}
+  .form-success b{font-family:var(--font-display);font-size:20px;display:block;margin-bottom:8px}
+  .form-success p{color:var(--muted);font-size:15px}
+
+  /* ---------- Contact ---------- */
+  .contact{
+    background:
+      radial-gradient(700px 420px at 0% 100%,rgba(47,107,255,.09),transparent 60%),
+      var(--bg-soft);
+    border-block:1px solid var(--card-edge);
+  }
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:stretch}
+  .contact-cards{display:grid;gap:16px;align-content:start}
+  .contact-card{
+    display:flex;gap:18px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
+    padding:22px 24px;transition:transform .25s,border-color .25s;
+  }
+  .contact-card:hover{transform:translateY(-3px);border-color:rgba(47,107,255,.4)}
+  .contact-card b{font-family:var(--font-display);font-size:15.5px;display:block;margin-bottom:4px}
+  .contact-card p{font-size:14.5px;color:var(--muted)}
+  .contact-card a{color:var(--accent-2);font-weight:600}
+  .contact-card a:hover{text-decoration:underline}
+  .contact-social{display:flex;gap:12px;margin-top:6px}
+  .contact-social a{
+    display:grid;place-items:center;width:42px;height:42px;border-radius:12px;
+    background:rgba(255,255,255,.05);border:1px solid var(--card-edge);
+    transition:background .2s,transform .2s,border-color .2s;
+  }
+  .contact-social a:hover{background:var(--accent);border-color:transparent;transform:translateY(-3px)}
+  .contact-social svg{width:18px;height:18px;fill:var(--text)}
+  .map-shell{
+    border-radius:22px;overflow:hidden;border:1px solid var(--card-edge);
+    min-height:380px;background:var(--card);position:relative;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
+  }
+  .map-shell iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0;
+    filter:grayscale(.35) contrast(1.05);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 0 34px}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;
+    padding-bottom:40px;border-bottom:1px solid var(--card-edge);
+  }
+  .foot-brand p{color:var(--muted);font-size:14.5px;margin-top:16px;max-width:40ch}
+  .foot-col b{font-family:var(--font-display);font-size:14px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:18px;color:var(--text)}
+  .foot-col a,.foot-col span{display:block;color:var(--muted);font-size:14.5px;margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:var(--accent-2)}
+  .foot-base{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-top:26px;flex-wrap:wrap;font-size:13px;color:var(--muted);
+  }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1020px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .hero-visual{max-width:560px}
+    .cars{grid-template-columns:repeat(2,1fr)}
+    .tiles-grid{grid-template-columns:1fr;margin-top:0}
+    .about-grid,.apply-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:840px){
+    nav.main{
+      position:fixed;inset:0 0 auto 0;top:0;z-index:60;
+      flex-direction:column;align-items:stretch;gap:6px;
+      background:rgba(10,14,26,.98);backdrop-filter:blur(16px);
+      padding:96px 24px 32px;border-bottom:1px solid var(--card-edge);
+      transform:translateY(-105%);transition:transform .3s ease;
+    }
+    nav.main.open{transform:none}
+    nav.main a{font-size:17px;padding:14px 16px}
+    .nav-cta{margin:10px 0 0;justify-content:center}
+    .nav-toggle{display:grid;position:relative;z-index:70}
+    .topbar .wrap{justify-content:center}
+    .topbar-group{justify-content:center}
+    .hero{padding:64px 0 60px}
+    section{padding:64px 0}
+  }
+  @media (max-width:560px){
+    .cars{grid-template-columns:1fr}
+    .form-row{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:32px}
+    .hero-float{right:8px;bottom:-16px;padding:12px 16px}
+    .topbar-group{gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG symbol library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Sedan silhouette -->
+    <symbol id="car-sedan" viewBox="0 0 240 86">
+      <path d="M18 62 Q10 62 10 54 L10 50 Q10 44 18 42 L48 36 L72 17 Q77 12 85 12 L146 12 Q154 12 160 17 L186 36 L222 42 Q230 44 230 52 L230 54 Q230 62 222 62 L204 62 A18 18 0 0 0 168 62 L92 62 A18 18 0 0 0 56 62 Z" fill="currentColor"/>
+      <path d="M80 34 L96 19 Q99 16 104 16 L112 16 L112 34 Z M120 16 L143 16 Q148 16 151 19 L166 34 L120 34 Z" fill="rgba(255,255,255,.22)"/>
+      <circle cx="74" cy="62" r="13" fill="#0a0e1a"/><circle cx="74" cy="62" r="5.5" fill="rgba(255,255,255,.35)"/>
+      <circle cx="186" cy="62" r="13" fill="#0a0e1a"/><circle cx="186" cy="62" r="5.5" fill="rgba(255,255,255,.35)"/>
+    </symbol>
+    <!-- Pickup truck silhouette -->
+    <symbol id="car-truck" viewBox="0 0 240 86">
+      <path d="M14 64 Q10 64 10 58 L10 46 Q10 40 16 40 L34 40 L40 20 Q42 14 50 14 L92 14 Q98 14 102 19 L116 38 L224 38 Q230 38 230 44 L230 58 Q230 64 226 64 L206 64 A16 16 0 0 0 174 64 L88 64 A16 16 0 0 0 56 64 Z" fill="currentColor"/>
+      <path d="M44 36 L49 21 Q50 18 54 18 L88 18 Q92 18 94 21 L105 36 Z" fill="rgba(255,255,255,.22)"/>
+      <circle cx="72" cy="64" r="13" fill="#0a0e1a"/><circle cx="72" cy="64" r="5.5" fill="rgba(255,255,255,.35)"/>
+      <circle cx="190" cy="64" r="13" fill="#0a0e1a"/><circle cx="190" cy="64" r="5.5" fill="rgba(255,255,255,.35)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-group">
+      <span class="topbar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        261861 Highway 101, Sequim, WA 98382
+      </span>
+      <span class="topbar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        Sales: <strong>360-797-1202</strong>
+      </span>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.6V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8.1v3h2.4v7Z"/></svg></a>
+      <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8.1L2.2 3h6.3l4.3 5.7ZM16.7 19.2h1.7L7.6 4.7H5.8Z"/></svg></a>
+      <a href="#" aria-label="Yelp"><svg viewBox="0 0 24 24"><path d="M11.2 2.6c.4-.8 1.6-.6 1.8.3l1 6.7c.1 1-1 1.6-1.8 1L7.4 7.1c-.7-.6-.5-1.7.4-2Zm9.3 8.1c.9-.2 1.6.8 1.1 1.6l-2 2.7c-.5.7-1.7.5-1.9-.4l-.4-1.9c-.2-.9.6-1.6 1.4-1.4ZM20 18.6c.8.5.6 1.7-.3 1.9l-3.3.7c-.9.2-1.6-.7-1.2-1.5l.9-1.8c.4-.8 1.4-1 2-.4ZM12.7 16.8c.7-.6 1.8-.1 1.8.8l-.1 3.5c0 .9-1.2 1.3-1.8.6l-1.4-1.6c-.6-.7-.4-1.7.4-2.1ZM4.2 13.9c-.9.3-1.7-.7-1.2-1.5L4.7 9.6c.5-.8 1.7-.6 1.9.3l.6 2.3c.2.8-.5 1.6-1.3 1.5Z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site" id="siteHeader">
+  <div class="wrap nav-row">
+    <a class="brand" href="#home" aria-label="Rocha Family Auto Sales — Home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg>
+      </span>
+      <span>
+        <span class="brand-name">Rocha <span>Family</span> Auto Sales</span>
+        <span class="brand-sub">www.sequimauto.com</span>
+      </span>
+    </a>
+    <nav class="main" id="mainNav" aria-label="Main navigation">
+      <a href="#home" class="active">Home</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#apply">Apply Online</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact Us</a>
+      <a class="nav-cta" href="tel:3607971202">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        360-797-1202
+      </a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="home">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Welcome">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="reveal">
+          <span class="eyebrow"><span class="dot"></span>Welcome to Rocha Family Auto Sales</span>
+          <h1>Your #1 source for buying a <em>quality pre-owned vehicle</em></h1>
+          <p class="hero-lead">Dedicated to providing you with the ultimate automobile buying experience — huge savings on the highest quality vehicles of your choice, with a full array of financing options to meet your needs.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#inventory">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg>
+              Inventory Vehicles
+            </a>
+            <a class="btn btn-ghost" href="#apply">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
+              Apply Now — Credit Online
+            </a>
+          </div>
+          <div class="hero-badges">
+            <span class="hero-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span><strong>Consignments</strong> welcome</span>
+            </span>
+            <span class="hero-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/></svg>
+              <span><strong>Family owned</strong> · Sequim, WA</span>
+            </span>
+            <span class="hero-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              <span><strong>Financing</strong> options available</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-card">
+            <span class="hero-card-tag"><span class="dot"></span>Open Today</span>
+            <svg class="scene" viewBox="0 0 560 400" role="img" aria-label="Stylized illustration of a pickup truck on the lot at dusk">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1a2a5e"/>
+                  <stop offset=".55" stop-color="#16214a"/>
+                  <stop offset="1" stop-color="#0e1530"/>
+                </linearGradient>
+                <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0c1226"/>
+                  <stop offset="1" stop-color="#0a0e1a"/>
+                </linearGradient>
+                <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+                  <stop offset="0" stop-color="#4f8cff" stop-opacity=".85"/>
+                  <stop offset="1" stop-color="#4f8cff" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="560" height="400" fill="url(#sky)"/>
+              <circle cx="430" cy="130" r="130" fill="url(#sun)"/>
+              <circle cx="430" cy="130" r="46" fill="#5d95ff" opacity=".9"/>
+              <path d="M0 262 L90 236 L150 252 L230 226 L310 250 L400 232 L480 252 L560 238 L560 400 L0 400 Z" fill="#111a38" opacity=".8"/>
+              <rect y="290" width="560" height="110" fill="url(#ground)"/>
+              <g stroke="#2f6bff" stroke-opacity=".35" stroke-width="2">
+                <line x1="30" y1="330" x2="120" y2="330"/><line x1="180" y1="330" x2="270" y2="330"/>
+                <line x1="330" y1="330" x2="420" y2="330"/><line x1="480" y1="330" x2="560" y2="330"/>
+              </g>
+              <g color="#0b1020">
+                <use href="#car-truck" x="120" y="176" width="330" height="118" color="#0d1430"/>
+              </g>
+              <use href="#car-truck" x="118" y="172" width="330" height="118" color="#3b74ff"/>
+              <ellipse cx="285" cy="298" rx="170" ry="12" fill="#000" opacity=".4"/>
+            </svg>
+          </div>
+          <div class="hero-float">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span><b>Quality Pre-Owned</b><span>Lease returns &amp; new car trades</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUICK ACTION TILES ============ -->
+  <div class="tiles" aria-label="Quick links">
+    <div class="wrap tiles-grid">
+      <a class="tile reveal" href="#apply">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
+        <span><b>Apply Now</b><span>Credit Online</span></span>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+      </a>
+      <a class="tile reveal" href="#inventory">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg></span>
+        <span><b>Inventory</b><span>Vehicles</span></span>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+      </a>
+      <a class="tile reveal" href="#contact">
+        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <span><b>Visit the Lot</b><span>261861 Highway 101, Sequim, WA</span></span>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ INVENTORY ============ -->
+  <section id="inventory" aria-label="Inventory">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="kicker">Inventory Vehicles</div>
+          <h2>Featured Vehicles</h2>
+        </div>
+        <p>Search by price and find the right quality pre-owned vehicle for you.</p>
+      </div>
+
+      <div class="chips reveal" role="group" aria-label="Search by price">
+        <button class="chip" data-max="5000">Under $5,000</button>
+        <button class="chip" data-max="10000">Under $10,000</button>
+        <button class="chip" data-max="15000">Under $15,000</button>
+        <button class="chip" data-max="20000">Under $20,000</button>
+        <button class="chip" data-max="25000">Under $25,000</button>
+        <button class="chip" data-max="30000">Under $30,000</button>
+        <button class="chip" data-max="35000">Under $35,000</button>
+        <button class="chip active" data-max="all">All Cars</button>
+      </div>
+
+      <div class="cars" id="carGrid">
+        <article class="car reveal" data-price="13190">
+          <div class="car-media">
+            <svg viewBox="0 0 400 240" role="img" aria-label="2001 Ford F250 Super Duty Super Cab">
+              <defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2c66"/><stop offset="1" stop-color="#101833"/></linearGradient></defs>
+              <rect width="400" height="240" fill="url(#bg1)"/>
+              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2001</text>
+              <use href="#car-truck" x="80" y="88" width="240" height="86" color="#4f8cff"/>
+              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
+            </svg>
+          </div>
+          <span class="car-year">2001</span>
+          <div class="car-body">
+            <h3>2001 Ford F250 Super Duty Super Cab</h3>
+            <span class="car-miles">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
+              183,872 Miles
+            </span>
+            <div class="car-foot">
+              <span class="car-price">$13,190<sup>*</sup></span>
+              <span class="car-fees">*Includes dealer fees</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="car reveal" data-price="4190">
+          <div class="car-media">
+            <svg viewBox="0 0 400 240" role="img" aria-label="2000 Chrysler 300M">
+              <defs><linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#20265c"/><stop offset="1" stop-color="#111631"/></linearGradient></defs>
+              <rect width="400" height="240" fill="url(#bg2)"/>
+              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2000</text>
+              <use href="#car-sedan" x="80" y="88" width="240" height="86" color="#8ea9ff"/>
+              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
+            </svg>
+          </div>
+          <span class="car-year">2000</span>
+          <div class="car-body">
+            <h3>2000 Chrysler 300M</h3>
+            <span class="car-miles">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
+              170,490 Miles
+            </span>
+            <div class="car-foot">
+              <span class="car-price">$4,190<sup>*</sup></span>
+              <span class="car-fees">*Includes dealer fees</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="car reveal" data-price="25190">
+          <div class="car-media">
+            <svg viewBox="0 0 400 240" role="img" aria-label="2000 Dodge Ram 3500 Quad Cab">
+              <defs><linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33204f"/><stop offset="1" stop-color="#141230"/></linearGradient></defs>
+              <rect width="400" height="240" fill="url(#bg3)"/>
+              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2000</text>
+              <use href="#car-truck" x="80" y="88" width="240" height="86" color="#b06bff"/>
+              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
+            </svg>
+          </div>
+          <span class="car-year">2000</span>
+          <div class="car-body">
+            <h3>2000 Dodge Ram 3500 Quad Cab</h3>
+            <span class="car-miles">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
+              91,759 Miles
+            </span>
+            <div class="car-foot">
+              <span class="car-price">$25,190<sup>*</sup></span>
+              <span class="car-fees">*Includes dealer fees</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="car reveal" data-price="4190">
+          <div class="car-media">
+            <svg viewBox="0 0 400 240" role="img" aria-label="1999 Mazda 626">
+              <defs><linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123a52"/><stop offset="1" stop-color="#0d1730"/></linearGradient></defs>
+              <rect width="400" height="240" fill="url(#bg4)"/>
+              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">1999</text>
+              <use href="#car-sedan" x="80" y="88" width="240" height="86" color="#4fd0ff"/>
+              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
+            </svg>
+          </div>
+          <span class="car-year">1999</span>
+          <div class="car-body">
+            <h3>1999 Mazda 626</h3>
+            <span class="car-miles">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
+              193,311 Miles
+            </span>
+            <div class="car-foot">
+              <span class="car-price">$4,190<sup>*</sup></span>
+              <span class="car-fees">*Includes dealer fees</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="cars-note reveal">*Includes dealer fees</p>
+      <div class="cars-cta reveal">
+        <a class="btn btn-ghost" href="#inventory">
+          All Cars
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / WELCOME ============ -->
+  <section id="about" class="about" aria-label="About Us">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <div class="kicker">About Us</div>
+          <h2>Welcome to Rocha Family Auto Sales</h2>
+          <p><strong>Rocha Family Auto Sales</strong> is dedicated to providing you with the ultimate automobile buying experience. Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle.</p>
+          <p>We have extensive relationships in the dealer community allowing us to purchase a wide variety of lease returns and new car trades at exceptional values. This enables Rocha Family Auto Sales to pass along huge savings on the highest quality vehicles of your choice. In addition, we offer a full array of financing options to meet your needs.</p>
+        </div>
+        <div class="about-panel reveal">
+          <div class="about-item">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <span><b>Quality Pre-Owned Vehicles</b><span>Your #1 source for buying a quality pre-owned vehicle</span></span>
+          </div>
+          <div class="about-item">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <span><b>Extensive Dealer Relationships</b><span>Lease returns &amp; new car trades at exceptional values</span></span>
+          </div>
+          <div class="about-item">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+            <span><b>Full Array of Financing Options</b><span>Financing to meet your needs — apply online today</span></span>
+          </div>
+          <div class="about-item">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V4h12l-2 4 2 4H4"/><path d="M4 22v-7"/></svg></span>
+            <span><b>Consignments Welcome</b><span>Let us help you sell your vehicle</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLY ONLINE ============ -->
+  <section id="apply" aria-label="Apply Online">
+    <div class="wrap">
+      <div class="apply-grid">
+        <div class="apply-info reveal">
+          <div class="kicker">Apply Online</div>
+          <h2>Apply Now — Credit Online</h2>
+          <p>We offer a full array of financing options to meet your needs. Start your application below and our team will follow up with you.</p>
+          <div class="apply-points">
+            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Quick and easy online application</span>
+            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A full array of financing options</span>
+            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Friendly, family-owned service</span>
+          </div>
+          <a class="apply-call" href="tel:3607971202">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+            <span><span>Prefer to talk? Sales:</span><b>360-797-1202</b></span>
+          </a>
+        </div>
+
+        <form class="apply reveal" id="applyForm" novalidate>
+          <div id="formFields">
+            <div class="form-row">
+              <div class="field">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+              </div>
+              <div class="field">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="vehicle">Vehicle of Interest</label>
+              <select id="vehicle" name="vehicle">
+                <option value="">Select a vehicle (optional)</option>
+                <option>2001 Ford F250 Super Duty Super Cab</option>
+                <option>2000 Chrysler 300M</option>
+                <option>2000 Dodge Ram 3500 Quad Cab</option>
+                <option>1999 Mazda 626</option>
+                <option>Other / not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Anything we should know?</label>
+              <textarea id="message" name="message" placeholder="Tell us about your budget, trade-in, or the vehicle you're looking for…"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
+              Apply Online
+            </button>
+            <p class="form-note">Submitting starts your credit application — a member of our team will contact you to complete it.</p>
+          </div>
+          <div class="form-success" id="formSuccess" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 5-5"/></svg>
+            <b>Thanks — we've got it!</b>
+            <p>A member of the Rocha Family Auto Sales team will be in touch shortly.<br>Can't wait? Call Sales: <a href="tel:3607971202" style="color:var(--accent-2);font-weight:600">360-797-1202</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="contact" aria-label="Contact Us">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <div class="kicker">Contact Us</div>
+          <h2>Come See Us on Highway 101</h2>
+        </div>
+        <p>Stop by the lot, give us a call, or find us online — we'd love to help you find your next vehicle.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-cards reveal">
+          <div class="contact-card">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span><b>Visit the Lot</b><p>261861 Highway 101,<br>Sequim, WA 98382</p></span>
+          </div>
+          <div class="contact-card">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+            <span><b>Sales</b><p><a href="tel:3607971202">360-797-1202</a></p></span>
+          </div>
+          <div class="contact-card">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
+            <span><b>On the Web</b><p><a href="https://www.sequimauto.com" target="_blank" rel="noopener">www.sequimauto.com</a></p></span>
+          </div>
+          <div class="contact-card">
+            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12m8-16.12L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></span>
+            <span>
+              <b>Follow Us</b>
+              <span class="contact-social">
+                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.6V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8.1v3h2.4v7Z"/></svg></a>
+                <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8.1L2.2 3h6.3l4.3 5.7ZM16.7 19.2h1.7L7.6 4.7H5.8Z"/></svg></a>
+                <a href="#" aria-label="Yelp"><svg viewBox="0 0 24 24"><path d="M11.2 2.6c.4-.8 1.6-.6 1.8.3l1 6.7c.1 1-1 1.6-1.8 1L7.4 7.1c-.7-.6-.5-1.7.4-2Zm9.3 8.1c.9-.2 1.6.8 1.1 1.6l-2 2.7c-.5.7-1.7.5-1.9-.4l-.4-1.9c-.2-.9.6-1.6 1.4-1.4ZM20 18.6c.8.5.6 1.7-.3 1.9l-3.3.7c-.9.2-1.6-.7-1.2-1.5l.9-1.8c.4-.8 1.4-1 2-.4ZM12.7 16.8c.7-.6 1.8-.1 1.8.8l-.1 3.5c0 .9-1.2 1.3-1.8.6l-1.4-1.6c-.6-.7-.4-1.7.4-2.1ZM4.2 13.9c-.9.3-1.7-.7-1.2-1.5L4.7 9.6c.5-.8 1.7-.6 1.9.3l.6 2.3c.2.8-.5 1.6-1.3 1.5Z"/></svg></a>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="map-shell reveal">
+          <iframe
+            title="Map — Rocha Family Auto Sales, 261861 Highway 101, Sequim, WA 98382"
+            src="https://www.google.com/maps?q=261861+Highway+101,+Sequim,+WA+98382&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg>
+          </span>
+          <span>
+            <span class="brand-name">Rocha <span>Family</span> Auto Sales</span>
+            <span class="brand-sub">www.sequimauto.com</span>
+          </span>
+        </a>
+        <p>Dedicated to providing you with the ultimate automobile buying experience — your #1 source for buying a quality pre-owned vehicle.</p>
+      </div>
+      <div class="foot-col">
+        <b>Explore</b>
+        <a href="#home">Home</a>
+        <a href="#inventory">Inventory</a>
+        <a href="#apply">Apply Online</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <div class="foot-col">
+        <b>Get In Touch</b>
+        <span>261861 Highway 101,<br>Sequim, WA 98382</span>
+        <a href="tel:3607971202">Sales: 360-797-1202</a>
+        <a href="https://www.sequimauto.com" target="_blank" rel="noopener">www.sequimauto.com</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© <span id="year"></span> Rocha Family Auto Sales. All rights reserved.</span>
+      <span>*Prices include dealer fees.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Sticky header state */
+  var header = document.getElementById('siteHeader');
+  var onScroll = function(){ header.classList.toggle('scrolled', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* Mobile nav */
+  var nav = document.getElementById('mainNav');
+  var toggle = document.getElementById('navToggle');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* Active nav link on scroll */
+  var sections = ['home','inventory','apply','about','contact'];
+  var navLinks = nav.querySelectorAll('a[href^="#"]');
+  var setActive = function(){
+    var current = 'home';
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 140) current = id;
+    });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+
+  /* Search by price — filters the featured vehicles */
+  var chips = document.querySelectorAll('.chip');
+  var cars = document.querySelectorAll('#carGrid .car');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var max = chip.dataset.max;
+      cars.forEach(function(car){
+        var price = parseInt(car.dataset.price, 10);
+        car.classList.toggle('hidden', max !== 'all' && price >= parseInt(max, 10));
+      });
+    });
+  });
+
+  /* Apply form — client-side confirmation */
+  var form = document.getElementById('applyForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  /* Scroll reveal */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* Footer year */
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
