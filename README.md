@@ -5,6 +5,7 @@ A modern, mobile-friendly redesign of [rochafamilyautosales.com](https://www.roc
 ## What's inside
 
 - `index.html` — the entire site in a single self-contained file (HTML + CSS + JS, no build step, no dependencies beyond Google Fonts and a Google Maps embed).
+- `assets/logo.webp` — the Rocha Family Auto Sales logo (white-on-transparent), used in the header and footer.
 
 ## Features
 
