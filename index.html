@@ -2,500 +2,600 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rocha Family Auto Sales</title>
-<meta name="description" content="Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle. 261861 Highway 101, Sequim, WA 98382 — Sales: 360-797-1202.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f6bff'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='bold' fill='white' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Rocha Family Auto Sales | Quality Pre-Owned Vehicles in Sequim, WA</title>
+<meta name="description" content="Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle. Huge savings, a full array of financing options, and consignments welcome. Call (360) 555-0148.">
+<meta name="theme-color" content="#0d0f0e">
+<meta property="og:title" content="Rocha Family Auto Sales">
+<meta property="og:description" content="Your #1 source for buying a quality pre-owned vehicle.">
+<meta property="og:image" content="assets/hero-olympic-range.webp">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin>
+<link rel="stylesheet" href="assets/icons.css">
+<link rel="preload" as="image" href="assets/hero-olympic-range.webp">
+<link rel="preload" as="image" href="assets/vehicles/2001-ford-f250-super-duty.webp">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0f0e'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='32' font-weight='bold' fill='%23e3a34a' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
 <style>
-  :root{
-    --bg:#0a0e1a;
-    --bg-soft:#0e1424;
-    --surface:#121a2e;
-    --card:#141d33;
-    --card-edge:rgba(255,255,255,.07);
-    --text:#eef2fb;
-    --muted:#9aa7c2;
-    --accent:#2f6bff;
-    --accent-2:#4f8cff;
-    --accent-soft:rgba(47,107,255,.14);
-    --glow:rgba(47,107,255,.35);
-    --radius:18px;
-    --font-display:'Sora',sans-serif;
-    --font-body:'Inter',sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *,*::before,*::after{animation:none!important;transition:none!important}
-  }
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    font-size:16px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  ::selection{background:var(--accent);color:#fff}
-  img,svg{display:block;max-width:100%}
-  a{color:inherit;text-decoration:none}
-  .wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+/* =========================================================================
+   Rocha Family Auto Sales: dealership template
+   Theme: dark-locked on purpose (white logo + cinematic photography).
+   Shape system: buttons, chips and pills are full-pill; surfaces 18px;
+   inputs 12px. One accent (amber), used everywhere.
+   ========================================================================= */
+/* Self-hosted fonts (SIL Open Font License): Archivo + Geist, latin subset */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(assets/fonts/archivo-latin.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-style:italic;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(assets/fonts/archivo-italic-latin.woff2) format('woff2')}
+@font-face{font-family:'Geist';font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/fonts/geist-latin.woff2) format('woff2')}
+:root{
+  color-scheme:dark;
+  --bg:#0d0f0e;
+  --bg-2:#121513;
+  --surface:#171a18;
+  --surface-2:#1e2220;
+  --line:rgba(236,233,226,.09);
+  --line-2:rgba(236,233,226,.16);
+  --text:#eceae4;
+  --muted:#a3a69f;
+  --dim:#7d817a;
+  --accent:#e3a34a;
+  --accent-ink:#1a1206;
+  --accent-soft:rgba(227,163,74,.12);
+  --ok:#7fc79a;
+  --danger:#f08a7a;
+  --r-surface:18px;
+  --r-input:12px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --font-display:'Archivo',system-ui,sans-serif;
+  --font-body:'Geist',system-ui,sans-serif;
+  --wrap:1280px;
+  --header-h:76px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:var(--accent-ink)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.ph,.ph-fill{line-height:1}
+.wrap{width:min(var(--wrap),100% - 32px);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-  /* ---------- Top utility bar ---------- */
-  .topbar{
-    background:linear-gradient(90deg,#101736,#0c1226);
-    border-bottom:1px solid var(--card-edge);
-    font-size:13.5px;
-    color:var(--muted);
-  }
-  .topbar .wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:16px;min-height:42px;flex-wrap:wrap;padding-block:6px;
-  }
-  .topbar-group{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-  .topbar-item{display:flex;align-items:center;gap:8px;white-space:nowrap}
-  .topbar-item svg{width:15px;height:15px;flex:none;stroke:var(--accent-2)}
-  .topbar-item strong{color:var(--text);font-weight:600}
-  .topbar-social{display:flex;gap:10px}
-  .topbar-social a{
-    display:grid;place-items:center;width:28px;height:28px;border-radius:8px;
-    background:rgba(255,255,255,.06);transition:background .2s,transform .2s;
-  }
-  .topbar-social a:hover{background:var(--accent);transform:translateY(-1px)}
-  .topbar-social svg{width:14px;height:14px;fill:var(--text)}
+/* Film grain, fixed and non-interactive */
+body::after{
+  content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-  /* ---------- Header ---------- */
-  header.site{
-    position:sticky;top:0;z-index:50;
-    background:rgba(10,14,26,.72);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s,background .3s;
-  }
-  header.site.scrolled{border-bottom-color:var(--card-edge);background:rgba(10,14,26,.92)}
-  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
-  .brand{display:flex;align-items:center;gap:13px}
-  .brand-logo{
-    height:56px;width:auto;flex:none;
-    filter:drop-shadow(0 4px 14px rgba(0,0,0,.45));
-    transition:transform .2s;
-  }
-  .brand:hover .brand-logo{transform:scale(1.03)}
-  nav.main{display:flex;align-items:center;gap:4px}
-  nav.main a{
-    font-weight:600;font-size:14.5px;color:var(--muted);
-    padding:9px 15px;border-radius:10px;
-    transition:color .2s,background .2s;
-  }
-  nav.main a:hover,nav.main a.active{color:var(--text);background:rgba(255,255,255,.06)}
-  .nav-cta{
-    display:inline-flex;align-items:center;gap:9px;
-    background:linear-gradient(135deg,var(--accent),#1e4fd6);
-    color:#fff!important;font-weight:700;font-size:14.5px;
-    padding:11px 20px;border-radius:12px;margin-left:10px;
-    box-shadow:0 8px 24px -8px var(--glow);
-    transition:transform .2s,box-shadow .2s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px -8px var(--glow)}
-  .nav-cta svg{width:16px;height:16px;stroke:#fff}
-  .nav-toggle{
-    display:none;background:none;border:1px solid var(--card-edge);
-    border-radius:10px;width:44px;height:44px;cursor:pointer;
-    place-items:center;color:var(--text);
-  }
-  .nav-toggle svg{width:22px;height:22px;stroke:currentColor}
+/* ---------- Type ---------- */
+h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;line-height:1.05;font-stretch:108%}
+h2{font-size:clamp(2rem,4.2vw,3.4rem)}
+.lead{color:var(--muted);font-size:1.075rem;max-width:58ch;margin-top:16px}
+.eyebrow{
+  display:inline-block;font-family:var(--font-display);font-stretch:125%;
+  font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:18px;
+}
+.num{font-variant-numeric:tabular-nums}
 
-  /* ---------- Hero ---------- */
-  .hero{position:relative;padding:96px 0 80px;overflow:hidden}
-  .hero::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:
-      radial-gradient(680px 420px at 82% 8%,rgba(47,107,255,.22),transparent 62%),
-      radial-gradient(560px 380px at 8% 88%,rgba(79,140,255,.12),transparent 60%);
-  }
-  .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:56px 56px;
-    mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
-    -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
-  }
-  .hero .wrap{position:relative;z-index:1}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;
-    font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--accent-2);background:var(--accent-soft);
-    border:1px solid rgba(47,107,255,.3);
-    padding:8px 16px;border-radius:999px;margin-bottom:22px;
-  }
-  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
-  h1{
-    font-family:var(--font-display);font-weight:800;
-    font-size:clamp(34px,4.6vw,54px);line-height:1.12;letter-spacing:-.02em;
-    margin-bottom:20px;
-  }
-  h1 em{
-    font-style:normal;
-    background:linear-gradient(92deg,var(--accent-2),#8ab4ff 60%,#c4d7ff);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero-lead{color:var(--muted);font-size:17.5px;max-width:52ch;margin-bottom:32px}
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    font-family:var(--font-body);font-weight:700;font-size:15.5px;
-    padding:15px 28px;border-radius:14px;border:none;cursor:pointer;
-    transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;
-  }
-  .btn svg{width:18px;height:18px;stroke:currentColor}
-  .btn-primary{
-    background:linear-gradient(135deg,var(--accent),#1e4fd6);color:#fff;
-    box-shadow:0 10px 30px -8px var(--glow);
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px -10px var(--glow)}
-  .btn-ghost{
-    background:rgba(255,255,255,.05);color:var(--text);
-    border:1px solid var(--card-edge);
-  }
-  .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
-  .hero-badges{display:flex;gap:26px;flex-wrap:wrap}
-  .hero-badge{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--muted);font-weight:500}
-  .hero-badge svg{width:19px;height:19px;stroke:var(--accent-2);flex:none}
-  .hero-badge strong{color:var(--text);font-weight:600}
+/* ---------- Buttons ---------- */
+.btn{
+  --h:52px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;
+  height:var(--h);padding:0 26px;border-radius:999px;border:1px solid transparent;cursor:pointer;
+  font-weight:600;font-size:.98rem;letter-spacing:.005em;
+  transition:transform .35s var(--ease),background-color .25s,border-color .25s,color .25s,box-shadow .35s var(--ease);
+}
+.btn .ph,.btn .ph-fill{font-size:1.15em}
+.btn:active{transform:translateY(1px) scale(.985)}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 30px -14px rgba(227,163,74,.7)}
+.btn-primary:hover{background:#ecb361;transform:translateY(-2px);box-shadow:0 16px 34px -14px rgba(227,163,74,.75)}
+.btn-ghost{background:rgba(13,15,14,.35);border-color:var(--line-2);color:var(--text);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-ghost:hover{border-color:rgba(236,233,226,.4);background:rgba(236,233,226,.06);transform:translateY(-2px)}
+.btn .arrow{transition:transform .35s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
 
-  .hero-visual{position:relative}
-  .hero-card{
-    position:relative;border-radius:24px;overflow:hidden;
-    border:1px solid var(--card-edge);
-    background:linear-gradient(160deg,#16214040,#0d132600),var(--surface);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
-  }
-  .hero-card svg.scene{width:100%;height:auto}
-  .hero-card-tag{
-    position:absolute;top:18px;left:18px;
-    display:inline-flex;align-items:center;gap:8px;
-    background:rgba(10,14,26,.72);backdrop-filter:blur(8px);
-    border:1px solid var(--card-edge);border-radius:999px;
-    padding:8px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);
-  }
-  .hero-card-tag .dot{width:7px;height:7px;border-radius:50%;background:#39d98a;box-shadow:0 0 8px #39d98a}
-  .hero-float{
-    position:absolute;right:-14px;bottom:-20px;z-index:2;
-    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
-    padding:15px 20px;display:flex;align-items:center;gap:13px;
-    box-shadow:0 20px 50px -18px rgba(0,0,0,.8);
-  }
-  .hero-float svg{width:26px;height:26px;stroke:var(--accent-2);flex:none}
-  .hero-float b{display:block;font-family:var(--font-display);font-size:15px}
-  .hero-float span{font-size:12.5px;color:var(--muted)}
+/* ---------- Header ---------- */
+.site-header{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--header-h)}
+/* Blur lives on a pseudo-element so the header never becomes a containing block for the fixed mobile menu */
+.site-header::before{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;
+  background:rgba(13,15,14,.82);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);
+}
+.site-header.solid::before{opacity:1}
+.nav-row{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand,.menu-btn{position:relative;z-index:2}
+.brand img{height:44px;width:auto;transition:opacity .25s}
+.brand:hover img{opacity:.85}
+.main-nav{display:flex;align-items:center;gap:2px}
+.main-nav a{
+  position:relative;font-size:.93rem;font-weight:500;color:var(--muted);
+  padding:10px 14px;border-radius:999px;transition:color .2s;
+}
+.main-nav a::after{
+  content:"";position:absolute;left:14px;right:14px;bottom:5px;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);
+}
+.main-nav a:hover{color:var(--text)}
+.main-nav a.active{color:var(--text)}
+.main-nav a.active::after{transform:scaleX(1)}
+.header-call{--h:44px;padding:0 18px;font-size:.92rem;margin-left:12px}
+.menu-btn{display:none;width:46px;height:46px;border-radius:999px;border:1px solid var(--line-2);background:rgba(13,15,14,.4);cursor:pointer;place-items:center;font-size:1.3rem}
 
-  /* ---------- Quick action tiles ---------- */
-  .tiles{padding:26px 0 0}
-  .tiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:-38px;position:relative;z-index:2}
-  .tile{
-    display:flex;align-items:center;gap:16px;
-    background:linear-gradient(150deg,#1a2547,#121a2e 70%);
-    border:1px solid var(--card-edge);border-radius:var(--radius);
-    padding:22px 24px;transition:transform .25s,border-color .25s,box-shadow .25s;
-  }
-  .tile:hover{transform:translateY(-4px);border-color:rgba(47,107,255,.45);box-shadow:0 18px 40px -18px var(--glow)}
-  .tile-icon{
-    width:52px;height:52px;border-radius:14px;flex:none;
-    background:var(--accent-soft);border:1px solid rgba(47,107,255,.3);
-    display:grid;place-items:center;
-  }
-  .tile-icon svg{width:25px;height:25px;stroke:var(--accent-2)}
-  .tile b{font-family:var(--font-display);font-size:16px;display:block;letter-spacing:.01em}
-  .tile span{font-size:13.5px;color:var(--muted)}
-  .tile-arrow{margin-left:auto;color:var(--muted);transition:transform .25s,color .25s}
-  .tile:hover .tile-arrow{transform:translateX(4px);color:var(--accent-2)}
-  .tile-arrow svg{width:18px;height:18px;stroke:currentColor}
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;isolation:isolate;overflow:clip;
+  min-height:clamp(720px,100dvh,960px);padding:calc(var(--header-h) + 64px) 0 36px;
+  display:flex;flex-direction:column;
+}
+.hero-sentinel{position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none}
+.hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero-bg img{
+  width:100%;height:115%;object-fit:cover;object-position:50% 70%;
+  filter:brightness(.62) contrast(1.12);
+  animation:heroZoom 2.6s var(--ease) both;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(13,15,14,.55) 0%,rgba(13,15,14,0) 30%,rgba(13,15,14,.15) 62%,var(--bg) 97%),
+    linear-gradient(90deg,rgba(13,15,14,.72) 0%,rgba(13,15,14,.2) 55%,rgba(13,15,14,0) 100%),
+    radial-gradient(60% 45% at 78% 74%,rgba(227,163,74,.16),transparent 70%);
+}
+.nw{white-space:nowrap}
+.hero-copy{max-width:700px;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.4rem,4.3vw,4.1rem);font-stretch:104%;line-height:1.03}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:600;padding-right:.06em}
+.hero-sub{color:#cfcdc6;font-size:1.13rem;max-width:44ch;margin-top:22px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hero-truck{
+  position:absolute;z-index:1;right:max(8px,calc((100% - var(--wrap)) / 2 - 40px));bottom:118px;width:min(52vw,800px);
+  animation:truckIn 1.5s .25s var(--ease) both;
+}
+.hero-truck img{width:100%;height:auto;filter:drop-shadow(0 40px 30px rgba(0,0,0,.6)) saturate(1.05)}
+.hero-truck::after{
+  content:"";position:absolute;left:8%;right:4%;bottom:-2%;height:12%;z-index:-1;
+  background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent);filter:blur(6px);
+}
+.hero-caption{
+  position:absolute;right:3%;top:-9%;z-index:2;text-align:right;
+  font-size:.82rem;color:var(--muted);
+  animation:fadeUp 1s 1.1s var(--ease) both;
+}
+.hero-caption b{display:block;color:var(--text);font-family:var(--font-display);font-weight:600;font-size:.98rem;letter-spacing:-.005em}
+.hero-caption a{color:var(--accent);font-weight:600}
 
-  /* ---------- Sections ---------- */
+/* Quick search: sits on the hero's lower edge */
+.quick{
+  position:relative;z-index:3;margin-top:auto;padding-top:48px;
+}
+.quick-form{
+  display:grid;grid-template-columns:1.1fr 1fr 1fr auto;align-items:end;gap:14px;
+  padding:16px;border-radius:calc(var(--r-surface) + 4px);
+  background:rgba(23,26,24,.78);border:1px solid var(--line-2);
+  backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 60px -30px rgba(0,0,0,.8);
+}
+.quick-title{padding:4px 10px}
+.quick-title b{display:block;font-family:var(--font-display);font-size:1.12rem;font-weight:650;letter-spacing:-.01em}
+.quick-title span{font-size:.86rem;color:var(--muted)}
+.qfield label{display:block;font-size:.76rem;font-weight:600;color:var(--muted);letter-spacing:.04em;margin:0 0 6px 4px}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.quick-form{background:var(--surface)}}
+
+/* ---------- Form controls (shared) ---------- */
+.control{
+  width:100%;height:50px;padding:0 16px;border-radius:var(--r-input);
+  background:rgba(236,233,226,.04);border:1px solid var(--line-2);color:var(--text);
+  font:500 .97rem var(--font-body);transition:border-color .2s,box-shadow .2s,background-color .2s;
+}
+textarea.control{height:auto;min-height:96px;padding:13px 16px;resize:vertical;line-height:1.5}
+select.control{
+  appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23a3a69f' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+select.control option{background:var(--surface);color:var(--text)}
+.control::placeholder{color:var(--dim)}
+.control:hover{border-color:rgba(236,233,226,.28)}
+.control:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(227,163,74,.18);background:rgba(236,233,226,.06)}
+
+/* ---------- Value strip ---------- */
+.values{padding:72px 0 8px}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.value{display:flex;gap:14px;align-items:flex-start;padding:4px 28px}
+.value + .value{border-left:1px solid var(--line)}
+.value:first-child{padding-left:0}
+.value .ph{font-size:1.7rem;color:var(--accent);flex:none;margin-top:2px}
+.value b{display:block;font-family:var(--font-display);font-weight:600;font-size:1.02rem;letter-spacing:-.005em;line-height:1.25}
+.value span{font-size:.9rem;color:var(--muted)}
+
+/* ---------- Sections ---------- */
+section{padding:120px 0}
+
+/* ---------- Inventory ---------- */
+.inv-head{display:flex;flex-direction:column;margin-bottom:40px}
+.inv-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:28px}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.seg button{
+  border:0;background:none;cursor:pointer;padding:9px 18px;border-radius:999px;
+  font-size:.9rem;font-weight:600;color:var(--muted);transition:color .2s,background-color .3s var(--ease);
+  display:inline-flex;align-items:center;gap:7px;
+}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.chips{
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.chip{
+  flex:none;scroll-snap-align:start;cursor:pointer;
+  padding:9px 16px;border-radius:999px;border:1px solid var(--line-2);background:transparent;
+  font-size:.88rem;font-weight:500;color:var(--muted);white-space:nowrap;
+  transition:color .2s,border-color .2s,background-color .2s;
+}
+.chip:hover{color:var(--text);border-color:rgba(236,233,226,.35)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.inv-count{font-size:.9rem;color:var(--muted);margin-bottom:18px}
+.inv-count b{color:var(--text);font-weight:600}
+
+.cars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.car{
+  position:relative;display:flex;flex-direction:column;text-align:left;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-surface);overflow:hidden;
+  transition:transform .5s var(--ease),border-color .3s,box-shadow .5s var(--ease);
+  view-transition-class:car;
+}
+.car:hover{transform:translateY(-6px);border-color:var(--line-2);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.car[hidden]{display:none}
+.stage{
+  position:relative;aspect-ratio:4/3;overflow:hidden;
+  background:
+    radial-gradient(90% 55% at 50% 100%,#2b302d 0%,rgba(43,48,45,0) 70%),
+    linear-gradient(180deg,#161917 0%,#1c201e 62%,#232825 62.2%,#1a1e1c 100%);
+  display:flex;align-items:flex-end;justify-content:center;padding:0 7% 13%;
+}
+.stage::before{ /* soft key light */
+  content:"";position:absolute;inset:-20% 10% auto;height:70%;
+  background:radial-gradient(closest-side,rgba(236,233,226,.07),transparent);transition:opacity .5s;
+  opacity:.6;
+}
+.car:hover .stage::before{opacity:1}
+.stage img{
+  position:relative;width:100%;height:auto;max-height:86%;object-fit:contain;
+  filter:drop-shadow(0 16px 12px rgba(0,0,0,.6));
+  transition:transform .7s var(--ease);
+}
+.stage::after{ /* contact shadow */
+  content:"";position:absolute;left:12%;right:12%;bottom:11%;height:7%;
+  background:radial-gradient(closest-side,rgba(0,0,0,.7),transparent);
+}
+.car:hover .stage img{transform:translateY(-3px) scale(1.04)}
+.car-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.car-year{font-size:.8rem;font-weight:600;letter-spacing:.06em;color:var(--dim)}
+.car h3{font-size:1.14rem;font-weight:650;letter-spacing:-.01em;line-height:1.22;margin:4px 0 10px;font-stretch:100%}
+.car-miles{display:flex;align-items:center;gap:7px;font-size:.88rem;color:var(--muted)}
+.car-miles .ph{font-size:1.05rem;color:var(--dim)}
+.car-foot{margin-top:auto;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.car-price{font-family:var(--font-display);font-weight:700;font-size:1.6rem;letter-spacing:-.02em;line-height:1}
+.car-price sup{font-size:.55em;color:var(--muted);font-weight:500;margin-left:1px}
+.car-est{font-size:.82rem;color:var(--muted);text-align:right;line-height:1.3}
+.car-est b{display:block;color:var(--accent);font-weight:600;font-size:.92rem}
+.car-open{
+  position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:999px;display:grid;place-items:center;
+  background:rgba(13,15,14,.6);border:1px solid var(--line-2);font-size:1.05rem;
+  opacity:0;transform:scale(.85);transition:opacity .3s,transform .4s var(--ease);
+}
+.car:hover .car-open,.car:focus-within .car-open{opacity:1;transform:none}
+.car-link{all:unset;cursor:pointer}
+.car-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}
+.car-link:focus-visible{outline:none}
+.car:has(.car-link:focus-visible){outline:2px solid var(--accent);outline-offset:3px}
+.empty{
+  display:none;text-align:center;padding:64px 20px;border:1px dashed var(--line-2);border-radius:var(--r-surface);
+}
+.empty.show{display:block}
+.empty .ph{font-size:2.2rem;color:var(--dim)}
+.empty b{display:block;font-family:var(--font-display);font-size:1.2rem;margin:12px 0 6px}
+.empty p{color:var(--muted);margin-bottom:20px}
+.inv-note{margin-top:22px;font-size:.84rem;color:var(--dim)}
+
+/* ---------- Vehicle dialog ---------- */
+dialog.quickview{
+  width:min(980px,100% - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:0;border:1px solid var(--line-2);
+  border-radius:calc(var(--r-surface) + 6px);background:var(--bg-2);color:var(--text);overflow:auto;
+  box-shadow:0 50px 120px -40px rgba(0,0,0,.95);
+}
+dialog.quickview::backdrop{background:rgba(6,7,7,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+dialog.quickview[open]{animation:dialogIn .5s var(--ease)}
+.qv-grid{display:grid;grid-template-columns:1.25fr 1fr}
+.qv-grid .stage{aspect-ratio:auto;min-height:380px;padding:0 6% 12%}
+.qv-info{padding:40px 36px 36px;display:flex;flex-direction:column}
+.qv-info h3{font-size:1.9rem;margin:6px 0 14px;font-stretch:104%}
+.qv-specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:8px 0 22px}
+.qv-specs div{background:var(--bg-2);padding:14px 16px}
+.qv-specs dt{font-size:.76rem;color:var(--dim);font-weight:600;letter-spacing:.04em}
+.qv-specs dd{font-family:var(--font-display);font-weight:650;font-size:1.12rem;margin-top:2px}
+.qv-actions{display:grid;gap:10px;margin-top:auto}
+.qv-actions .btn{width:100%}
+.qv-close{
+  position:absolute;top:14px;right:14px;z-index:2;width:42px;height:42px;border-radius:999px;cursor:pointer;
+  display:grid;place-items:center;background:rgba(13,15,14,.7);border:1px solid var(--line-2);font-size:1.15rem;
+}
+.qv-close:hover{border-color:rgba(236,233,226,.4)}
+.qv-fine{font-size:.78rem;color:var(--dim);margin-top:14px}
+
+/* ---------- About ---------- */
+.about{background:var(--bg-2);border-block:1px solid var(--line)}
+.about-intro{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.statement{
+  grid-column:1 / span 9;
+  font-family:var(--font-display);font-weight:500;font-stretch:100%;
+  font-size:clamp(1.75rem,3.6vw,3.1rem);line-height:1.14;letter-spacing:-.022em;
+}
+.statement b{font-weight:700;color:var(--text)}
+.statement span{color:var(--dim)}
+.about-sub{grid-column:7 / span 6;color:var(--muted);font-size:1.04rem;margin-top:14px}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(260px,auto);gap:18px;margin-top:64px}
+.tile{
+  position:relative;overflow:hidden;border-radius:var(--r-surface);border:1px solid var(--line);
+  background:var(--surface);padding:30px;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;
+}
+.tile .ph{font-size:2rem;color:var(--accent);margin-bottom:auto}
+.tile h3{font-size:1.4rem;font-weight:650;margin-bottom:8px;font-stretch:100%;letter-spacing:-.015em;line-height:1.15}
+.tile p{color:var(--muted);font-size:.96rem;max-width:40ch}
+.tile-wide{grid-column:span 2}
+.tile-photo{background:linear-gradient(120deg,#1b1f1d 0%,#202522 100%);justify-content:flex-start;padding-right:50%}
+.tile-photo img{
+  position:absolute;right:-4%;bottom:-4%;width:54%;z-index:-1;
+  filter:drop-shadow(0 22px 18px rgba(0,0,0,.55));transition:transform .9s var(--ease);
+}
+.tile-photo:hover img{transform:translateX(-10px)}
+.tile-photo::after{
+  content:"";position:absolute;inset:auto 0 0 0;height:30%;z-index:-2;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.25));
+}
+.tile-photo .ph{margin-bottom:22px}
+.tile-photo.flip{padding-right:30px;padding-left:52%;text-align:left}
+.tile-photo.flip img{right:auto;left:-5%;width:52%}
+.tile-accent{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
+.tile-accent .ph{color:var(--accent-ink)}
+.tile-accent p{color:rgba(26,18,6,.78)}
+.tile-accent a{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:700;font-size:.95rem}
+.tile-accent a .ph{font-size:1rem;margin:0;transition:transform .35s var(--ease)}
+.tile-accent a:hover .ph{transform:translateX(4px)}
+
+/* ---------- Apply / Financing ---------- */
+.apply-head{max-width:760px;margin-bottom:52px}
+.apply-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;align-items:stretch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:calc(var(--r-surface) + 4px);padding:36px}
+.calc h3,.apply-form h3{font-size:1.35rem;font-weight:650;font-stretch:100%;letter-spacing:-.01em}
+.calc-sub{color:var(--muted);font-size:.92rem;margin:6px 0 26px}
+.calc-out{
+  border-radius:16px;padding:22px 24px;margin-bottom:26px;
+  background:radial-gradient(120% 140% at 0% 0%,rgba(227,163,74,.16),transparent 60%),var(--bg-2);
+  border:1px solid var(--line);
+}
+.calc-out > span{font-size:.82rem;color:var(--muted);font-weight:500}
+.calc-out strong{display:block;font-family:var(--font-display);font-size:clamp(2.6rem,5vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-top:4px}
+.calc-out strong small{font-size:.38em;color:var(--muted);font-weight:500;letter-spacing:0;margin-left:4px}
+.calc-out p{font-size:.84rem;color:var(--muted);margin-top:8px}
+.range{margin-bottom:22px}
+.range-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.range-top label{font-size:.88rem;font-weight:600;color:var(--muted)}
+.range-top output{font-family:var(--font-display);font-weight:650;font-size:1.05rem}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer;
+  --p:50%;
+}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:999px;background:linear-gradient(90deg,var(--accent) var(--p),rgba(236,233,226,.14) var(--p))}
+input[type=range]::-moz-range-track{height:4px;border-radius:999px;background:rgba(236,233,226,.14)}
+input[type=range]::-moz-range-progress{height:4px;border-radius:999px;background:var(--accent)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--text);border:5px solid var(--accent);margin-top:-9px;transition:transform .2s}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--text);border:5px solid var(--accent)}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
+.terms{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.terms .chip{text-align:center;padding:10px 0}
+.calc-fine{font-size:.78rem;color:var(--dim);margin-top:20px}
+
+.apply-form h3{margin-bottom:6px}
+.apply-form .calc-sub{margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.field label{font-size:.84rem;font-weight:600;color:var(--muted)}
+.field .err{display:none;font-size:.8rem;color:var(--danger);align-items:center;gap:6px}
+.field.invalid .control{border-color:var(--danger)}
+.field.invalid .err{display:flex}
+.apply-form .btn{width:100%;margin-top:4px}
+.form-note{font-size:.8rem;color:var(--dim);margin-top:14px;text-align:center}
+.form-success{display:none;text-align:center;padding:48px 8px}
+.form-success .ph-fill{font-size:3.4rem;color:var(--ok)}
+.form-success b{display:block;font-family:var(--font-display);font-size:1.5rem;margin:14px 0 8px}
+.form-success p{color:var(--muted)}
+.form-success a{color:var(--accent);font-weight:600}
+.apply-form.done .form-fields{display:none}
+.apply-form.done .form-success{display:block;animation:fadeUp .7s var(--ease) both}
+.btn.loading{pointer-events:none;opacity:.8}
+.btn.loading .ph{animation:spin 1s linear infinite}
+
+/* ---------- Contact ---------- */
+.contact{padding:0;position:relative;border-top:1px solid var(--line)}
+.map{position:relative;height:clamp(600px,76vh,740px);background:radial-gradient(60% 70% at 70% 50%,#222725,#141716)}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(180deg) grayscale(.75) contrast(.92) brightness(.9)}
+.map::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(13,15,14,.85) 0%,rgba(13,15,14,.25) 45%,transparent 70%),linear-gradient(0deg,rgba(13,15,14,.4),transparent 30%)}
+.contact-overlay{position:absolute;inset:0;z-index:2;display:flex;align-items:center;pointer-events:none}
+.contact-card{
+  pointer-events:auto;width:min(440px,100%);padding:36px;border-radius:calc(var(--r-surface) + 4px);
+  background:rgba(18,21,19,.86);border:1px solid var(--line-2);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 40px 80px -40px rgba(0,0,0,.9);
+}
+.contact-card h2{font-size:clamp(1.9rem,3vw,2.5rem)}
+.contact-list{display:grid;gap:18px;margin:26px 0 28px}
+.contact-item{display:flex;gap:14px;align-items:flex-start}
+.contact-item > .ph{font-size:1.35rem;color:var(--accent);margin-top:2px}
+.contact-item b{display:block;font-size:.8rem;color:var(--dim);font-weight:600;letter-spacing:.04em}
+.contact-item p,.contact-item a{font-size:1rem;color:var(--text)}
+.contact-item a:hover{color:var(--accent)}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:.84rem;font-weight:600;margin-top:4px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.status.open{color:var(--ok)}
+.status.open i{background:var(--ok);box-shadow:0 0 0 4px rgba(127,199,154,.18)}
+.status.closed{color:var(--muted)}
+.contact-actions{display:flex;gap:10px;flex-wrap:wrap}
+.social{display:flex;gap:8px}
+.social a{
+  width:44px;height:44px;border-radius:999px;display:grid;place-items:center;border:1px solid var(--line-2);
+  font-size:1.15rem;color:var(--muted);transition:color .2s,border-color .2s,transform .35s var(--ease);
+}
+.social a:hover{color:var(--text);border-color:rgba(236,233,226,.4);transform:translateY(-2px)}
+
+/* ---------- Footer ---------- */
+footer{padding:88px 0 40px;border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px}
+.foot-brand img{height:74px;width:auto}
+.foot-brand p{color:var(--muted);font-size:.94rem;margin-top:20px;max-width:38ch}
+.foot-col h4{font-family:var(--font-display);font-size:.95rem;font-weight:650;margin-bottom:16px}
+.foot-col a,.foot-col span{display:block;color:var(--muted);font-size:.93rem;margin-bottom:10px;transition:color .2s}
+.foot-col a:hover{color:var(--text)}
+.foot-base{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line);font-size:.84rem;color:var(--dim)}
+.credits summary{cursor:pointer;color:var(--muted);list-style:none;font-size:.84rem;display:inline-block}
+.credits summary::-webkit-details-marker{display:none}
+.credits summary:hover{color:var(--text)}
+.credits ul{list-style:none;margin-top:14px;display:grid;gap:6px;font-size:.8rem;color:var(--dim)}
+.credits a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.foot-credit-wrap{padding-top:18px}
+
+/* ---------- Mobile action bar ---------- */
+.mobile-bar{display:none}
+
+/* ---------- Motion ---------- */
+@keyframes heroZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes truckIn{from{opacity:0;transform:translateX(9%);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes dialogIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-copy > *{animation:fadeUp .9s var(--ease) both}
+.hero-copy > :nth-child(2){animation-delay:.08s}
+.hero-copy > :nth-child(3){animation-delay:.16s}
+.hero-copy > :nth-child(4){animation-delay:.24s}
+.quick{animation:fadeUp 1s .45s var(--ease) both}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+.reveal.in{opacity:1;transform:none}
+
+/* Scroll-linked parallax where supported (no scroll listeners) */
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .hero-bg{animation:parallaxBg linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+    .hero-truck img{animation:parallaxTruck linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+  }
+  @keyframes parallaxBg{to{transform:translateY(14%)}}
+  @keyframes parallaxTruck{to{transform:translateX(-5%)}}
+}
+::view-transition-group(*.car){animation-duration:.45s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .cars{grid-template-columns:repeat(2,1fr)}
+  .quick-form{grid-template-columns:1fr 1fr auto}
+  .quick-title{display:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:1020px){
+  .values-grid{grid-template-columns:1fr 1fr;row-gap:28px}
+  .value:nth-child(3){border-left:0;padding-left:0}
+  .apply-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .statement,.about-sub{grid-column:1 / -1}
+  .tile-wide{grid-column:span 2}
+  .qv-grid{grid-template-columns:1fr}
+  .qv-grid .stage{min-height:300px}
+}
+@media (max-width:860px){
+  :root{--header-h:66px}
+  .brand img{height:36px}
+  .menu-btn{display:grid}
+  .main-nav{
+    position:fixed;inset:0;z-index:1;flex-direction:column;align-items:stretch;justify-content:center;gap:4px;
+    padding:96px 24px 40px;background:var(--bg);
+    opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s;
+  }
+  .main-nav.open{opacity:1;visibility:visible}
+  .main-nav a{font-family:var(--font-display);font-size:1.9rem;font-weight:650;color:var(--text);padding:10px 4px}
+  .main-nav a::after{display:none}
+  .main-nav a.active{color:var(--accent)}
+  .header-call{margin:20px 0 0;--h:54px;font-family:var(--font-body)!important;font-size:1rem!important}
+  .hero{min-height:auto;padding-top:calc(var(--header-h) + 48px)}
+  .hero{padding-bottom:28px}
+  .hero-truck{position:relative;right:auto;bottom:auto;width:min(108%,640px);margin:28px auto -8px;left:2%}
+  .hero-caption{top:-8%;right:auto;left:4%;text-align:left}
+  .hero-truck{margin-top:44px}
+  .eyebrow{letter-spacing:.14em}
+  .quick{margin-top:0;padding-top:20px}
+  .quick-form{grid-template-columns:1fr 1fr}
+  .quick-form .btn{grid-column:1 / -1}
   section{padding:88px 0}
-  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px;flex-wrap:wrap}
-  .kicker{
-    font-size:12.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--accent-2);display:flex;align-items:center;gap:10px;margin-bottom:12px;
+  .contact-overlay{position:relative;inset:auto;display:block;margin-top:-120px}
+  .contact-card{width:100%}
+  .map{height:420px}
+  .contact{padding-bottom:72px}
+  .mobile-bar{
+    display:grid;grid-template-columns:1fr 1.4fr;gap:8px;position:fixed;z-index:40;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));
+    padding:8px;border-radius:999px;background:rgba(23,26,24,.88);border:1px solid var(--line-2);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    transform:translateY(140%);transition:transform .5s var(--ease);
   }
-  .kicker::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
-  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.2vw,38px);letter-spacing:-.015em;line-height:1.18}
-  .sec-head p{color:var(--muted);max-width:46ch}
-
-  /* ---------- Price chips ---------- */
-  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px}
-  .chip{
-    font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--muted);
-    background:rgba(255,255,255,.045);border:1px solid var(--card-edge);
-    padding:10px 19px;border-radius:999px;cursor:pointer;
-    transition:all .2s;
-  }
-  .chip:hover{color:var(--text);border-color:rgba(47,107,255,.5)}
-  .chip.active{
-    background:linear-gradient(135deg,var(--accent),#1e4fd6);color:#fff;
-    border-color:transparent;box-shadow:0 8px 22px -8px var(--glow);
-  }
-
-  /* ---------- Vehicle cards ---------- */
-  .cars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  .car{
-    background:var(--card);border:1px solid var(--card-edge);border-radius:var(--radius);
-    overflow:hidden;display:flex;flex-direction:column;
-    transition:transform .25s,border-color .25s,box-shadow .25s,opacity .3s;
-  }
-  .car:hover{transform:translateY(-6px);border-color:rgba(47,107,255,.4);box-shadow:0 22px 50px -20px rgba(0,0,0,.8)}
-  .car.hidden{display:none}
-  .car-media{position:relative;aspect-ratio:16/9.5;overflow:hidden}
-  .car-media svg{width:100%;height:100%;transition:transform .4s ease}
-  .car:hover .car-media svg{transform:scale(1.045)}
-  .car-year{
-    position:absolute;top:12px;left:12px;
-    background:rgba(10,14,26,.7);backdrop-filter:blur(6px);
-    border:1px solid var(--card-edge);border-radius:9px;
-    font-family:var(--font-display);font-weight:700;font-size:13px;
-    padding:5px 11px;letter-spacing:.05em;
-  }
-  .car-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1}
-  .car h3{font-family:var(--font-display);font-weight:700;font-size:16.5px;line-height:1.3;letter-spacing:.01em;margin-bottom:8px}
-  .car-miles{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:16px}
-  .car-miles svg{width:15px;height:15px;stroke:var(--accent-2);flex:none}
-  .car-foot{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid var(--card-edge);padding-top:15px}
-  .car-price{font-family:var(--font-display);font-weight:800;font-size:21px;color:var(--accent-2)}
-  .car-price sup{font-size:12px;color:var(--muted);font-weight:600}
-  .car-fees{font-size:11.5px;color:var(--muted)}
-  .cars-note{margin-top:26px;font-size:13px;color:var(--muted)}
-  .cars-cta{margin-top:34px;text-align:center}
-
-  /* ---------- Welcome / About ---------- */
-  .about{
-    background:
-      radial-gradient(700px 420px at 100% 0%,rgba(47,107,255,.1),transparent 60%),
-      var(--bg-soft);
-    border-block:1px solid var(--card-edge);
-  }
-  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-  .about-copy p{color:var(--muted);font-size:16.5px;margin-top:20px}
-  .about-copy p strong{color:var(--text);font-weight:600}
-  .about-panel{display:grid;gap:16px}
-  .about-item{
-    display:flex;gap:16px;align-items:flex-start;
-    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
-    padding:20px 22px;transition:transform .25s,border-color .25s;
-  }
-  .about-item:hover{transform:translateX(6px);border-color:rgba(47,107,255,.4)}
-  .about-item .tile-icon{width:46px;height:46px;border-radius:12px}
-  .about-item .tile-icon svg{width:22px;height:22px}
-  .about-item b{font-family:var(--font-display);font-size:15.5px;display:block;margin-bottom:3px}
-  .about-item span{font-size:13.5px;color:var(--muted)}
-
-  /* ---------- Apply ---------- */
-  .apply-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:start}
-  .apply-info p{color:var(--muted);margin:18px 0 28px;max-width:48ch}
-  .apply-points{display:grid;gap:14px;margin-bottom:32px}
-  .apply-point{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
-  .apply-point svg{width:20px;height:20px;stroke:#39d98a;flex:none}
-  .apply-call{
-    display:inline-flex;align-items:center;gap:14px;
-    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
-    padding:16px 22px;
-  }
-  .apply-call svg{width:24px;height:24px;stroke:var(--accent-2)}
-  .apply-call span{font-size:12.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:700;display:block}
-  .apply-call b{font-family:var(--font-display);font-size:19px;letter-spacing:.02em}
-  form.apply{
-    background:var(--card);border:1px solid var(--card-edge);border-radius:22px;
-    padding:34px;box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
-  }
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .field{margin-bottom:16px}
-  .field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px;letter-spacing:.02em}
-  .field input,.field select,.field textarea{
-    width:100%;background:rgba(255,255,255,.045);
-    border:1px solid var(--card-edge);border-radius:12px;
-    color:var(--text);font-family:var(--font-body);font-size:15px;
-    padding:13px 15px;transition:border-color .2s,box-shadow .2s;
-  }
-  .field textarea{resize:vertical;min-height:88px}
-  .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239aa7c2' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
-  .field select option{background:var(--card);color:var(--text)}
-  .field input:focus,.field select:focus,.field textarea:focus{
-    outline:none;border-color:var(--accent);
-    box-shadow:0 0 0 3px rgba(47,107,255,.22);
-  }
-  form.apply .btn{width:100%;margin-top:8px}
-  .form-note{font-size:12.5px;color:var(--muted);margin-top:14px;text-align:center}
-  .form-success{
-    display:none;text-align:center;padding:36px 10px;
-  }
-  .form-success svg{width:54px;height:54px;stroke:#39d98a;margin:0 auto 18px}
-  .form-success b{font-family:var(--font-display);font-size:20px;display:block;margin-bottom:8px}
-  .form-success p{color:var(--muted);font-size:15px}
-
-  /* ---------- Contact ---------- */
-  .contact{
-    background:
-      radial-gradient(700px 420px at 0% 100%,rgba(47,107,255,.09),transparent 60%),
-      var(--bg-soft);
-    border-block:1px solid var(--card-edge);
-  }
-  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:stretch}
-  .contact-cards{display:grid;gap:16px;align-content:start}
-  .contact-card{
-    display:flex;gap:18px;align-items:flex-start;
-    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
-    padding:22px 24px;transition:transform .25s,border-color .25s;
-  }
-  .contact-card:hover{transform:translateY(-3px);border-color:rgba(47,107,255,.4)}
-  .contact-card b{font-family:var(--font-display);font-size:15.5px;display:block;margin-bottom:4px}
-  .contact-card p{font-size:14.5px;color:var(--muted)}
-  .contact-card a{color:var(--accent-2);font-weight:600}
-  .contact-card a:hover{text-decoration:underline}
-  .contact-social{display:flex;gap:12px;margin-top:6px}
-  .contact-social a{
-    display:grid;place-items:center;width:42px;height:42px;border-radius:12px;
-    background:rgba(255,255,255,.05);border:1px solid var(--card-edge);
-    transition:background .2s,transform .2s,border-color .2s;
-  }
-  .contact-social a:hover{background:var(--accent);border-color:transparent;transform:translateY(-3px)}
-  .contact-social svg{width:18px;height:18px;fill:var(--text)}
-  .map-shell{
-    border-radius:22px;overflow:hidden;border:1px solid var(--card-edge);
-    min-height:380px;background:var(--card);position:relative;
-    box-shadow:0 30px 70px -30px rgba(0,0,0,.7);
-  }
-  .map-shell iframe{
-    position:absolute;inset:0;width:100%;height:100%;border:0;
-    filter:grayscale(.35) contrast(1.05);
-  }
-
-  /* ---------- Footer ---------- */
-  footer{padding:56px 0 34px}
-  .foot-grid{
-    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;
-    padding-bottom:40px;border-bottom:1px solid var(--card-edge);
-  }
-  .foot-logo{height:88px}
-  .foot-brand p{color:var(--muted);font-size:14.5px;margin-top:16px;max-width:40ch}
-  .foot-col b{font-family:var(--font-display);font-size:14px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:18px;color:var(--text)}
-  .foot-col a,.foot-col span{display:block;color:var(--muted);font-size:14.5px;margin-bottom:11px;transition:color .2s}
-  .foot-col a:hover{color:var(--accent-2)}
-  .foot-base{
-    display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding-top:26px;flex-wrap:wrap;font-size:13px;color:var(--muted);
-  }
-
-  /* ---------- Reveal animation ---------- */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* ---------- Responsive ---------- */
-  @media (max-width:1020px){
-    .hero-grid{grid-template-columns:1fr;gap:44px}
-    .hero-visual{max-width:560px}
-    .cars{grid-template-columns:repeat(2,1fr)}
-    .tiles-grid{grid-template-columns:1fr;margin-top:0}
-    .about-grid,.apply-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
-    .foot-grid{grid-template-columns:1fr 1fr}
-  }
-  @media (max-width:840px){
-    nav.main{
-      position:fixed;inset:0 0 auto 0;top:0;z-index:60;
-      flex-direction:column;align-items:stretch;gap:6px;
-      background:rgba(10,14,26,.98);backdrop-filter:blur(16px);
-      padding:96px 24px 32px;border-bottom:1px solid var(--card-edge);
-      transform:translateY(-105%);transition:transform .3s ease;
-    }
-    nav.main.open{transform:none}
-    nav.main a{font-size:17px;padding:14px 16px}
-    .nav-cta{margin:10px 0 0;justify-content:center}
-    .nav-toggle{display:grid;position:relative;z-index:70}
-    .topbar .wrap{justify-content:center}
-    .topbar-group{justify-content:center}
-    .hero{padding:64px 0 60px}
-    section{padding:64px 0}
-  }
-  @media (max-width:560px){
-    .cars{grid-template-columns:1fr}
-    .form-row{grid-template-columns:1fr}
-    .foot-grid{grid-template-columns:1fr;gap:32px}
-    .hero-float{right:8px;bottom:-16px;padding:12px 16px}
-    .topbar-group{gap:12px}
-    .brand-logo{height:46px}
-    .foot-logo{height:72px}
-  }
+  .mobile-bar.show{transform:none}
+  .mobile-bar .btn{--h:48px;padding:0 14px}
+  footer{padding-bottom:110px}
+}
+@media (max-width:640px){
+  .cars{grid-template-columns:1fr}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;width:calc(100% + 16px);margin-right:-16px;padding-right:16px}
+  .chips::-webkit-scrollbar{display:none}
+  .seg{width:100%}
+  .seg button{flex:1;justify-content:center}
+  .values-grid{grid-template-columns:1fr}
+  .value{padding:0!important;border-left:0!important}
+  .quick-form{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .tile-wide{grid-column:auto}
+  .tile-photo,.tile-photo.flip{padding:28px 28px 46%;min-height:340px}
+  .tile-photo img,.tile-photo.flip img{width:86%;right:-10%;left:auto;bottom:-4%}
+  .panel{padding:26px 20px}
+  .qv-info{padding:28px 22px 26px}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-actions .btn{flex:1}
+}
 </style>
 </head>
 <body>
 
-<!-- SVG symbol library -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <!-- Sedan silhouette -->
-    <symbol id="car-sedan" viewBox="0 0 240 86">
-      <path d="M18 62 Q10 62 10 54 L10 50 Q10 44 18 42 L48 36 L72 17 Q77 12 85 12 L146 12 Q154 12 160 17 L186 36 L222 42 Q230 44 230 52 L230 54 Q230 62 222 62 L204 62 A18 18 0 0 0 168 62 L92 62 A18 18 0 0 0 56 62 Z" fill="currentColor"/>
-      <path d="M80 34 L96 19 Q99 16 104 16 L112 16 L112 34 Z M120 16 L143 16 Q148 16 151 19 L166 34 L120 34 Z" fill="rgba(255,255,255,.22)"/>
-      <circle cx="74" cy="62" r="13" fill="#0a0e1a"/><circle cx="74" cy="62" r="5.5" fill="rgba(255,255,255,.35)"/>
-      <circle cx="186" cy="62" r="13" fill="#0a0e1a"/><circle cx="186" cy="62" r="5.5" fill="rgba(255,255,255,.35)"/>
-    </symbol>
-    <!-- Pickup truck silhouette -->
-    <symbol id="car-truck" viewBox="0 0 240 86">
-      <path d="M14 64 Q10 64 10 58 L10 46 Q10 40 16 40 L34 40 L40 20 Q42 14 50 14 L92 14 Q98 14 102 19 L116 38 L224 38 Q230 38 230 44 L230 58 Q230 64 226 64 L206 64 A16 16 0 0 0 174 64 L88 64 A16 16 0 0 0 56 64 Z" fill="currentColor"/>
-      <path d="M44 36 L49 21 Q50 18 54 18 L88 18 Q92 18 94 21 L105 36 Z" fill="rgba(255,255,255,.22)"/>
-      <circle cx="72" cy="64" r="13" fill="#0a0e1a"/><circle cx="72" cy="64" r="5.5" fill="rgba(255,255,255,.35)"/>
-      <circle cx="190" cy="64" r="13" fill="#0a0e1a"/><circle cx="190" cy="64" r="5.5" fill="rgba(255,255,255,.35)"/>
-    </symbol>
-  </defs>
-</svg>
-
-<!-- ============ TOP BAR ============ -->
-<div class="topbar">
-  <div class="wrap">
-    <div class="topbar-group">
-      <span class="topbar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        261861 Highway 101, Sequim, WA 98382
-      </span>
-      <span class="topbar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
-        Sales: <strong>360-797-1202</strong>
-      </span>
-    </div>
-    <div class="topbar-social">
-      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.6V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8.1v3h2.4v7Z"/></svg></a>
-      <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8.1L2.2 3h6.3l4.3 5.7ZM16.7 19.2h1.7L7.6 4.7H5.8Z"/></svg></a>
-      <a href="#" aria-label="Yelp"><svg viewBox="0 0 24 24"><path d="M11.2 2.6c.4-.8 1.6-.6 1.8.3l1 6.7c.1 1-1 1.6-1.8 1L7.4 7.1c-.7-.6-.5-1.7.4-2Zm9.3 8.1c.9-.2 1.6.8 1.1 1.6l-2 2.7c-.5.7-1.7.5-1.9-.4l-.4-1.9c-.2-.9.6-1.6 1.4-1.4ZM20 18.6c.8.5.6 1.7-.3 1.9l-3.3.7c-.9.2-1.6-.7-1.2-1.5l.9-1.8c.4-.8 1.4-1 2-.4ZM12.7 16.8c.7-.6 1.8-.1 1.8.8l-.1 3.5c0 .9-1.2 1.3-1.8.6l-1.4-1.6c-.6-.7-.4-1.7.4-2.1ZM4.2 13.9c-.9.3-1.7-.7-1.2-1.5L4.7 9.6c.5-.8 1.7-.6 1.9.3l.6 2.3c.2.8-.5 1.6-1.3 1.5Z"/></svg></a>
-    </div>
-  </div>
-</div>
-
-<!-- ============ HEADER ============ -->
-<header class="site" id="siteHeader">
+<header class="site-header" id="siteHeader">
   <div class="wrap nav-row">
-    <a class="brand" href="#home" aria-label="Rocha Family Auto Sales — Home">
-      <img class="brand-logo" src="assets/logo.webp" alt="Rocha Family Auto Sales" width="1902" height="613">
+    <a class="brand" href="#home" aria-label="Rocha Family Auto Sales home">
+      <img src="assets/logo.webp" alt="Rocha Family Auto Sales" width="1902" height="613">
     </a>
-    <nav class="main" id="mainNav" aria-label="Main navigation">
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
       <a href="#home" class="active">Home</a>
       <a href="#inventory">Inventory</a>
       <a href="#apply">Apply Online</a>
       <a href="#about">About Us</a>
       <a href="#contact">Contact Us</a>
-      <a class="nav-cta" href="tel:3607971202">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
-        360-797-1202
-      </a>
+      <a class="btn btn-ghost header-call" href="tel:+13605550148"><i class="ph ph-phone"></i>(360) 555-0148</a>
     </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav"><i class="ph ph-list"></i></button>
   </div>
 </header>
 
@@ -503,261 +603,197 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" aria-label="Welcome">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="reveal">
-          <span class="eyebrow"><span class="dot"></span>Welcome to Rocha Family Auto Sales</span>
-          <h1>Your #1 source for buying a <em>quality pre-owned vehicle</em></h1>
-          <p class="hero-lead">Dedicated to providing you with the ultimate automobile buying experience — huge savings on the highest quality vehicles of your choice, with a full array of financing options to meet your needs.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#inventory">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg>
-              Inventory Vehicles
-            </a>
-            <a class="btn btn-ghost" href="#apply">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
-              Apply Now — Credit Online
-            </a>
-          </div>
-          <div class="hero-badges">
-            <span class="hero-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>Consignments</strong> welcome</span>
-            </span>
-            <span class="hero-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/></svg>
-              <span><strong>Family owned</strong> · Sequim, WA</span>
-            </span>
-            <span class="hero-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-              <span><strong>Financing</strong> options available</span>
-            </span>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal">
-          <div class="hero-card">
-            <span class="hero-card-tag"><span class="dot"></span>Open Today</span>
-            <svg class="scene" viewBox="0 0 560 400" role="img" aria-label="Stylized illustration of a pickup truck on the lot at dusk">
-              <defs>
-                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#1a2a5e"/>
-                  <stop offset=".55" stop-color="#16214a"/>
-                  <stop offset="1" stop-color="#0e1530"/>
-                </linearGradient>
-                <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#0c1226"/>
-                  <stop offset="1" stop-color="#0a0e1a"/>
-                </linearGradient>
-                <radialGradient id="sun" cx=".5" cy=".5" r=".5">
-                  <stop offset="0" stop-color="#4f8cff" stop-opacity=".85"/>
-                  <stop offset="1" stop-color="#4f8cff" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-              <rect width="560" height="400" fill="url(#sky)"/>
-              <circle cx="430" cy="130" r="130" fill="url(#sun)"/>
-              <circle cx="430" cy="130" r="46" fill="#5d95ff" opacity=".9"/>
-              <path d="M0 262 L90 236 L150 252 L230 226 L310 250 L400 232 L480 252 L560 238 L560 400 L0 400 Z" fill="#111a38" opacity=".8"/>
-              <rect y="290" width="560" height="110" fill="url(#ground)"/>
-              <g stroke="#2f6bff" stroke-opacity=".35" stroke-width="2">
-                <line x1="30" y1="330" x2="120" y2="330"/><line x1="180" y1="330" x2="270" y2="330"/>
-                <line x1="330" y1="330" x2="420" y2="330"/><line x1="480" y1="330" x2="560" y2="330"/>
-              </g>
-              <g color="#0b1020">
-                <use href="#car-truck" x="120" y="176" width="330" height="118" color="#0d1430"/>
-              </g>
-              <use href="#car-truck" x="118" y="172" width="330" height="118" color="#3b74ff"/>
-              <ellipse cx="285" cy="298" rx="170" ry="12" fill="#000" opacity=".4"/>
-            </svg>
-          </div>
-          <div class="hero-float">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span><b>Quality Pre-Owned</b><span>Lease returns &amp; new car trades</span></span>
-          </div>
-        </div>
+    <div class="hero-bg" aria-hidden="true">
+      <img src="assets/hero-olympic-range.webp" alt="" width="1920" height="1282" fetchpriority="high">
+    </div>
+    <span class="hero-sentinel" id="heroSentinel" aria-hidden="true"></span>
+    <div class="wrap"><div class="hero-copy">
+      <span class="eyebrow">Welcome to Rocha Family Auto Sales</span>
+      <h1>Your #1 source for buying a <em>quality <span class="nw">pre-owned</span></em> vehicle.</h1>
+      <p class="hero-sub">Huge savings on the highest quality vehicles of your choice, with a full array of financing options.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#inventory">View Inventory<i class="ph ph-arrow-right arrow"></i></a>
+        <a class="btn btn-ghost" href="#apply"><i class="ph ph-file-text"></i>Apply Online</a>
       </div>
+    </div></div>
+    <div class="hero-truck">
+        <img src="assets/vehicles/2001-ford-f250-super-duty.webp" alt="Black Ford F-250 Super Duty pickup" width="1400" height="805" fetchpriority="high">
+      <p class="hero-caption">
+        <b>2001 Ford F250 Super Duty</b>
+        <span class="num">$13,190*</span> &nbsp;<a href="#inventory" data-open="f250">See details</a>
+      </p>
+    </div>
+    <div class="wrap quick">
+      <form class="quick-form" id="quickSearch" aria-label="Quick vehicle search">
+        <div class="quick-title">
+          <b>Find your next vehicle</b>
+          <span>Search by body style and price</span>
+        </div>
+        <div class="qfield">
+          <label for="qBody">Body style</label>
+          <select class="control" id="qBody">
+            <option value="all">All vehicles</option>
+            <option value="truck">Trucks</option>
+            <option value="sedan">Sedans</option>
+          </select>
+        </div>
+        <div class="qfield">
+          <label for="qPrice">Max price</label>
+          <select class="control" id="qPrice">
+            <option value="all">Any price</option>
+            <option value="5000">Under $5,000</option>
+            <option value="10000">Under $10,000</option>
+            <option value="15000">Under $15,000</option>
+            <option value="20000">Under $20,000</option>
+            <option value="25000">Under $25,000</option>
+            <option value="30000">Under $30,000</option>
+            <option value="35000">Under $35,000</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit"><i class="ph ph-magnifying-glass"></i>Search</button>
+      </form>
     </div>
   </section>
 
-  <!-- ============ QUICK ACTION TILES ============ -->
-  <div class="tiles" aria-label="Quick links">
-    <div class="wrap tiles-grid">
-      <a class="tile reveal" href="#apply">
-        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
-        <span><b>Apply Now</b><span>Credit Online</span></span>
-        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-      </a>
-      <a class="tile reveal" href="#inventory">
-        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 6.5 6.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11m-14 0h14m-14 0a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h1m14-6a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-1M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01"/></svg></span>
-        <span><b>Inventory</b><span>Vehicles</span></span>
-        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-      </a>
-      <a class="tile reveal" href="#contact">
-        <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <span><b>Visit the Lot</b><span>261861 Highway 101, Sequim, WA</span></span>
-        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-      </a>
+  <!-- ============ VALUES ============ -->
+  <div class="values" aria-label="Why Rocha Family Auto Sales">
+    <div class="wrap values-grid">
+      <div class="value reveal" style="--i:0"><i class="ph ph-seal-check"></i><div><b>Quality pre-owned</b><span>Lease returns and new car trades</span></div></div>
+      <div class="value reveal" style="--i:1"><i class="ph ph-credit-card"></i><div><b>Financing options</b><span>A full array to meet your needs</span></div></div>
+      <div class="value reveal" style="--i:2"><i class="ph ph-handshake"></i><div><b>Consignments welcome</b><span>Let us help sell your vehicle</span></div></div>
+      <div class="value reveal" style="--i:3"><i class="ph ph-users-three"></i><div><b>Family owned</b><span>Proudly serving Sequim, WA</span></div></div>
     </div>
   </div>
 
   <!-- ============ INVENTORY ============ -->
   <section id="inventory" aria-label="Inventory">
     <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <div class="kicker">Inventory Vehicles</div>
-          <h2>Featured Vehicles</h2>
-        </div>
-        <p>Search by price and find the right quality pre-owned vehicle for you.</p>
+      <div class="inv-head reveal">
+        <h2>Featured Vehicles</h2>
+        <p class="lead">Search by price and find the right quality pre-owned vehicle for you.</p>
       </div>
 
-      <div class="chips reveal" role="group" aria-label="Search by price">
-        <button class="chip" data-max="5000">Under $5,000</button>
-        <button class="chip" data-max="10000">Under $10,000</button>
-        <button class="chip" data-max="15000">Under $15,000</button>
-        <button class="chip" data-max="20000">Under $20,000</button>
-        <button class="chip" data-max="25000">Under $25,000</button>
-        <button class="chip" data-max="30000">Under $30,000</button>
-        <button class="chip" data-max="35000">Under $35,000</button>
-        <button class="chip active" data-max="all">All Cars</button>
+      <div class="inv-tools reveal">
+        <div class="seg" role="group" aria-label="Body style">
+          <button type="button" data-body="all" aria-pressed="true">All</button>
+          <button type="button" data-body="truck" aria-pressed="false"><i class="ph ph-truck-trailer"></i>Trucks</button>
+          <button type="button" data-body="sedan" aria-pressed="false"><i class="ph ph-car-profile"></i>Sedans</button>
+        </div>
+        <div class="chips" role="group" aria-label="Search by price">
+          <button type="button" class="chip" data-max="5000" aria-pressed="false">Under $5,000</button>
+          <button type="button" class="chip" data-max="10000" aria-pressed="false">Under $10,000</button>
+          <button type="button" class="chip" data-max="15000" aria-pressed="false">Under $15,000</button>
+          <button type="button" class="chip" data-max="20000" aria-pressed="false">Under $20,000</button>
+          <button type="button" class="chip" data-max="25000" aria-pressed="false">Under $25,000</button>
+          <button type="button" class="chip" data-max="30000" aria-pressed="false">Under $30,000</button>
+          <button type="button" class="chip" data-max="35000" aria-pressed="false">Under $35,000</button>
+          <button type="button" class="chip" data-max="all" aria-pressed="true">All Cars</button>
+        </div>
       </div>
+
+      <p class="inv-count" aria-live="polite">Showing <b id="invCount">4</b> of 4 vehicles</p>
 
       <div class="cars" id="carGrid">
-        <article class="car reveal" data-price="13190">
-          <div class="car-media">
-            <svg viewBox="0 0 400 240" role="img" aria-label="2001 Ford F250 Super Duty Super Cab">
-              <defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2c66"/><stop offset="1" stop-color="#101833"/></linearGradient></defs>
-              <rect width="400" height="240" fill="url(#bg1)"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2001</text>
-              <use href="#car-truck" x="80" y="88" width="240" height="86" color="#4f8cff"/>
-              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
-            </svg>
-          </div>
-          <span class="car-year">2001</span>
-          <div class="car-body">
-            <h3>2001 Ford F250 Super Duty Super Cab</h3>
-            <span class="car-miles">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
-              183,872 Miles
+        <article class="car reveal" style="--i:0;view-transition-name:car-f250" data-id="f250" data-price="13190" data-body="truck" data-miles="183872" data-name="2001 Ford F250 Super Duty Super Cab" data-img="assets/vehicles/2001-ford-f250-super-duty.webp">
+          <span class="stage"><img src="assets/vehicles/2001-ford-f250-super-duty.webp" alt="2001 Ford F250 Super Duty Super Cab" width="1400" height="805" loading="lazy"></span>
+          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          <span class="car-body">
+            <span class="car-year">2001</span>
+            <h3><button type="button" class="car-link">Ford F250 Super Duty Super Cab</button></h3>
+            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">183,872</span> miles</span>
+            <span class="car-foot">
+              <span class="car-price num">$13,190<sup>*</sup></span>
+              <span class="car-est">est.<b class="num" data-est></b></span>
             </span>
-            <div class="car-foot">
-              <span class="car-price">$13,190<sup>*</sup></span>
-              <span class="car-fees">*Includes dealer fees</span>
-            </div>
-          </div>
+          </span>
         </article>
 
-        <article class="car reveal" data-price="4190">
-          <div class="car-media">
-            <svg viewBox="0 0 400 240" role="img" aria-label="2000 Chrysler 300M">
-              <defs><linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#20265c"/><stop offset="1" stop-color="#111631"/></linearGradient></defs>
-              <rect width="400" height="240" fill="url(#bg2)"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2000</text>
-              <use href="#car-sedan" x="80" y="88" width="240" height="86" color="#8ea9ff"/>
-              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
-            </svg>
-          </div>
-          <span class="car-year">2000</span>
-          <div class="car-body">
-            <h3>2000 Chrysler 300M</h3>
-            <span class="car-miles">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
-              170,490 Miles
+        <article class="car reveal" style="--i:1;view-transition-name:car-300m" data-id="300m" data-price="4190" data-body="sedan" data-miles="170490" data-name="2000 Chrysler 300M" data-img="assets/vehicles/2000-chrysler-300m.webp">
+          <span class="stage"><img src="assets/vehicles/2000-chrysler-300m.webp" alt="2000 Chrysler 300M" width="1400" height="490" loading="lazy"></span>
+          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          <span class="car-body">
+            <span class="car-year">2000</span>
+            <h3><button type="button" class="car-link">Chrysler 300M</button></h3>
+            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">170,490</span> miles</span>
+            <span class="car-foot">
+              <span class="car-price num">$4,190<sup>*</sup></span>
+              <span class="car-est">est.<b class="num" data-est></b></span>
             </span>
-            <div class="car-foot">
-              <span class="car-price">$4,190<sup>*</sup></span>
-              <span class="car-fees">*Includes dealer fees</span>
-            </div>
-          </div>
+          </span>
         </article>
 
-        <article class="car reveal" data-price="25190">
-          <div class="car-media">
-            <svg viewBox="0 0 400 240" role="img" aria-label="2000 Dodge Ram 3500 Quad Cab">
-              <defs><linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#33204f"/><stop offset="1" stop-color="#141230"/></linearGradient></defs>
-              <rect width="400" height="240" fill="url(#bg3)"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">2000</text>
-              <use href="#car-truck" x="80" y="88" width="240" height="86" color="#b06bff"/>
-              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
-            </svg>
-          </div>
-          <span class="car-year">2000</span>
-          <div class="car-body">
-            <h3>2000 Dodge Ram 3500 Quad Cab</h3>
-            <span class="car-miles">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
-              91,759 Miles
+        <article class="car reveal" style="--i:2;view-transition-name:car-ram" data-id="ram" data-price="25190" data-body="truck" data-miles="91759" data-name="2000 Dodge Ram 3500 Quad Cab" data-img="assets/vehicles/2000-dodge-ram-3500.webp">
+          <span class="stage"><img src="assets/vehicles/2000-dodge-ram-3500.webp" alt="2000 Dodge Ram 3500 Quad Cab" width="1400" height="656" loading="lazy"></span>
+          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          <span class="car-body">
+            <span class="car-year">2000</span>
+            <h3><button type="button" class="car-link">Dodge Ram 3500 Quad Cab</button></h3>
+            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">91,759</span> miles</span>
+            <span class="car-foot">
+              <span class="car-price num">$25,190<sup>*</sup></span>
+              <span class="car-est">est.<b class="num" data-est></b></span>
             </span>
-            <div class="car-foot">
-              <span class="car-price">$25,190<sup>*</sup></span>
-              <span class="car-fees">*Includes dealer fees</span>
-            </div>
-          </div>
+          </span>
         </article>
 
-        <article class="car reveal" data-price="4190">
-          <div class="car-media">
-            <svg viewBox="0 0 400 240" role="img" aria-label="1999 Mazda 626">
-              <defs><linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123a52"/><stop offset="1" stop-color="#0d1730"/></linearGradient></defs>
-              <rect width="400" height="240" fill="url(#bg4)"/>
-              <text x="200" y="118" text-anchor="middle" font-family="Sora,sans-serif" font-size="104" font-weight="800" fill="#ffffff" opacity=".05">1999</text>
-              <use href="#car-sedan" x="80" y="88" width="240" height="86" color="#4fd0ff"/>
-              <ellipse cx="200" cy="178" rx="130" ry="9" fill="#000" opacity=".35"/>
-            </svg>
-          </div>
-          <span class="car-year">1999</span>
-          <div class="car-body">
-            <h3>1999 Mazda 626</h3>
-            <span class="car-miles">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z"/><path d="m16 8-4.5 4.5"/><circle cx="12" cy="13" r="1"/></svg>
-              193,311 Miles
+        <article class="car reveal" style="--i:3;view-transition-name:car-626" data-id="626" data-price="4190" data-body="sedan" data-miles="193311" data-name="1999 Mazda 626" data-img="assets/vehicles/1999-mazda-626.webp">
+          <span class="stage"><img src="assets/vehicles/1999-mazda-626.webp" alt="1999 Mazda 626" width="1400" height="705" loading="lazy"></span>
+          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+          <span class="car-body">
+            <span class="car-year">1999</span>
+            <h3><button type="button" class="car-link">Mazda 626</button></h3>
+            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">193,311</span> miles</span>
+            <span class="car-foot">
+              <span class="car-price num">$4,190<sup>*</sup></span>
+              <span class="car-est">est.<b class="num" data-est></b></span>
             </span>
-            <div class="car-foot">
-              <span class="car-price">$4,190<sup>*</sup></span>
-              <span class="car-fees">*Includes dealer fees</span>
-            </div>
-          </div>
+          </span>
         </article>
       </div>
 
-      <p class="cars-note reveal">*Includes dealer fees</p>
-      <div class="cars-cta reveal">
-        <a class="btn btn-ghost" href="#inventory">
-          All Cars
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
-        </a>
+      <div class="empty" id="invEmpty" role="status">
+        <i class="ph ph-car"></i>
+        <b>No vehicles match those filters</b>
+        <p>Inventory changes often. Widen your search, or tell us what you're after and we'll find it.</p>
+        <button type="button" class="btn btn-ghost" id="resetFilters">Show all vehicles</button>
       </div>
+
+      <p class="inv-note">*Includes dealer fees. Estimated payments assume 10% down, 60 months at 8.9% APR, and are for illustration only.</p>
     </div>
   </section>
 
-  <!-- ============ ABOUT / WELCOME ============ -->
+  <!-- ============ ABOUT ============ -->
   <section id="about" class="about" aria-label="About Us">
     <div class="wrap">
-      <div class="about-grid">
-        <div class="about-copy reveal">
-          <div class="kicker">About Us</div>
-          <h2>Welcome to Rocha Family Auto Sales</h2>
-          <p><strong>Rocha Family Auto Sales</strong> is dedicated to providing you with the ultimate automobile buying experience. Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle.</p>
-          <p>We have extensive relationships in the dealer community allowing us to purchase a wide variety of lease returns and new car trades at exceptional values. This enables Rocha Family Auto Sales to pass along huge savings on the highest quality vehicles of your choice. In addition, we offer a full array of financing options to meet your needs.</p>
-        </div>
-        <div class="about-panel reveal">
-          <div class="about-item">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-            <span><b>Quality Pre-Owned Vehicles</b><span>Your #1 source for buying a quality pre-owned vehicle</span></span>
-          </div>
-          <div class="about-item">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <span><b>Extensive Dealer Relationships</b><span>Lease returns &amp; new car trades at exceptional values</span></span>
-          </div>
-          <div class="about-item">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
-            <span><b>Full Array of Financing Options</b><span>Financing to meet your needs — apply online today</span></span>
-          </div>
-          <div class="about-item">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15V4h12l-2 4 2 4H4"/><path d="M4 22v-7"/></svg></span>
-            <span><b>Consignments Welcome</b><span>Let us help you sell your vehicle</span></span>
-          </div>
-        </div>
+      <div class="about-intro">
+      <p class="statement reveal"><b>Rocha Family Auto Sales</b> is dedicated to providing you with <span>the ultimate automobile buying experience.</span></p>
+      <p class="about-sub reveal">We have extensive relationships in the dealer community allowing us to purchase a wide variety of lease returns and new car trades at exceptional values. This enables Rocha Family Auto Sales to pass along huge savings on the highest quality vehicles of your choice. In addition, we offer a full array of financing options to meet your needs.</p>
+      </div>
+
+      <div class="bento">
+        <article class="tile tile-wide tile-photo reveal" style="--i:0">
+          <i class="ph ph-handshake"></i>
+          <h3>Extensive dealer relationships</h3>
+          <p>Lease returns and new car trades, bought at exceptional values so the savings pass to you.</p>
+          <img src="assets/vehicles/2000-dodge-ram-3500.webp" alt="" width="1400" height="656" loading="lazy">
+        </article>
+        <article class="tile reveal" style="--i:1">
+          <i class="ph ph-seal-check"></i>
+          <h3>Quality pre-owned vehicles</h3>
+          <p>The highest quality vehicles of your choice, at huge savings.</p>
+        </article>
+        <article class="tile tile-accent reveal" style="--i:2">
+          <i class="ph ph-credit-card"></i>
+          <h3>A full array of financing options</h3>
+          <p>Financing to meet your needs. Start your credit application online.</p>
+          <a href="#apply">Apply Online<i class="ph ph-arrow-right"></i></a>
+        </article>
+        <article class="tile tile-wide tile-photo flip reveal" style="--i:3">
+          <i class="ph ph-key"></i>
+          <h3>Consignments welcome</h3>
+          <p>Ready to sell? Let us help you sell your vehicle on our lot.</p>
+          <img src="assets/vehicles/1999-mazda-626.webp" alt="" width="1400" height="705" loading="lazy">
+        </article>
       </div>
     </div>
   </section>
@@ -765,47 +801,76 @@
   <!-- ============ APPLY ONLINE ============ -->
   <section id="apply" aria-label="Apply Online">
     <div class="wrap">
+      <div class="apply-head reveal">
+        <span class="eyebrow">Financing</span>
+        <h2>Apply Online. Drive home sooner.</h2>
+        <p class="lead">We offer a full array of financing options to meet your needs. Estimate a payment, then start your credit application and our team will follow up with you.</p>
+      </div>
+
       <div class="apply-grid">
-        <div class="apply-info reveal">
-          <div class="kicker">Apply Online</div>
-          <h2>Apply Now — Credit Online</h2>
-          <p>We offer a full array of financing options to meet your needs. Start your application below and our team will follow up with you.</p>
-          <div class="apply-points">
-            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Quick and easy online application</span>
-            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A full array of financing options</span>
-            <span class="apply-point"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Friendly, family-owned service</span>
+        <div class="panel calc reveal" id="calculator">
+          <h3>Estimate your payment</h3>
+          <p class="calc-sub">Adjust the numbers to see what fits your budget.</p>
+          <div class="calc-out" aria-live="polite">
+            <span>Estimated monthly payment</span>
+            <strong class="num"><span id="payOut">$0</span><small>/mo</small></strong>
+            <p id="payDetail">Amount financed $0</p>
           </div>
-          <a class="apply-call" href="tel:3607971202">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
-            <span><span>Prefer to talk? Sales:</span><b>360-797-1202</b></span>
-          </a>
+          <div class="range">
+            <div class="range-top"><label for="rPrice">Vehicle price</label><output class="num" id="oPrice" for="rPrice">$13,190</output></div>
+            <input type="range" id="rPrice" min="2000" max="40000" step="10" value="13190">
+          </div>
+          <div class="range">
+            <div class="range-top"><label for="rDown">Down payment</label><output class="num" id="oDown" for="rDown">$1,319</output></div>
+            <input type="range" id="rDown" min="0" max="10000" step="50" value="1319">
+          </div>
+          <div class="range">
+            <div class="range-top"><label for="rApr">Interest rate (APR)</label><output class="num" id="oApr" for="rApr">8.9%</output></div>
+            <input type="range" id="rApr" min="0" max="24" step="0.1" value="8.9">
+          </div>
+          <div class="range" style="margin-bottom:0">
+            <div class="range-top"><label id="termLabel">Term</label><output class="num" id="oTerm">60 months</output></div>
+            <div class="terms" role="group" aria-labelledby="termLabel">
+              <button type="button" class="chip" data-term="36" aria-pressed="false">36</button>
+              <button type="button" class="chip" data-term="48" aria-pressed="false">48</button>
+              <button type="button" class="chip" data-term="60" aria-pressed="true">60</button>
+              <button type="button" class="chip" data-term="72" aria-pressed="false">72</button>
+            </div>
+          </div>
+          <p class="calc-fine">Estimate only. Not an offer of credit. Your actual rate and payment depend on credit approval, taxes and fees.</p>
         </div>
 
-        <form class="apply reveal" id="applyForm" novalidate>
-          <div id="formFields">
+        <form class="panel apply-form reveal" id="applyForm" novalidate>
+          <div class="form-fields">
+            <h3>Apply Now. Credit Online.</h3>
+            <p class="calc-sub">Takes about two minutes. No obligation.</p>
             <div class="form-row">
               <div class="field">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                <label for="firstName">First name</label>
+                <input class="control" type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                <span class="err"><i class="ph ph-warning-circle"></i>Please enter your first name.</span>
               </div>
               <div class="field">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                <label for="lastName">Last name</label>
+                <input class="control" type="text" id="lastName" name="lastName" autocomplete="family-name" required>
+                <span class="err"><i class="ph ph-warning-circle"></i>Please enter your last name.</span>
               </div>
             </div>
             <div class="form-row">
               <div class="field">
                 <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+                <input class="control" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required pattern="[0-9()+\-.\s]{7,}">
+                <span class="err"><i class="ph ph-warning-circle"></i>Please enter a valid phone number.</span>
               </div>
               <div class="field">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="email" required>
+                <input class="control" type="email" id="email" name="email" autocomplete="email" required>
+                <span class="err"><i class="ph ph-warning-circle"></i>Please enter a valid email.</span>
               </div>
             </div>
             <div class="field">
-              <label for="vehicle">Vehicle of Interest</label>
-              <select id="vehicle" name="vehicle">
+              <label for="vehicle">Vehicle of interest</label>
+              <select class="control" id="vehicle" name="vehicle">
                 <option value="">Select a vehicle (optional)</option>
                 <option>2001 Ford F250 Super Duty Super Cab</option>
                 <option>2000 Chrysler 300M</option>
@@ -816,18 +881,15 @@
             </div>
             <div class="field">
               <label for="message">Anything we should know?</label>
-              <textarea id="message" name="message" placeholder="Tell us about your budget, trade-in, or the vehicle you're looking for…"></textarea>
+              <textarea class="control" id="message" name="message" placeholder="Budget, trade-in, or the vehicle you're looking for"></textarea>
             </div>
-            <button class="btn btn-primary" type="submit">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
-              Apply Online
-            </button>
-            <p class="form-note">Submitting starts your credit application — a member of our team will contact you to complete it.</p>
+            <button class="btn btn-primary" type="submit"><i class="ph ph-file-text"></i>Apply Online</button>
+            <p class="form-note">Submitting starts your credit application. A member of our team will contact you to complete it.</p>
           </div>
-          <div class="form-success" id="formSuccess" role="status">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 5-5"/></svg>
-            <b>Thanks — we've got it!</b>
-            <p>A member of the Rocha Family Auto Sales team will be in touch shortly.<br>Can't wait? Call Sales: <a href="tel:3607971202" style="color:var(--accent-2);font-weight:600">360-797-1202</a></p>
+          <div class="form-success" role="status">
+            <i class="ph-fill ph-check-circle"></i>
+            <b>Thanks, we've got it.</b>
+            <p>A member of the Rocha Family Auto Sales team will be in touch shortly.<br>Can't wait? Call Sales at <a href="tel:+13605550148">(360) 555-0148</a>.</p>
           </div>
         </form>
       </div>
@@ -836,48 +898,27 @@
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="contact" aria-label="Contact Us">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <div class="kicker">Contact Us</div>
-          <h2>Come See Us on Highway 101</h2>
-        </div>
-        <p>Stop by the lot, give us a call, or find us online — we'd love to help you find your next vehicle.</p>
+    <div class="map">
+      <iframe title="Map of Sequim, Washington" src="https://www.google.com/maps?q=Sequim,+WA+98382&z=13&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="contact-overlay"><div class="wrap">
+    <div class="contact-card reveal">
+      <h2>Come see us in Sequim.</h2>
+      <div class="contact-list">
+        <div class="contact-item"><i class="ph ph-map-pin"></i><div><b>Visit the lot</b><p>2150 Evergreen Motor Way<br>Sequim, WA 98382</p></div></div>
+        <div class="contact-item"><i class="ph ph-phone"></i><div><b>Sales</b><a href="tel:+13605550148">(360) 555-0148</a></div></div>
+        <div class="contact-item"><i class="ph ph-clock"></i><div><b>Hours</b><p>Mon to Fri, 9am - 6pm<br>Sat, 10am - 5pm. Sun, closed</p><span class="status" id="openStatus" hidden><i></i><span></span></span></div></div>
       </div>
-      <div class="contact-grid">
-        <div class="contact-cards reveal">
-          <div class="contact-card">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <span><b>Visit the Lot</b><p>261861 Highway 101,<br>Sequim, WA 98382</p></span>
-          </div>
-          <div class="contact-card">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
-            <span><b>Sales</b><p><a href="tel:3607971202">360-797-1202</a></p></span>
-          </div>
-          <div class="contact-card">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg></span>
-            <span><b>On the Web</b><p><a href="https://www.sequimauto.com" target="_blank" rel="noopener">www.sequimauto.com</a></p></span>
-          </div>
-          <div class="contact-card">
-            <span class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12m8-16.12L14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></span>
-            <span>
-              <b>Follow Us</b>
-              <span class="contact-social">
-                <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5H16.6V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8.1v3h2.4v7Z"/></svg></a>
-                <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8.1L2.2 3h6.3l4.3 5.7ZM16.7 19.2h1.7L7.6 4.7H5.8Z"/></svg></a>
-                <a href="#" aria-label="Yelp"><svg viewBox="0 0 24 24"><path d="M11.2 2.6c.4-.8 1.6-.6 1.8.3l1 6.7c.1 1-1 1.6-1.8 1L7.4 7.1c-.7-.6-.5-1.7.4-2Zm9.3 8.1c.9-.2 1.6.8 1.1 1.6l-2 2.7c-.5.7-1.7.5-1.9-.4l-.4-1.9c-.2-.9.6-1.6 1.4-1.4ZM20 18.6c.8.5.6 1.7-.3 1.9l-3.3.7c-.9.2-1.6-.7-1.2-1.5l.9-1.8c.4-.8 1.4-1 2-.4ZM12.7 16.8c.7-.6 1.8-.1 1.8.8l-.1 3.5c0 .9-1.2 1.3-1.8.6l-1.4-1.6c-.6-.7-.4-1.7.4-2.1ZM4.2 13.9c-.9.3-1.7-.7-1.2-1.5L4.7 9.6c.5-.8 1.7-.6 1.9.3l.6 2.3c.2.8-.5 1.6-1.3 1.5Z"/></svg></a>
-              </span>
-            </span>
-          </div>
-        </div>
-        <div class="map-shell reveal">
-          <iframe
-            title="Map — Rocha Family Auto Sales, 261861 Highway 101, Sequim, WA 98382"
-            src="https://www.google.com/maps?q=261861+Highway+101,+Sequim,+WA+98382&output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Sequim,+WA+98382" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i>Get Directions</a>
+        <div class="social">
+          <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+          <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+          <a href="#" aria-label="X (Twitter)"><i class="ph ph-x-logo"></i></a>
         </div>
       </div>
     </div>
+    </div></div>
   </section>
 </main>
 
@@ -886,13 +927,11 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a class="brand" href="#home">
-          <img class="brand-logo foot-logo" src="assets/logo.webp" alt="Rocha Family Auto Sales" width="1902" height="613" loading="lazy">
-        </a>
-        <p>Dedicated to providing you with the ultimate automobile buying experience — your #1 source for buying a quality pre-owned vehicle.</p>
+        <img src="assets/logo.webp" alt="Rocha Family Auto Sales" width="1902" height="613" loading="lazy">
+        <p>Dedicated to providing you with the ultimate automobile buying experience. Your #1 source for buying a quality pre-owned vehicle.</p>
       </div>
       <div class="foot-col">
-        <b>Explore</b>
+        <h4>Explore</h4>
         <a href="#home">Home</a>
         <a href="#inventory">Inventory</a>
         <a href="#apply">Apply Online</a>
@@ -900,101 +939,298 @@
         <a href="#contact">Contact Us</a>
       </div>
       <div class="foot-col">
-        <b>Get In Touch</b>
-        <span>261861 Highway 101,<br>Sequim, WA 98382</span>
-        <a href="tel:3607971202">Sales: 360-797-1202</a>
-        <a href="https://www.sequimauto.com" target="_blank" rel="noopener">www.sequimauto.com</a>
+        <h4>Get in touch</h4>
+        <span>2150 Evergreen Motor Way<br>Sequim, WA 98382</span>
+        <a href="tel:+13605550148">Sales: (360) 555-0148</a>
+      </div>
+      <div class="foot-col">
+        <h4>Hours</h4>
+        <span>Mon to Fri, 9am - 6pm</span>
+        <span>Saturday, 10am - 5pm</span>
+        <span>Sunday, closed</span>
       </div>
     </div>
     <div class="foot-base">
-      <span>© <span id="year"></span> Rocha Family Auto Sales. All rights reserved.</span>
+      <span>&copy; <span id="year"></span> Rocha Family Auto Sales. All rights reserved.</span>
       <span>*Prices include dealer fees.</span>
+    </div>
+    <div class="foot-credit-wrap">
+      <details class="credits">
+        <summary>Photo credits</summary>
+        <ul>
+          <li>Hurricane Ridge, Olympic Mountains: <a href="https://commons.wikimedia.org/wiki/File:Hurricane_Ridge_(15189120833).jpg" target="_blank" rel="noopener">Nick Mealey</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>, converted to black and white</li>
+          <li>Ford F-250 Super Duty: <a href="https://commons.wikimedia.org/wiki/File:1999_Ford_F-250_Super_Duty_in_Black_Clearcoat,_front_left,_07-22-2022.jpg" target="_blank" rel="noopener">Cutlass</a>, CC0</li>
+          <li>Chrysler 300M: <a href="https://commons.wikimedia.org/wiki/File:300M_Special_06-25-2019_1.jpg" target="_blank" rel="noopener">SsmIntrigue</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, background removed</li>
+          <li>Dodge Ram 3500 Quad Cab: <a href="https://commons.wikimedia.org/wiki/File:2000_Dodge_Ram_3500_Sport_Quad_Cab_Long_Bed_2WD_in_White,_front_left.jpg" target="_blank" rel="noopener">Mr.choppers</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>, background removed</li>
+          <li>Mazda 626: <a href="https://commons.wikimedia.org/wiki/File:1999_Mazda_626_LX_in_Mojave_Beige_Mica,_Front_Right,_05-08-2023.jpg" target="_blank" rel="noopener">Elise240SX</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, background removed</li>
+        </ul>
+      </details>
     </div>
   </div>
 </footer>
 
+<!-- Mobile quick actions -->
+<div class="mobile-bar" id="mobileBar" aria-label="Quick actions">
+  <a class="btn btn-ghost" href="tel:+13605550148"><i class="ph ph-phone"></i>Call</a>
+  <a class="btn btn-primary" href="#apply"><i class="ph ph-file-text"></i>Apply Online</a>
+</div>
+
+<!-- Vehicle quick view -->
+<dialog class="quickview" id="quickview" aria-labelledby="qvTitle">
+  <button class="qv-close" type="button" id="qvClose" aria-label="Close"><i class="ph ph-x"></i></button>
+  <div class="qv-grid">
+    <div class="stage"><img id="qvImg" src="" alt="" width="1400" height="700"></div>
+    <div class="qv-info">
+      <span class="car-year" id="qvYear"></span>
+      <h3 id="qvTitle"></h3>
+      <dl class="qv-specs">
+        <div><dt>Price*</dt><dd class="num" id="qvPrice"></dd></div>
+        <div><dt>Mileage</dt><dd class="num" id="qvMiles"></dd></div>
+        <div><dt>Est. payment</dt><dd class="num" id="qvEst"></dd></div>
+        <div><dt>Body style</dt><dd id="qvBody"></dd></div>
+      </dl>
+      <div class="qv-actions">
+        <button class="btn btn-primary" type="button" id="qvApply"><i class="ph ph-file-text"></i>Apply Online</button>
+        <button class="btn btn-ghost" type="button" id="qvCalc"><i class="ph ph-calculator"></i>Estimate payment</button>
+        <a class="btn btn-ghost" href="tel:+13605550148"><i class="ph ph-phone"></i>(360) 555-0148</a>
+      </div>
+      <p class="qv-fine">*Includes dealer fees. Estimate assumes 10% down, 60 months at 8.9% APR.</p>
+    </div>
+  </div>
+</dialog>
+
 <script>
 (function(){
   "use strict";
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var money = function(n){ return '$' + Math.round(n).toLocaleString('en-US'); };
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Sticky header state */
-  var header = document.getElementById('siteHeader');
-  var onScroll = function(){ header.classList.toggle('scrolled', window.scrollY > 8); };
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  /* Monthly payment (standard amortization) */
+  function payment(principal, apr, months){
+    if (principal <= 0) return 0;
+    var r = apr / 100 / 12;
+    if (r === 0) return principal / months;
+    return principal * r / (1 - Math.pow(1 + r, -months));
+  }
+  var estFor = function(price){ return payment(price * 0.9, 8.9, 60); };
 
-  /* Mobile nav */
-  var nav = document.getElementById('mainNav');
-  var toggle = document.getElementById('navToggle');
-  toggle.addEventListener('click', function(){
-    var open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  nav.addEventListener('click', function(e){
-    if (e.target.closest('a')) {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded','false');
-    }
-  });
+  /* Header: solid once the hero scrolls away (IntersectionObserver, no scroll listener) */
+  var header = $('#siteHeader');
+  var nav = $('#mainNav'), menuBtn = $('#menuBtn');
+  var hero = $('.hero');
+  var mobileBar = $('#mobileBar');
+  var pastTop = false;
+  new IntersectionObserver(function(entries){
+    pastTop = !entries[0].isIntersecting;
+    header.classList.toggle('solid', pastTop || nav.classList.contains('open'));
+  }).observe($('#heroSentinel'));
+  new IntersectionObserver(function(entries){
+    mobileBar.classList.toggle('show', entries[0].intersectionRatio < 0.3);
+  }, {threshold:[0, 0.3]}).observe(hero);
 
-  /* Active nav link on scroll */
-  var sections = ['home','inventory','apply','about','contact'];
-  var navLinks = nav.querySelectorAll('a[href^="#"]');
-  var setActive = function(){
-    var current = 'home';
-    sections.forEach(function(id){
-      var el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= 140) current = id;
+  /* Mobile menu */
+  function setMenu(open){
+    nav.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn.innerHTML = open ? '<i class="ph ph-x"></i>' : '<i class="ph ph-list"></i>';
+    document.body.style.overflow = open ? 'hidden' : '';
+    header.classList.toggle('solid', open || pastTop);
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function(e){ if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && nav.classList.contains('open')) setMenu(false); });
+
+  /* Active nav link (IntersectionObserver) */
+  var links = $$('.main-nav a[href^="#"]');
+  var secObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      var id = entry.target === hero ? 'home' : entry.target.id;
+      links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
     });
-    navLinks.forEach(function(a){
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-  };
-  window.addEventListener('scroll', setActive, {passive:true});
-  setActive();
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  [hero, $('#inventory'), $('#about'), $('#apply'), $('#contact')].forEach(function(el){ secObs.observe(el); });
 
-  /* Search by price — filters the featured vehicles */
-  var chips = document.querySelectorAll('.chip');
-  var cars = document.querySelectorAll('#carGrid .car');
-  chips.forEach(function(chip){
-    chip.addEventListener('click', function(){
-      chips.forEach(function(c){ c.classList.remove('active'); });
-      chip.classList.add('active');
-      var max = chip.dataset.max;
-      cars.forEach(function(car){
-        var price = parseInt(car.dataset.price, 10);
-        car.classList.toggle('hidden', max !== 'all' && price >= parseInt(max, 10));
-      });
+  /* Inventory filtering */
+  var cars = $$('#carGrid .car');
+  var state = {body:'all', max:'all'};
+  cars.forEach(function(car){
+    var est = $('[data-est]', car);
+    est.textContent = money(estFor(+car.dataset.price)) + '/mo';
+  });
+  function applyFilters(){
+    var shown = 0;
+    cars.forEach(function(car){
+      var ok = (state.body === 'all' || car.dataset.body === state.body) &&
+               (state.max === 'all' || +car.dataset.price < +state.max);
+      car.hidden = !ok;
+      if (ok) { shown++; car.classList.add('in'); }
     });
+    $('#invCount').textContent = shown;
+    $('#invEmpty').classList.toggle('show', shown === 0);
+    $$('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.body === state.body); });
+    $$('.chips .chip').forEach(function(c){ c.setAttribute('aria-pressed', c.dataset.max === state.max); });
+  }
+  function update(patch){
+    Object.keys(patch).forEach(function(k){ state[k] = patch[k]; });
+    if (document.startViewTransition && !reduceMotion) document.startViewTransition(applyFilters);
+    else applyFilters();
+  }
+  $$('.seg button').forEach(function(b){ b.addEventListener('click', function(){ update({body:b.dataset.body}); }); });
+  $$('.chips .chip').forEach(function(c){ c.addEventListener('click', function(){ update({max:c.dataset.max}); }); });
+  $('#resetFilters').addEventListener('click', function(){ update({body:'all', max:'all'}); });
+  $('#quickSearch').addEventListener('submit', function(e){
+    e.preventDefault();
+    state.body = $('#qBody').value; state.max = $('#qPrice').value;
+    applyFilters();
+    $('#inventory').scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth'});
   });
 
-  /* Apply form — client-side confirmation */
-  var form = document.getElementById('applyForm');
+  /* Payment calculator */
+  var rPrice = $('#rPrice'), rDown = $('#rDown'), rApr = $('#rApr');
+  var term = 60, shownPay = 0, rafId = null;
+  function fill(input){
+    var p = (input.value - input.min) / (input.max - input.min) * 100;
+    input.style.setProperty('--p', p + '%');
+  }
+  function animateTo(target){
+    if (reduceMotion) { $('#payOut').textContent = money(target); shownPay = target; return; }
+    cancelAnimationFrame(rafId);
+    var from = shownPay, start = performance.now(), dur = 420;
+    (function step(now){
+      var t = Math.min(1, (now - start) / dur), k = 1 - Math.pow(1 - t, 3);
+      shownPay = from + (target - from) * k;
+      $('#payOut').textContent = money(shownPay);
+      if (t < 1) rafId = requestAnimationFrame(step);
+    })(start);
+  }
+  function calc(){
+    var price = +rPrice.value;
+    rDown.max = Math.min(price, 15000);
+    if (+rDown.value > +rDown.max) rDown.value = rDown.max;
+    var down = +rDown.value, apr = +rApr.value;
+    var financed = Math.max(0, price - down);
+    $('#oPrice').textContent = money(price);
+    $('#oDown').textContent = money(down);
+    $('#oApr').textContent = apr.toFixed(1) + '%';
+    $('#oTerm').textContent = term + ' months';
+    $('#payDetail').textContent = 'Amount financed ' + money(financed) + ' over ' + term + ' months';
+    [rPrice, rDown, rApr].forEach(fill);
+    animateTo(payment(financed, apr, term));
+  }
+  [rPrice, rDown, rApr].forEach(function(i){ i.addEventListener('input', calc); });
+  $$('.terms .chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      term = +c.dataset.term;
+      $$('.terms .chip').forEach(function(x){ x.setAttribute('aria-pressed', x === c); });
+      calc();
+    });
+  });
+  function setCalcPrice(price){
+    rPrice.value = price;
+    rDown.max = Math.min(price, 15000);
+    rDown.value = Math.round(price * 0.1 / 50) * 50;
+    calc();
+  }
+  calc();
+
+  /* Vehicle quick view */
+  var dlg = $('#quickview'), current = null;
+  function openCar(car){
+    current = car;
+    var name = car.dataset.name, year = name.slice(0, 4);
+    $('#qvImg').src = car.dataset.img;
+    $('#qvImg').alt = name;
+    $('#qvYear').textContent = year;
+    $('#qvTitle').textContent = name.slice(5);
+    $('#qvPrice').textContent = money(+car.dataset.price);
+    $('#qvMiles').textContent = (+car.dataset.miles).toLocaleString('en-US') + ' mi';
+    $('#qvEst').textContent = money(estFor(+car.dataset.price)) + '/mo';
+    $('#qvBody').textContent = car.dataset.body === 'truck' ? 'Pickup truck' : 'Sedan';
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  function closeDlg(){ if (dlg.open) dlg.close(); }
+  cars.forEach(function(car){ car.addEventListener('click', function(){ openCar(car); }); });
+  $$('[data-open]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var car = $('.car[data-id="' + a.dataset.open + '"]');
+      if (car) openCar(car);
+    });
+  });
+  $('#qvClose').addEventListener('click', closeDlg);
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) closeDlg(); });
+  function goTo(id){
+    closeDlg();
+    var el = document.getElementById(id);
+    setTimeout(function(){ el.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'}); }, 60);
+  }
+  $('#qvApply').addEventListener('click', function(){
+    if (current) $('#vehicle').value = current.dataset.name;
+    setCalcPrice(+current.dataset.price);
+    goTo('apply');
+  });
+  $('#qvCalc').addEventListener('click', function(){
+    setCalcPrice(+current.dataset.price);
+    goTo('calculator');
+  });
+
+  /* Credit application: inline validation + success state */
+  var form = $('#applyForm');
+  function validateField(input){
+    var f = input.closest('.field');
+    var ok = input.checkValidity() && (input.value.trim() !== '' || !input.required);
+    f.classList.toggle('invalid', !ok);
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    return ok;
+  }
+  $$('[required]', form).forEach(function(input){
+    input.addEventListener('blur', function(){ if (input.value) validateField(input); });
+    input.addEventListener('input', function(){ if (input.closest('.field').classList.contains('invalid')) validateField(input); });
+  });
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-    document.getElementById('formFields').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+    var bad = $$('[required]', form).filter(function(i){ return !validateField(i); });
+    if (bad.length) { bad[0].focus(); return; }
+    var btn = $('button[type=submit]', form);
+    btn.classList.add('loading');
+    btn.innerHTML = '<i class="ph ph-circle-notch"></i>Sending';
+    // Front-end only: connect this to your CRM / form service.
+    setTimeout(function(){ form.classList.add('done'); }, 700);
   });
 
+  /* Open / closed status (Mon-Fri 9-18, Sat 10-17, Pacific time) */
+  (function(){
+    var el = $('#openStatus');
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', weekday:'short', hour:'numeric', hour12:false}).formatToParts(new Date());
+      var day = parts.find(function(p){ return p.type === 'weekday'; }).value;
+      var hour = +parts.find(function(p){ return p.type === 'hour'; }).value % 24;
+      var hrs = {Mon:[9,18],Tue:[9,18],Wed:[9,18],Thu:[9,18],Fri:[9,18],Sat:[10,17]}[day];
+      var open = !!hrs && hour >= hrs[0] && hour < hrs[1];
+      el.classList.add(open ? 'open' : 'closed');
+      $('span', el).textContent = open ? 'Open now' : 'Closed now';
+      el.hidden = false;
+    } catch (err) { /* leave hidden */ }
+  })();
+
   /* Scroll reveal */
-  var reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  var reveals = $$('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
       });
-    }, {threshold:.12});
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
     reveals.forEach(function(el){ io.observe(el); });
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* Footer year */
-  document.getElementById('year').textContent = new Date().getFullYear();
+  $('#year').textContent = new Date().getFullYear();
 })();
 </script>
 </body>
