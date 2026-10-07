@@ -8,7 +8,7 @@ Open `index.html` in a browser. No build step, no frameworks, no third-party CDN
 
 Researched against award-recognized automotive and dealer sites (Rivian, Polestar, Porsche, Carvana, Clutch, Fletcher Jones) and current dealer UX guidance:
 
-- **Cinematic video hero**: a looping montage of cars on open roads plays behind a cut-out F-250, which is the featured vehicle.
+- **Cinematic video hero**: a full-bleed looping montage of cars on open roads behind the headline.
 - **Inventory-first** (Carvana / Clutch): a glass quick-search bar sits on the hero, and the inventory grid has body-style and "Search by price" filters with live counts and an empty state.
 - **Studio photography**: every vehicle is cut out and placed on the same lit "virtual studio" backdrop, so mismatched lot photos look like a consistent catalog.
 - **Payment next to price** (Fletcher Jones): each card shows an estimated monthly payment, and an interactive payment calculator sits beside the credit application.
@@ -17,7 +17,7 @@ Researched against award-recognized automotive and dealer sites (Rivian, Polesta
 ## Features
 
 - Transparent header that turns to frosted glass on scroll; full-screen mobile menu
-- Hero with a muted, looping background video (it shows a still poster frame when `prefers-reduced-motion` is on) and load choreography (slow zoom, truck slides in) and CSS scroll-driven parallax where supported
+- Hero with a muted, looping background video (it shows a still poster frame when `prefers-reduced-motion` is on) with a slow zoom on load and CSS scroll-driven parallax where supported
 - Quick search (body style + max price) that filters the inventory and scrolls to it
 - Inventory filters with View Transitions animation, live result count and empty state
 - Vehicle quick-view dialog (price, mileage, estimated payment, body style) with "Apply Online" (pre-fills the form and calculator) and "Estimate payment"
