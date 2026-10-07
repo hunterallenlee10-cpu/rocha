@@ -382,9 +382,10 @@
       flex-direction:column;align-items:stretch;gap:6px;
       background:rgba(10,14,26,.98);backdrop-filter:blur(16px);
       padding:96px 24px 32px;border-bottom:1px solid var(--card-edge);
-      transform:translateY(-105%);transition:transform .3s ease;
+      transform:translateY(-105%);visibility:hidden;
+      transition:transform .3s ease,visibility 0s linear .3s;
     }
-    nav.main.open{transform:none}
+    nav.main.open{transform:none;visibility:visible;transition:transform .3s ease,visibility 0s}
     nav.main a{font-size:17px;padding:14px 16px}
     .nav-cta{margin:10px 0 0;justify-content:center}
     .nav-toggle{display:grid;position:relative;z-index:70}
