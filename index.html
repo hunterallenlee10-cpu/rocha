@@ -12,7 +12,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="stylesheet" href="assets/icons.css">
-<link rel="preload" as="image" href="assets/hero-olympic-range.webp">
+<link rel="preload" as="image" href="assets/hero-drive-poster.jpg">
 <link rel="preload" as="image" href="assets/vehicles/2001-ford-f250-super-duty.webp">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0f0e'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='32' font-weight='bold' fill='%23e3a34a' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
 <style>
@@ -136,10 +136,10 @@ h2{font-size:clamp(2rem,4.2vw,3.4rem)}
   display:flex;flex-direction:column;
 }
 .hero-sentinel{position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none}
-.hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden}
-.hero-bg img{
-  width:100%;height:115%;object-fit:cover;object-position:50% 70%;
-  filter:brightness(.62) contrast(1.12);
+.hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--bg)}
+.hero-bg video{
+  display:block;width:100%;height:115%;object-fit:cover;object-position:50% 60%;
+  filter:brightness(.7) contrast(1.08) saturate(.9);
   animation:heroZoom 2.6s var(--ease) both;
 }
 .hero::before{
@@ -537,6 +537,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   .header-call{margin:20px 0 0;--h:54px;font-family:var(--font-body)!important;font-size:1rem!important}
   .hero{min-height:auto;padding-top:calc(var(--header-h) + 48px)}
   .hero{padding-bottom:28px}
+  .hero-bg video{filter:brightness(.56) contrast(1.08) saturate(.9)}
   .hero-truck{position:relative;right:auto;bottom:auto;width:min(108%,640px);margin:28px auto -8px;left:2%}
   .hero-caption{top:-8%;right:auto;left:4%;text-align:left}
   .hero-truck{margin-top:44px}
@@ -604,7 +605,10 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   <!-- ============ HERO ============ -->
   <section class="hero" aria-label="Welcome">
     <div class="hero-bg" aria-hidden="true">
-      <img src="assets/hero-olympic-range.webp" alt="" width="1920" height="1282" fetchpriority="high">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-drive-poster.jpg">
+        <source src="assets/hero-drive.webm" type="video/webm">
+        <source src="assets/hero-drive.mp4" type="video/mp4">
+      </video>
     </div>
     <span class="hero-sentinel" id="heroSentinel" aria-hidden="true"></span>
     <div class="wrap"><div class="hero-copy">
@@ -958,6 +962,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       <details class="credits">
         <summary>Photo credits</summary>
         <ul>
+          <li>Hero video: driving clips from <a href="https://mixkit.co/free-stock-video/" target="_blank" rel="noopener">Mixkit</a>, Mixkit Stock Video Free License</li>
           <li>Hurricane Ridge, Olympic Mountains: <a href="https://commons.wikimedia.org/wiki/File:Hurricane_Ridge_(15189120833).jpg" target="_blank" rel="noopener">Nick Mealey</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>, converted to black and white</li>
           <li>Ford F-250 Super Duty: <a href="https://commons.wikimedia.org/wiki/File:1999_Ford_F-250_Super_Duty_in_Black_Clearcoat,_front_left,_07-22-2022.jpg" target="_blank" rel="noopener">Cutlass</a>, CC0</li>
           <li>Chrysler 300M: <a href="https://commons.wikimedia.org/wiki/File:300M_Special_06-25-2019_1.jpg" target="_blank" rel="noopener">SsmIntrigue</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, background removed</li>
@@ -1216,6 +1221,13 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       el.hidden = false;
     } catch (err) { /* leave hidden */ }
   })();
+
+  /* Hero video: hold on the poster frame for reduced-motion users */
+  var heroVideo = $('#heroVideo');
+  if (heroVideo && reduceMotion) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
 
   /* Scroll reveal */
   var reveals = $$('.reveal');

@@ -8,7 +8,7 @@ Open `index.html` in a browser. No build step, no frameworks, no third-party CDN
 
 Researched against award-recognized automotive and dealer sites (Rivian, Polestar, Porsche, Carvana, Clutch, Fletcher Jones) and current dealer UX guidance:
 
-- **Cinematic, place-based hero** (Rivian / Bugatti): a black-and-white shot of the Olympic Mountains near Sequim with a full-color F-250 cut out in front of it, so the vehicle is the only color in the frame.
+- **Cinematic video hero**: a looping montage of cars on open roads plays behind a cut-out F-250, which is the featured vehicle.
 - **Inventory-first** (Carvana / Clutch): a glass quick-search bar sits on the hero, and the inventory grid has body-style and "Search by price" filters with live counts and an empty state.
 - **Studio photography**: every vehicle is cut out and placed on the same lit "virtual studio" backdrop, so mismatched lot photos look like a consistent catalog.
 - **Payment next to price** (Fletcher Jones): each card shows an estimated monthly payment, and an interactive payment calculator sits beside the credit application.
@@ -17,7 +17,7 @@ Researched against award-recognized automotive and dealer sites (Rivian, Polesta
 ## Features
 
 - Transparent header that turns to frosted glass on scroll; full-screen mobile menu
-- Hero with load choreography (slow zoom, truck slides in) and CSS scroll-driven parallax where supported
+- Hero with a muted, looping background video (it shows a still poster frame when `prefers-reduced-motion` is on) and load choreography (slow zoom, truck slides in) and CSS scroll-driven parallax where supported
 - Quick search (body style + max price) that filters the inventory and scrolls to it
 - Inventory filters with View Transitions animation, live result count and empty state
 - Vehicle quick-view dialog (price, mileage, estimated payment, body style) with "Apply Online" (pre-fills the form and calculator) and "Estimate payment"
@@ -49,15 +49,17 @@ Search `index.html` for `555-0148`, `Evergreen Motor Way` and the hours text to 
 
 - `index.html`: the whole site (HTML, CSS, JS)
 - `assets/logo.webp`: dealership logo
-- `assets/hero-olympic-range.webp`: hero background
+- `assets/hero-drive.webm` / `.mp4` / `-poster.jpg`: hero background video. It is a 21-second montage of six clips with crossfades and a seamless loop point, at 720p (about 2 MB as WebM, 3 MB as MP4).
+- `assets/hero-olympic-range.webp`: social share image (`og:image`)
 - `assets/vehicles/*.webp`: background-removed vehicle photos
 - `assets/fonts/`: Archivo, Geist (SIL OFL) and Phosphor icon fonts (MIT)
 - `assets/icons.css`: Phosphor icon subset used by the page
 
 ## Photo credits
 
-All photos are from Wikimedia Commons. The vehicle photos show the same make, model and generation as the listings; they are not photos of the specific units for sale.
+All photos are from Wikimedia Commons, and the hero video is from Mixkit. The vehicle photos show the same make, model and generation as the listings; they are not photos of the specific units for sale.
 
+- Hero video: Mixkit clips 50267, 52427, 41393, 41537, 506 and 52452, under the [Mixkit Stock Video Free License](https://mixkit.co/license/#videoFree). Commercial use is allowed and attribution is not required.
 - Hurricane Ridge, Olympic Mountains: [Nick Mealey](https://commons.wikimedia.org/wiki/File:Hurricane_Ridge_(15189120833).jpg), CC BY 2.0 (converted to black and white)
 - Ford F-250 Super Duty: [Cutlass](https://commons.wikimedia.org/wiki/File:1999_Ford_F-250_Super_Duty_in_Black_Clearcoat,_front_left,_07-22-2022.jpg), CC0
 - Chrysler 300M: [SsmIntrigue](https://commons.wikimedia.org/wiki/File:300M_Special_06-25-2019_1.jpg), CC BY-SA 4.0 (background removed)
