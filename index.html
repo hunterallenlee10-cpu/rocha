@@ -112,23 +112,22 @@
   .nav-toggle svg{width:22px;height:22px;stroke:currentColor}
 
   /* ---------- Hero ---------- */
-  .hero{position:relative;padding:96px 0 80px;overflow:hidden}
-  .hero::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:
-      radial-gradient(680px 420px at 82% 8%,rgba(47,107,255,.22),transparent 62%),
-      radial-gradient(560px 380px at 8% 88%,rgba(79,140,255,.12),transparent 60%);
+  .hero{
+    position:relative;overflow:hidden;isolation:isolate;
+    display:flex;align-items:center;
+    min-height:clamp(560px,86vh,860px);padding:110px 0 120px;
   }
-  .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:56px 56px;
-    mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
-    -webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 35%,black 30%,transparent 75%);
+  .hero-media{position:absolute;inset:0;z-index:-1;background:#0a0e1a url("assets/hero-drive-poster.jpg") center/cover no-repeat}
+  .hero-media video{width:100%;height:100%;object-fit:cover;display:block}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,rgba(10,14,26,.94) 0%,rgba(10,14,26,.76) 36%,rgba(10,14,26,.28) 70%,rgba(10,14,26,.18) 100%),
+      linear-gradient(180deg,rgba(10,14,26,.45) 0%,transparent 20%,transparent 62%,var(--bg) 100%),
+      radial-gradient(680px 420px at 82% 8%,rgba(47,107,255,.18),transparent 62%);
   }
   .hero .wrap{position:relative;z-index:1}
-  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero-grid{max-width:680px}
   .eyebrow{
     display:inline-flex;align-items:center;gap:9px;
     font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -147,7 +146,7 @@
     background:linear-gradient(92deg,var(--accent-2),#8ab4ff 60%,#c4d7ff);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .hero-lead{color:var(--muted);font-size:17.5px;max-width:52ch;margin-bottom:32px}
+  .hero-lead{color:#c3cde2;font-size:17.5px;max-width:52ch;margin-bottom:32px}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -170,32 +169,6 @@
   .hero-badge{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--muted);font-weight:500}
   .hero-badge svg{width:19px;height:19px;stroke:var(--accent-2);flex:none}
   .hero-badge strong{color:var(--text);font-weight:600}
-
-  .hero-visual{position:relative}
-  .hero-card{
-    position:relative;border-radius:24px;overflow:hidden;
-    border:1px solid var(--card-edge);
-    background:linear-gradient(160deg,#16214040,#0d132600),var(--surface);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
-  }
-  .hero-card svg.scene{width:100%;height:auto}
-  .hero-card-tag{
-    position:absolute;top:18px;left:18px;
-    display:inline-flex;align-items:center;gap:8px;
-    background:rgba(10,14,26,.72);backdrop-filter:blur(8px);
-    border:1px solid var(--card-edge);border-radius:999px;
-    padding:8px 15px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);
-  }
-  .hero-card-tag .dot{width:7px;height:7px;border-radius:50%;background:#39d98a;box-shadow:0 0 8px #39d98a}
-  .hero-float{
-    position:absolute;right:-14px;bottom:-20px;z-index:2;
-    background:var(--card);border:1px solid var(--card-edge);border-radius:16px;
-    padding:15px 20px;display:flex;align-items:center;gap:13px;
-    box-shadow:0 20px 50px -18px rgba(0,0,0,.8);
-  }
-  .hero-float svg{width:26px;height:26px;stroke:var(--accent-2);flex:none}
-  .hero-float b{display:block;font-family:var(--font-display);font-size:15px}
-  .hero-float span{font-size:12.5px;color:var(--muted)}
 
   /* ---------- Quick action tiles ---------- */
   .tiles{padding:26px 0 0}
@@ -398,8 +371,6 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width:1020px){
-    .hero-grid{grid-template-columns:1fr;gap:44px}
-    .hero-visual{max-width:560px}
     .cars{grid-template-columns:repeat(2,1fr)}
     .tiles-grid{grid-template-columns:1fr;margin-top:0}
     .about-grid,.apply-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
@@ -419,14 +390,14 @@
     .nav-toggle{display:grid;position:relative;z-index:70}
     .topbar .wrap{justify-content:center}
     .topbar-group{justify-content:center}
-    .hero{padding:64px 0 60px}
+    .hero{min-height:clamp(520px,80vh,720px);padding:72px 0 88px}
+    .hero-media::after{background:linear-gradient(180deg,rgba(10,14,26,.72) 0%,rgba(10,14,26,.62) 55%,var(--bg) 100%)}
     section{padding:64px 0}
   }
   @media (max-width:560px){
     .cars{grid-template-columns:1fr}
     .form-row{grid-template-columns:1fr}
     .foot-grid{grid-template-columns:1fr;gap:32px}
-    .hero-float{right:8px;bottom:-16px;padding:12px 16px}
     .topbar-group{gap:12px}
     .brand-logo{height:46px}
     .foot-logo{height:72px}
@@ -503,6 +474,12 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" aria-label="Welcome">
+    <div class="hero-media" aria-hidden="true">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-drive-poster.jpg">
+        <source src="assets/hero-drive.webm" type="video/webm">
+        <source src="assets/hero-drive.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="wrap">
       <div class="hero-grid">
         <div class="reveal">
@@ -532,47 +509,6 @@
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
               <span><strong>Financing</strong> options available</span>
             </span>
-          </div>
-        </div>
-
-        <div class="hero-visual reveal">
-          <div class="hero-card">
-            <span class="hero-card-tag"><span class="dot"></span>Open Today</span>
-            <svg class="scene" viewBox="0 0 560 400" role="img" aria-label="Stylized illustration of a pickup truck on the lot at dusk">
-              <defs>
-                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#1a2a5e"/>
-                  <stop offset=".55" stop-color="#16214a"/>
-                  <stop offset="1" stop-color="#0e1530"/>
-                </linearGradient>
-                <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#0c1226"/>
-                  <stop offset="1" stop-color="#0a0e1a"/>
-                </linearGradient>
-                <radialGradient id="sun" cx=".5" cy=".5" r=".5">
-                  <stop offset="0" stop-color="#4f8cff" stop-opacity=".85"/>
-                  <stop offset="1" stop-color="#4f8cff" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-              <rect width="560" height="400" fill="url(#sky)"/>
-              <circle cx="430" cy="130" r="130" fill="url(#sun)"/>
-              <circle cx="430" cy="130" r="46" fill="#5d95ff" opacity=".9"/>
-              <path d="M0 262 L90 236 L150 252 L230 226 L310 250 L400 232 L480 252 L560 238 L560 400 L0 400 Z" fill="#111a38" opacity=".8"/>
-              <rect y="290" width="560" height="110" fill="url(#ground)"/>
-              <g stroke="#2f6bff" stroke-opacity=".35" stroke-width="2">
-                <line x1="30" y1="330" x2="120" y2="330"/><line x1="180" y1="330" x2="270" y2="330"/>
-                <line x1="330" y1="330" x2="420" y2="330"/><line x1="480" y1="330" x2="560" y2="330"/>
-              </g>
-              <g color="#0b1020">
-                <use href="#car-truck" x="120" y="176" width="330" height="118" color="#0d1430"/>
-              </g>
-              <use href="#car-truck" x="118" y="172" width="330" height="118" color="#3b74ff"/>
-              <ellipse cx="285" cy="298" rx="170" ry="12" fill="#000" opacity=".4"/>
-            </svg>
-          </div>
-          <div class="hero-float">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7Z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span><b>Quality Pre-Owned</b><span>Lease returns &amp; new car trades</span></span>
           </div>
         </div>
       </div>
@@ -976,6 +912,13 @@
     document.getElementById('formFields').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   });
+
+  /* Hero video: hold on the poster frame for reduced-motion users */
+  var heroVideo = document.getElementById('heroVideo');
+  if (heroVideo && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
 
   /* Scroll reveal */
   var reveals = document.querySelectorAll('.reveal');
