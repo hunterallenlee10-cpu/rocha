@@ -369,6 +369,14 @@ dialog.quickview[open]{animation:dialogIn .5s var(--ease)}
 .range-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
 .range-top label{font-size:.88rem;font-weight:600;color:var(--muted)}
 .range-top output{font-family:var(--font-display);font-weight:650;font-size:1.05rem}
+.money-in{
+  width:9.5ch;margin:-5px -10px -5px 0;padding:4px 10px;text-align:right;
+  font-family:var(--font-display);font-weight:650;font-size:1.05rem;color:var(--text);
+  background:rgba(236,233,226,.04);border:1px solid var(--line-2);border-radius:10px;
+  transition:border-color .2s,background .2s;
+}
+.money-in:hover{border-color:rgba(236,233,226,.3)}
+.money-in:focus{outline:none;border-color:var(--accent);background:var(--accent-soft)}
 input[type=range]{
   -webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer;
   --p:50%;
@@ -789,12 +797,12 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
             <p id="payDetail">Amount financed $0</p>
           </div>
           <div class="range">
-            <div class="range-top"><label for="rPrice">Vehicle price</label><output class="num" id="oPrice" for="rPrice">$13,190</output></div>
-            <input type="range" id="rPrice" min="2000" max="40000" step="10" value="13190">
+            <div class="range-top"><label for="tPrice">Vehicle price</label><input class="num money-in" id="tPrice" type="text" inputmode="numeric" autocomplete="off" value="$13,190"></div>
+            <input type="range" id="rPrice" min="2000" max="40000" step="10" value="13190" aria-label="Vehicle price">
           </div>
           <div class="range">
-            <div class="range-top"><label for="rDown">Down payment</label><output class="num" id="oDown" for="rDown">$1,319</output></div>
-            <input type="range" id="rDown" min="0" max="10000" step="50" value="1319">
+            <div class="range-top"><label for="tDown">Down payment</label><input class="num money-in" id="tDown" type="text" inputmode="numeric" autocomplete="off" value="$1,319"></div>
+            <input type="range" id="rDown" min="0" max="10000" step="50" value="1319" aria-label="Down payment">
           </div>
           <div class="range">
             <div class="range-top"><label for="rApr">Interest rate (APR)</label><output class="num" id="oApr" for="rApr">8.9%</output></div>
@@ -1064,9 +1072,13 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 
   /* Payment calculator */
   var rPrice = $('#rPrice'), rDown = $('#rDown'), rApr = $('#rApr');
+  var tPrice = $('#tPrice'), tDown = $('#tDown');
+  var price = +rPrice.value, down = +rDown.value, MAX_PRICE = 250000;
   var term = 60, shownPay = 0, rafId = null;
+  var parseMoney = function(v){ var n = parseInt(String(v).replace(/[^\d]/g, ''), 10); return isNaN(n) ? 0 : n; };
   function fill(input){
-    var p = (input.value - input.min) / (input.max - input.min) * 100;
+    var span = input.max - input.min;
+    var p = span > 0 ? (input.value - input.min) / span * 100 : 0;
     input.style.setProperty('--p', p + '%');
   }
   function animateTo(target){
@@ -1081,20 +1093,35 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
     })(start);
   }
   function calc(){
-    var price = +rPrice.value;
+    /* Mid-typing values ("6" on the way to "60000") must not permanently clamp the down payment */
+    var typing = document.activeElement === tPrice || document.activeElement === tDown;
+    var capped = Math.min(down, price);
+    if (!typing) down = capped;
+    rPrice.value = price;
     rDown.max = Math.min(price, 15000);
-    if (+rDown.value > +rDown.max) rDown.value = rDown.max;
-    var down = +rDown.value, apr = +rApr.value;
-    var financed = Math.max(0, price - down);
-    $('#oPrice').textContent = money(price);
-    $('#oDown').textContent = money(down);
+    rDown.value = capped;
+    var apr = +rApr.value;
+    var financed = Math.max(0, price - capped);
+    /* Don't rewrite a box while someone is typing in it; it reformats on blur */
+    if (document.activeElement !== tPrice) tPrice.value = money(price);
+    if (document.activeElement !== tDown) tDown.value = money(capped);
     $('#oApr').textContent = apr.toFixed(1) + '%';
     $('#oTerm').textContent = term + ' months';
     $('#payDetail').textContent = 'Amount financed ' + money(financed) + ' over ' + term + ' months';
     [rPrice, rDown, rApr].forEach(fill);
     animateTo(payment(financed, apr, term));
   }
-  [rPrice, rDown, rApr].forEach(function(i){ i.addEventListener('input', calc); });
+  rPrice.addEventListener('input', function(){ price = +rPrice.value; calc(); });
+  rDown.addEventListener('input', function(){ down = +rDown.value; calc(); });
+  rApr.addEventListener('input', calc);
+  /* Typed amounts can go past the slider range; the slider just pins at its end */
+  [[tPrice, function(n){ price = Math.min(n, MAX_PRICE); }], [tDown, function(n){ down = n; }]].forEach(function(pair){
+    var box = pair[0], set = pair[1];
+    box.addEventListener('focus', function(){ box.select(); });
+    box.addEventListener('input', function(){ set(parseMoney(box.value)); calc(); });
+    box.addEventListener('blur', calc);
+    box.addEventListener('keydown', function(e){ if (e.key === 'Enter') box.blur(); });
+  });
   $$('.terms .chip').forEach(function(c){
     c.addEventListener('click', function(){
       term = +c.dataset.term;
@@ -1102,10 +1129,9 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       calc();
     });
   });
-  function setCalcPrice(price){
-    rPrice.value = price;
-    rDown.max = Math.min(price, 15000);
-    rDown.value = Math.round(price * 0.1 / 50) * 50;
+  function setCalcPrice(p){
+    price = p;
+    down = Math.round(p * 0.1 / 50) * 50;
     calc();
   }
   calc();
