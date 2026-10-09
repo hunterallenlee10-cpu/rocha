@@ -49,9 +49,10 @@
   --font-body:'Geist',system-ui,sans-serif;
   --wrap:1280px;
   --header-h:76px;
+  --safe-top:env(safe-area-inset-top,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + var(--safe-top) + 12px)}
 body{
   background:var(--bg);color:var(--text);
   font-family:var(--font-body);font-size:16px;line-height:1.6;
@@ -102,7 +103,13 @@ h2{font-size:clamp(2rem,4.2vw,3.4rem)}
 .btn:hover .arrow{transform:translateX(4px)}
 
 /* ---------- Header ---------- */
-.site-header{position:fixed;inset:0 0 auto 0;z-index:50;height:var(--header-h)}
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  height:calc(var(--header-h) + var(--safe-top));padding-top:var(--safe-top);
+  background-color:transparent;transition:background-color .4s;
+}
+/* Solid colour on the header itself (not just the pseudo-element) so iOS Safari tints the status-bar strip to match instead of showing page content scrolling through it */
+.site-header.solid{background-color:var(--bg)}
 /* Blur lives on a pseudo-element so the header never becomes a containing block for the fixed mobile menu */
 .site-header::before{
   content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .4s;
@@ -132,7 +139,7 @@ h2{font-size:clamp(2rem,4.2vw,3.4rem)}
 /* ---------- Hero ---------- */
 .hero{
   position:relative;isolation:isolate;overflow:clip;
-  min-height:clamp(720px,100dvh,960px);padding:calc(var(--header-h) + 64px) 0 36px;
+  min-height:clamp(720px,100dvh,960px);padding:calc(var(--header-h) + var(--safe-top) + 64px) 0 36px;
   display:flex;flex-direction:column;
 }
 .hero-sentinel{position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none}
@@ -622,7 +629,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   .main-nav a::after{display:none}
   .main-nav a.active{color:var(--accent)}
   .header-call{margin:20px 0 0;--h:54px;font-family:var(--font-body)!important;font-size:1rem!important}
-  .hero{min-height:auto;padding-top:calc(var(--header-h) + 48px)}
+  .hero{min-height:auto;padding-top:calc(var(--header-h) + var(--safe-top) + 48px)}
   .hero{padding-bottom:28px}
   .hero-bg video{filter:brightness(.56) contrast(1.08) saturate(.9)}
   .eyebrow{letter-spacing:.14em}
