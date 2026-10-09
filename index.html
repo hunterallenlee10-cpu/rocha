@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Rocha Family Auto Sales | Quality Pre-Owned Vehicles in Sequim, WA</title>
-<meta name="description" content="Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle. Huge savings, a full array of financing options, and consignments welcome. Call (360) 555-0148.">
+<meta name="description" content="Rocha Family Auto Sales is your #1 source for buying a quality pre-owned vehicle. Huge savings, a full array of financing options, and consignments welcome. Call (360) 797-1202.">
 <meta name="theme-color" content="#0d0f0e">
 <meta property="og:title" content="Rocha Family Auto Sales">
 <meta property="og:description" content="Your #1 source for buying a quality pre-owned vehicle.">
@@ -12,6 +12,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/archivo-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin>
 <link rel="stylesheet" href="assets/icons.css">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.min.css">
 <link rel="preload" as="image" href="assets/hero-drive-poster.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0f0e'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='32' font-weight='bold' fill='%23e3a34a' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
 <style>
@@ -310,6 +311,39 @@ dialog.quickview[open]{animation:dialogIn .5s var(--ease)}
 .qv-close:hover{border-color:rgba(236,233,226,.4)}
 .qv-fine{font-size:.78rem;color:var(--dim);margin-top:14px}
 
+/* Inventory: search, sort and live lot photos */
+.inv-find{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.inv-search{position:relative;flex:1 1 340px}
+.inv-search .ph{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--dim);pointer-events:none}
+.inv-search .control{padding-left:46px}
+.inv-search .control::-webkit-search-cancel-button{filter:invert(.7)}
+.inv-sort{flex:0 0 230px}
+.inv-meta{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-bottom:18px}
+.inv-meta .inv-count{margin:0}
+.inv-fresh{display:inline-flex;align-items:center;gap:9px;font-size:.86rem;color:var(--muted)}
+.inv-fresh i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(127,199,154,.18)}
+.inv-fresh[hidden]{display:none}
+.stage.photo{display:block;padding:0;background:var(--surface-2)}
+.stage.photo::before,.stage.photo::after{display:none}
+.stage.photo img{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;filter:none}
+.car:hover .stage.photo img{transform:scale(1.04)}
+.car-tag{
+  position:absolute;top:14px;left:14px;z-index:1;padding:6px 12px;border-radius:999px;
+  background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+}
+.car-trim{font-size:.88rem;color:var(--muted);margin:-6px 0 10px}
+.car-specs{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.86rem;color:var(--muted)}
+.car-specs > span{display:inline-flex;align-items:center;gap:6px}
+.car-specs .ph{font-size:1.05rem;color:var(--dim)}
+.car-price s{display:block;font-family:var(--font-body);font-size:.8rem;font-weight:500;letter-spacing:0;color:var(--dim);margin-bottom:5px}
+.qv-grid .stage.photo{min-height:380px;padding:0}
+.qv-specs .wide{grid-column:1 / -1}
+.qv-specs dd s{font-family:var(--font-body);font-size:.82rem;font-weight:500;color:var(--dim);margin-left:6px}
+.qv-specs dd.vin{font-family:var(--font-body);font-size:1rem;letter-spacing:.04em}
+.qv-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:.86rem;color:var(--muted)}
+.qv-link:hover{color:var(--accent)}
+.qv-link[hidden]{display:none}
+
 /* ---------- About ---------- */
 .about{background:var(--bg-2);border-block:1px solid var(--line)}
 .about-intro{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
@@ -443,6 +477,72 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
 }
 .social a:hover{color:var(--text);border-color:rgba(236,233,226,.4);transform:translateY(-2px)}
 
+/* Lot map (Leaflet, self-hosted in assets/vendor/leaflet) */
+.lot-map{position:absolute;inset:0;z-index:0;background:#161917}
+.lot-map.leaflet-container{font-family:var(--font-body);background:#161917}
+.lot-map.tiles-dark .leaflet-tile-pane{filter:invert(.92) hue-rotate(180deg) grayscale(.75) contrast(.92) brightness(.9)}
+.map::after{z-index:1}
+.map-ui{position:absolute;inset:0;z-index:3;pointer-events:none}
+.map-ui[hidden]{display:none}
+.map-ui > *{pointer-events:auto}
+.map-layers{
+  position:absolute;top:24px;right:24px;display:flex;gap:4px;padding:4px;border-radius:999px;
+  background:rgba(18,21,19,.86);border:1px solid var(--line-2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.map-layers button{border:0;background:none;cursor:pointer;padding:8px 16px;border-radius:999px;font-size:.86rem;font-weight:600;color:var(--muted);transition:color .2s,background-color .3s var(--ease)}
+.map-layers button:hover{color:var(--text)}
+.map-layers button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.map-tools{position:absolute;right:24px;top:50%;transform:translateY(-50%);display:grid;gap:8px}
+.map-tools button{
+  width:44px;height:44px;border-radius:999px;display:grid;place-items:center;cursor:pointer;font-size:1.15rem;
+  background:rgba(18,21,19,.86);border:1px solid var(--line-2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  transition:border-color .2s,color .2s,transform .35s var(--ease);
+}
+.map-tools button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.map-hint{
+  position:absolute;right:24px;bottom:24px;z-index:3;padding:8px 16px;border-radius:999px;pointer-events:none;
+  background:rgba(18,21,19,.9);border:1px solid var(--line-2);font-size:.84rem;color:var(--muted);
+  opacity:0;transform:translateY(6px);transition:opacity .3s,transform .4s var(--ease);
+}
+.map-hint.show{opacity:1;transform:none}
+.leaflet-control-attribution{background:rgba(13,15,14,.78)!important;color:var(--dim)!important;font-size:10.5px;border-top-left-radius:8px}
+.leaflet-control-attribution a{color:var(--muted)!important}
+/* the pin on our lot */
+.lot-marker{position:relative;width:56px;height:68px}
+.lot-marker .pin{
+  position:absolute;left:50%;top:0;width:50px;height:50px;margin-left:-25px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  background:linear-gradient(135deg,#f0bb6b,#d08a2c);border:3px solid var(--bg);
+  box-shadow:0 0 0 2px var(--accent),0 14px 28px -8px rgba(0,0,0,.85);
+  animation:pinDrop .8s cubic-bezier(.34,1.56,.64,1) both;
+}
+.lot-marker .pin .ph{position:absolute;inset:0;display:grid;place-items:center;transform:rotate(45deg);font-size:1.45rem;color:var(--accent-ink)}
+.lot-marker .pulse{position:absolute;left:50%;bottom:-1px;width:22px;height:9px;margin-left:-11px;border-radius:50%;background:rgba(227,163,74,.5)}
+.lot-marker .pulse::before,.lot-marker .pulse::after{
+  content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(227,163,74,.8);animation:lotPulse 2.4s ease-out infinite;
+}
+.lot-marker .pulse::after{animation-delay:1.2s}
+@keyframes lotPulse{from{transform:scale(1);opacity:1}to{transform:scale(5.5);opacity:0}}
+@keyframes pinDrop{from{transform:translateY(-60px) rotate(-45deg);opacity:0}to{transform:rotate(-45deg);opacity:1}}
+.leaflet-tooltip.lot-label{
+  padding:7px 13px;border-radius:999px;background:rgba(18,21,19,.94);border:1px solid rgba(227,163,74,.55);color:var(--text);
+  font:650 .84rem var(--font-display);letter-spacing:-.005em;box-shadow:0 14px 30px -14px rgba(0,0,0,.9);
+}
+.leaflet-tooltip-right.lot-label::before{border-right-color:rgba(227,163,74,.55)}
+.leaflet-tooltip-top.lot-label::before{border-top-color:rgba(227,163,74,.55)}
+.you-dot{width:18px;height:18px;border-radius:50%;background:var(--ok);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--ok),0 0 0 8px rgba(127,199,154,.22)}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--bg-2);color:var(--text);border:1px solid var(--line-2);box-shadow:0 30px 60px -24px rgba(0,0,0,.95)}
+.leaflet-popup-content-wrapper{border-radius:var(--r-surface)}
+.leaflet-popup-content{margin:18px 20px;font:400 .9rem/1.5 var(--font-body)}
+.leaflet-container a.leaflet-popup-close-button{color:var(--muted);top:8px;right:8px}
+.lot-pop img{height:40px;width:auto;margin-bottom:10px}
+.lot-pop p{margin:0 0 12px;color:var(--muted)}
+.lot-pop .row{display:flex;gap:8px}
+.lot-pop .row a{flex:1;text-align:center;padding:8px 10px;border-radius:999px;font-weight:600;font-size:.84rem;border:1px solid var(--line-2);color:var(--text)}
+.lot-pop .row a.go{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
+.contact-item .dist{display:block;margin-top:4px;font-size:.88rem;font-weight:600;color:var(--ok)}
+.contact-item .dist[hidden]{display:none}
+.contact-actions .btn[aria-busy="true"]{opacity:.7;pointer-events:none}
+
 /* ---------- Footer ---------- */
 footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px}
@@ -492,12 +592,13 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1180px){
-  .cars{grid-template-columns:repeat(2,1fr)}
+  .cars{grid-template-columns:repeat(3,1fr)}
   .quick-form{grid-template-columns:1fr 1fr auto}
   .quick-title{display:none}
   .foot-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:1020px){
+  .cars{grid-template-columns:repeat(2,1fr)}
   .values-grid{grid-template-columns:1fr 1fr;row-gap:28px}
   .value:nth-child(3){border-left:0;padding-left:0}
   .apply-grid{grid-template-columns:1fr}
@@ -547,8 +648,13 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   .cars{grid-template-columns:1fr}
   .chips{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;width:calc(100% + 16px);margin-right:-16px;padding-right:16px}
   .chips::-webkit-scrollbar{display:none}
-  .seg{width:100%}
-  .seg button{flex:1;justify-content:center}
+  .seg{width:100%;overflow-x:auto;scrollbar-width:none}
+  .seg::-webkit-scrollbar{display:none}
+  .seg button{flex:none;padding:9px 14px}
+  .inv-sort{flex:1 1 100%}
+  .map-layers{top:16px;right:16px}
+  .map-tools{right:16px;top:42%}
+  .map-hint{display:none}
   .values-grid{grid-template-columns:1fr}
   .value{padding:0!important;border-left:0!important}
   .quick-form{grid-template-columns:1fr}
@@ -577,7 +683,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       <a href="#apply">Apply Online</a>
       <a href="#about">About Us</a>
       <a href="#contact">Contact Us</a>
-      <a class="btn btn-ghost header-call" href="tel:+13605550148"><i class="ph ph-phone"></i>(360) 555-0148</a>
+      <a class="btn btn-ghost header-call" href="tel:+13607971202"><i class="ph ph-phone"></i>(360) 797-1202</a>
     </nav>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav"><i class="ph ph-list"></i></button>
   </div>
@@ -614,7 +720,9 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
           <select class="control" id="qBody">
             <option value="all">All vehicles</option>
             <option value="truck">Trucks</option>
-            <option value="sedan">Sedans</option>
+            <option value="suv">SUVs</option>
+            <option value="car">Cars</option>
+            <option value="wagon">Wagons &amp; vans</option>
           </select>
         </div>
         <div class="qfield">
@@ -622,12 +730,9 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
           <select class="control" id="qPrice">
             <option value="all">Any price</option>
             <option value="5000">Under $5,000</option>
+            <option value="7500">Under $7,500</option>
             <option value="10000">Under $10,000</option>
             <option value="15000">Under $15,000</option>
-            <option value="20000">Under $20,000</option>
-            <option value="25000">Under $25,000</option>
-            <option value="30000">Under $30,000</option>
-            <option value="35000">Under $35,000</option>
           </select>
         </div>
         <button class="btn btn-primary" type="submit"><i class="ph ph-magnifying-glass"></i>Search</button>
@@ -646,99 +751,66 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   </div>
 
   <!-- ============ INVENTORY ============ -->
+  <!-- Cards are built from assets/inventory.js; edit that file to update the lot. -->
   <section id="inventory" aria-label="Inventory">
     <div class="wrap">
       <div class="inv-head reveal">
-        <h2>Featured Vehicles</h2>
-        <p class="lead">Search by price and find the right quality pre-owned vehicle for you.</p>
+        <h2>On the lot right now.</h2>
+        <p class="lead">Search by price, body style or make and find the right quality pre-owned vehicle for you.</p>
+      </div>
+
+      <div class="inv-find reveal">
+        <label class="inv-search">
+          <span class="sr-only">Search inventory</span>
+          <i class="ph ph-magnifying-glass"></i>
+          <input class="control" type="search" id="invSearch" placeholder="Search make, model, year, AWD, diesel…" autocomplete="off">
+        </label>
+        <label class="inv-sort">
+          <span class="sr-only">Sort vehicles</span>
+          <select class="control" id="invSort">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="miles-asc">Mileage: lowest first</option>
+            <option value="year-desc">Year: newest first</option>
+          </select>
+        </label>
       </div>
 
       <div class="inv-tools reveal">
         <div class="seg" role="group" aria-label="Body style">
           <button type="button" data-body="all" aria-pressed="true">All</button>
           <button type="button" data-body="truck" aria-pressed="false"><i class="ph ph-truck-trailer"></i>Trucks</button>
-          <button type="button" data-body="sedan" aria-pressed="false"><i class="ph ph-car-profile"></i>Sedans</button>
+          <button type="button" data-body="suv" aria-pressed="false"><i class="ph ph-jeep"></i>SUVs</button>
+          <button type="button" data-body="car" aria-pressed="false"><i class="ph ph-car-profile"></i>Cars</button>
+          <button type="button" data-body="wagon" aria-pressed="false"><i class="ph ph-van"></i>Wagons &amp; vans</button>
         </div>
         <div class="chips" role="group" aria-label="Search by price">
           <button type="button" class="chip" data-max="5000" aria-pressed="false">Under $5,000</button>
+          <button type="button" class="chip" data-max="7500" aria-pressed="false">Under $7,500</button>
           <button type="button" class="chip" data-max="10000" aria-pressed="false">Under $10,000</button>
           <button type="button" class="chip" data-max="15000" aria-pressed="false">Under $15,000</button>
-          <button type="button" class="chip" data-max="20000" aria-pressed="false">Under $20,000</button>
-          <button type="button" class="chip" data-max="25000" aria-pressed="false">Under $25,000</button>
-          <button type="button" class="chip" data-max="30000" aria-pressed="false">Under $30,000</button>
-          <button type="button" class="chip" data-max="35000" aria-pressed="false">Under $35,000</button>
-          <button type="button" class="chip" data-max="all" aria-pressed="true">All Cars</button>
+          <button type="button" class="chip" data-max="all" aria-pressed="true">All prices</button>
         </div>
       </div>
 
-      <p class="inv-count" aria-live="polite">Showing <b id="invCount">4</b> of 4 vehicles</p>
+      <div class="inv-meta">
+        <p class="inv-count" aria-live="polite">Showing <b id="invCount">0</b> of <b id="invTotal">0</b> vehicles</p>
+        <span class="inv-fresh" id="invFresh" hidden><i></i><span></span></span>
+      </div>
 
       <div class="cars" id="carGrid">
-        <article class="car reveal" style="--i:0;view-transition-name:car-f250" data-id="f250" data-price="13190" data-body="truck" data-miles="183872" data-name="2001 Ford F250 Super Duty Super Cab" data-img="assets/vehicles/2001-ford-f250-super-duty.webp">
-          <span class="stage"><img src="assets/vehicles/2001-ford-f250-super-duty.webp" alt="2001 Ford F250 Super Duty Super Cab" width="1400" height="805" loading="lazy"></span>
-          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
-          <span class="car-body">
-            <span class="car-year">2001</span>
-            <h3><button type="button" class="car-link">Ford F250 Super Duty Super Cab</button></h3>
-            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">183,872</span> miles</span>
-            <span class="car-foot">
-              <span class="car-price num">$13,190<sup>*</sup></span>
-              <span class="car-est">est.<b class="num" data-est></b></span>
-            </span>
-          </span>
-        </article>
-
-        <article class="car reveal" style="--i:1;view-transition-name:car-300m" data-id="300m" data-price="4190" data-body="sedan" data-miles="170490" data-name="2000 Chrysler 300M" data-img="assets/vehicles/2000-chrysler-300m.webp">
-          <span class="stage"><img src="assets/vehicles/2000-chrysler-300m.webp" alt="2000 Chrysler 300M" width="1400" height="490" loading="lazy"></span>
-          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
-          <span class="car-body">
-            <span class="car-year">2000</span>
-            <h3><button type="button" class="car-link">Chrysler 300M</button></h3>
-            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">170,490</span> miles</span>
-            <span class="car-foot">
-              <span class="car-price num">$4,190<sup>*</sup></span>
-              <span class="car-est">est.<b class="num" data-est></b></span>
-            </span>
-          </span>
-        </article>
-
-        <article class="car reveal" style="--i:2;view-transition-name:car-ram" data-id="ram" data-price="25190" data-body="truck" data-miles="91759" data-name="2000 Dodge Ram 3500 Quad Cab" data-img="assets/vehicles/2000-dodge-ram-3500.webp">
-          <span class="stage"><img src="assets/vehicles/2000-dodge-ram-3500.webp" alt="2000 Dodge Ram 3500 Quad Cab" width="1400" height="656" loading="lazy"></span>
-          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
-          <span class="car-body">
-            <span class="car-year">2000</span>
-            <h3><button type="button" class="car-link">Dodge Ram 3500 Quad Cab</button></h3>
-            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">91,759</span> miles</span>
-            <span class="car-foot">
-              <span class="car-price num">$25,190<sup>*</sup></span>
-              <span class="car-est">est.<b class="num" data-est></b></span>
-            </span>
-          </span>
-        </article>
-
-        <article class="car reveal" style="--i:3;view-transition-name:car-626" data-id="626" data-price="4190" data-body="sedan" data-miles="193311" data-name="1999 Mazda 626" data-img="assets/vehicles/1999-mazda-626.webp">
-          <span class="stage"><img src="assets/vehicles/1999-mazda-626.webp" alt="1999 Mazda 626" width="1400" height="705" loading="lazy"></span>
-          <span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
-          <span class="car-body">
-            <span class="car-year">1999</span>
-            <h3><button type="button" class="car-link">Mazda 626</button></h3>
-            <span class="car-miles"><i class="ph ph-gauge"></i><span class="num">193,311</span> miles</span>
-            <span class="car-foot">
-              <span class="car-price num">$4,190<sup>*</sup></span>
-              <span class="car-est">est.<b class="num" data-est></b></span>
-            </span>
-          </span>
-        </article>
+        <noscript><p class="lead">Turn on JavaScript to browse our inventory, or call Sales at <a href="tel:+13607971202">(360) 797-1202</a>.</p></noscript>
       </div>
 
       <div class="empty" id="invEmpty" role="status">
         <i class="ph ph-car"></i>
-        <b>No vehicles match those filters</b>
+        <b>No vehicles match that search</b>
         <p>Inventory changes often. Widen your search, or tell us what you're after and we'll find it.</p>
         <button type="button" class="btn btn-ghost" id="resetFilters">Show all vehicles</button>
       </div>
 
-      <p class="inv-note">*Includes dealer fees. Estimated payments assume 10% down, 60 months at 8.9% APR, and are for illustration only.</p>
+      <p class="inv-note">*Prices include dealer fees. Inventory changes quickly, so call ahead to confirm a vehicle is still available. Estimated payments assume 10% down, 60 months at 8.9% APR, and are for illustration only.</p>
     </div>
   </section>
 
@@ -852,11 +924,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
               <label for="vehicle">Vehicle of interest</label>
               <select class="control" id="vehicle" name="vehicle">
                 <option value="">Select a vehicle (optional)</option>
-                <option>2001 Ford F250 Super Duty Super Cab</option>
-                <option>2000 Chrysler 300M</option>
-                <option>2000 Dodge Ram 3500 Quad Cab</option>
-                <option>1999 Mazda 626</option>
-                <option>Other / not sure yet</option>
+                <option value="other">Other / not sure yet</option>
               </select>
             </div>
             <div class="field">
@@ -869,7 +937,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
           <div class="form-success" role="status">
             <i class="ph-fill ph-check-circle"></i>
             <b>Thanks, we've got it.</b>
-            <p>A member of the Rocha Family Auto Sales team will be in touch shortly.<br>Can't wait? Call Sales at <a href="tel:+13605550148">(360) 555-0148</a>.</p>
+            <p>A member of the Rocha Family Auto Sales team will be in touch shortly.<br>Can't wait? Call Sales at <a href="tel:+13607971202">(360) 797-1202</a>.</p>
           </div>
         </form>
       </div>
@@ -879,18 +947,31 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="contact" aria-label="Contact Us">
     <div class="map">
-      <iframe title="Map of Sequim, Washington" src="https://www.google.com/maps?q=Sequim,+WA+98382&z=13&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="lot-map" id="lotMap" role="region" aria-label="Map showing Rocha Family Auto Sales at 261861 Highway 101, Sequim, WA"></div>
+      <div class="map-ui" id="mapUi" hidden>
+        <div class="map-layers" role="group" aria-label="Map style">
+          <button type="button" data-layer="map" aria-pressed="true">Map</button>
+          <button type="button" data-layer="satellite" aria-pressed="false">Satellite</button>
+        </div>
+        <div class="map-tools">
+          <button type="button" data-act="in" aria-label="Zoom in"><i class="ph ph-plus"></i></button>
+          <button type="button" data-act="out" aria-label="Zoom out"><i class="ph ph-minus"></i></button>
+          <button type="button" data-act="home" aria-label="Center the map on our lot"><i class="ph ph-crosshair"></i></button>
+        </div>
+      </div>
+      <div class="map-hint" id="mapHint" aria-hidden="true">Click the map to zoom with your scroll wheel</div>
     </div>
     <div class="contact-overlay"><div class="wrap">
     <div class="contact-card reveal">
-      <h2>Come see us in Sequim.</h2>
+      <h2>Come see us on Highway&nbsp;101.</h2>
       <div class="contact-list">
-        <div class="contact-item"><i class="ph ph-map-pin"></i><div><b>Visit the lot</b><p>2150 Evergreen Motor Way<br>Sequim, WA 98382</p></div></div>
-        <div class="contact-item"><i class="ph ph-phone"></i><div><b>Sales</b><a href="tel:+13605550148">(360) 555-0148</a></div></div>
-        <div class="contact-item"><i class="ph ph-clock"></i><div><b>Hours</b><p>Mon to Fri, 9am - 6pm<br>Sat, 10am - 5pm. Sun, closed</p><span class="status" id="openStatus" hidden><i></i><span></span></span></div></div>
+        <div class="contact-item"><i class="ph ph-map-pin"></i><div><b>Visit the lot</b><p>261861 Highway 101<br>Sequim, WA 98382</p><span class="dist" id="mapDist" hidden></span></div></div>
+        <div class="contact-item"><i class="ph ph-phone"></i><div><b>Sales</b><a href="tel:+13607971202">(360) 797-1202</a></div></div>
+        <div class="contact-item"><i class="ph ph-globe"></i><div><b>On the web</b><a href="https://www.sequimauto.com" target="_blank" rel="noopener">sequimauto.com</a></div></div>
       </div>
       <div class="contact-actions">
-        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Sequim,+WA+98382" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i>Get Directions</a>
+        <a class="btn btn-primary" id="mapDirections" href="https://www.google.com/maps/dir/?api=1&amp;destination=48.077763,-123.159544" target="_blank" rel="noopener"><i class="ph ph-navigation-arrow"></i>Get Directions</a>
+        <button class="btn btn-ghost" type="button" id="mapLocate"><i class="ph ph-path"></i>How far am I?</button>
         <div class="social">
           <a href="#" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
           <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
@@ -920,14 +1001,14 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       </div>
       <div class="foot-col">
         <h4>Get in touch</h4>
-        <span>2150 Evergreen Motor Way<br>Sequim, WA 98382</span>
-        <a href="tel:+13605550148">Sales: (360) 555-0148</a>
+        <span>261861 Highway 101<br>Sequim, WA 98382</span>
+        <a href="tel:+13607971202">Sales: (360) 797-1202</a>
       </div>
       <div class="foot-col">
-        <h4>Hours</h4>
-        <span>Mon to Fri, 9am - 6pm</span>
-        <span>Saturday, 10am - 5pm</span>
-        <span>Sunday, closed</span>
+        <h4>Find us</h4>
+        <span>On Highway 101, west of downtown Sequim</span>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=48.077763,-123.159544" target="_blank" rel="noopener">Get directions</a>
+        <a href="https://www.sequimauto.com" target="_blank" rel="noopener">sequimauto.com</a>
       </div>
     </div>
     <div class="foot-base">
@@ -940,8 +1021,6 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
         <ul>
           <li>Hero video: driving clips from <a href="https://mixkit.co/free-stock-video/" target="_blank" rel="noopener">Mixkit</a>, Mixkit Stock Video Free License</li>
           <li>Hurricane Ridge, Olympic Mountains: <a href="https://commons.wikimedia.org/wiki/File:Hurricane_Ridge_(15189120833).jpg" target="_blank" rel="noopener">Nick Mealey</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>, converted to black and white</li>
-          <li>Ford F-250 Super Duty: <a href="https://commons.wikimedia.org/wiki/File:1999_Ford_F-250_Super_Duty_in_Black_Clearcoat,_front_left,_07-22-2022.jpg" target="_blank" rel="noopener">Cutlass</a>, CC0</li>
-          <li>Chrysler 300M: <a href="https://commons.wikimedia.org/wiki/File:300M_Special_06-25-2019_1.jpg" target="_blank" rel="noopener">SsmIntrigue</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, background removed</li>
           <li>Dodge Ram 3500 Quad Cab: <a href="https://commons.wikimedia.org/wiki/File:2000_Dodge_Ram_3500_Sport_Quad_Cab_Long_Bed_2WD_in_White,_front_left.jpg" target="_blank" rel="noopener">Mr.choppers</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>, background removed</li>
           <li>Mazda 626: <a href="https://commons.wikimedia.org/wiki/File:1999_Mazda_626_LX_in_Mojave_Beige_Mica,_Front_Right,_05-08-2023.jpg" target="_blank" rel="noopener">Elise240SX</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, background removed</li>
         </ul>
@@ -952,7 +1031,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 
 <!-- Mobile quick actions -->
 <div class="mobile-bar" id="mobileBar" aria-label="Quick actions">
-  <a class="btn btn-ghost" href="tel:+13605550148"><i class="ph ph-phone"></i>Call</a>
+  <a class="btn btn-ghost" href="tel:+13607971202"><i class="ph ph-phone"></i>Call</a>
   <a class="btn btn-primary" href="#apply"><i class="ph ph-file-text"></i>Apply Online</a>
 </div>
 
@@ -960,26 +1039,23 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 <dialog class="quickview" id="quickview" aria-labelledby="qvTitle">
   <button class="qv-close" type="button" id="qvClose" aria-label="Close"><i class="ph ph-x"></i></button>
   <div class="qv-grid">
-    <div class="stage"><img id="qvImg" src="" alt="" width="1400" height="700"></div>
+    <div class="stage photo"><img id="qvImg" src="" alt="" width="800" height="600"></div>
     <div class="qv-info">
       <span class="car-year" id="qvYear"></span>
       <h3 id="qvTitle"></h3>
-      <dl class="qv-specs">
-        <div><dt>Price*</dt><dd class="num" id="qvPrice"></dd></div>
-        <div><dt>Mileage</dt><dd class="num" id="qvMiles"></dd></div>
-        <div><dt>Est. payment</dt><dd class="num" id="qvEst"></dd></div>
-        <div><dt>Body style</dt><dd id="qvBody"></dd></div>
-      </dl>
+      <dl class="qv-specs" id="qvSpecs"></dl>
       <div class="qv-actions">
         <button class="btn btn-primary" type="button" id="qvApply"><i class="ph ph-file-text"></i>Apply Online</button>
         <button class="btn btn-ghost" type="button" id="qvCalc"><i class="ph ph-calculator"></i>Estimate payment</button>
-        <a class="btn btn-ghost" href="tel:+13605550148"><i class="ph ph-phone"></i>(360) 555-0148</a>
+        <a class="btn btn-ghost" href="tel:+13607971202"><i class="ph ph-phone"></i>(360) 797-1202</a>
       </div>
-      <p class="qv-fine">*Includes dealer fees. Estimate assumes 10% down, 60 months at 8.9% APR.</p>
+      <a class="qv-link" id="qvListing" href="#" target="_blank" rel="noopener" hidden>See all photos of this vehicle<i class="ph ph-arrow-square-out"></i></a>
+      <p class="qv-fine">*Includes dealer fees. Estimate assumes 10% down, 60 months at 8.9% APR. Call to confirm availability.</p>
     </div>
   </div>
 </dialog>
 
+<script src="assets/inventory.js"></script>
 <script>
 (function(){
   "use strict";
@@ -1035,20 +1111,78 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   }, {rootMargin:'-45% 0px -50% 0px'});
   [hero, $('#inventory'), $('#about'), $('#apply'), $('#contact')].forEach(function(el){ secObs.observe(el); });
 
-  /* Inventory filtering */
+  /* Inventory: one card per vehicle in assets/inventory.js */
+  var INV = window.ROCHA_INVENTORY || [];
+  var BODY = {truck:'Pickup truck', suv:'SUV', car:'Car', wagon:'Wagon / van'};
+  var byId = {};
+  var esc = function(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  };
+  var fullName = function(v){ return [v.year, v.make, v.model, v.trim].filter(Boolean).join(' '); };
+  var grid = $('#carGrid');
+  grid.insertAdjacentHTML('beforeend', INV.map(function(v, i){
+    v.order = i;
+    v.hay = [v.year, v.make, v.model, v.trim, v.color, v.drivetrain, v.fuel, v.engine, v.transmission, BODY[v.type], v.stock].join(' ').toLowerCase();
+    byId[v.stock] = v;
+    var specs = '<span><i class="ph ph-gauge"></i><span class="num">' + v.miles.toLocaleString('en-US') + '</span> mi</span>';
+    if (v.drivetrain) specs += '<span><i class="ph ph-steering-wheel"></i>' + esc(v.drivetrain) + '</span>';
+    if (v.fuel && v.fuel !== 'Gasoline') specs += '<span><i class="ph ph-gas-pump"></i>' + esc(v.fuel) + '</span>';
+    return '<article class="car reveal" style="--i:' + (i % 4) + ';view-transition-name:car-' + esc(v.stock) + '" data-id="' + esc(v.stock) + '" data-price="' + v.price + '" data-body="' + esc(v.type) + '" data-miles="' + v.miles + '" data-name="' + esc(fullName(v)) + '">' +
+      '<span class="stage photo"><img src="' + esc(v.photo) + '" alt="' + esc(fullName(v)) + '" width="800" height="600" loading="lazy" decoding="async"></span>' +
+      (v.wasPrice ? '<span class="car-tag">Price drop</span>' : '') +
+      '<span class="car-open" aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>' +
+      '<span class="car-body">' +
+        '<span class="car-year">' + v.year + '</span>' +
+        '<h3><button type="button" class="car-link">' + esc(v.make + ' ' + v.model) + '</button></h3>' +
+        (v.trim ? '<span class="car-trim">' + esc(v.trim) + '</span>' : '') +
+        '<span class="car-specs">' + specs + '</span>' +
+        '<span class="car-foot">' +
+          '<span class="car-price num">' + (v.wasPrice ? '<s>' + money(v.wasPrice) + '</s>' : '') + money(v.price) + '<sup>*</sup></span>' +
+          '<span class="car-est">est.<b class="num" data-est></b></span>' +
+        '</span>' +
+      '</span>' +
+    '</article>';
+  }).join(''));
+  $('#invTotal').textContent = INV.length;
+  if (window.ROCHA_INVENTORY_UPDATED) {
+    var updated = new Date(window.ROCHA_INVENTORY_UPDATED + 'T12:00:00');
+    $('span', $('#invFresh')).textContent = INV.length + ' in stock, updated ' + updated.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+    $('#invFresh').hidden = false;
+  }
+  /* "Vehicle of interest" in the credit application lists the same cars */
+  var otherOpt = $('#vehicle option[value="other"]');
+  INV.slice().sort(function(a, b){ return b.year - a.year || a.order - b.order; }).forEach(function(v){
+    var o = document.createElement('option');
+    o.textContent = fullName(v);
+    $('#vehicle').insertBefore(o, otherOpt);
+  });
+
+  /* Inventory filtering + sorting */
   var cars = $$('#carGrid .car');
-  var state = {body:'all', max:'all'};
+  var state = {body:'all', max:'all', q:'', sort:'featured'};
+  var SORTS = {
+    'featured':   function(a, b){ return a.order - b.order; },
+    'price-asc':  function(a, b){ return a.price - b.price || a.order - b.order; },
+    'price-desc': function(a, b){ return b.price - a.price || a.order - b.order; },
+    'miles-asc':  function(a, b){ return a.miles - b.miles; },
+    'year-desc':  function(a, b){ return b.year - a.year || a.price - b.price; }
+  };
   cars.forEach(function(car){
     var est = $('[data-est]', car);
     est.textContent = money(estFor(+car.dataset.price)) + '/mo';
   });
   function applyFilters(){
-    var shown = 0;
-    cars.forEach(function(car){
-      var ok = (state.body === 'all' || car.dataset.body === state.body) &&
-               (state.max === 'all' || +car.dataset.price < +state.max);
+    var shown = 0, words = state.q ? state.q.split(/\s+/) : [];
+    cars.slice().sort(function(a, b){ return SORTS[state.sort](byId[a.dataset.id], byId[b.dataset.id]); }).forEach(function(car){
+      var v = byId[car.dataset.id];
+      var ok = (state.body === 'all' || v.type === state.body) &&
+               (state.max === 'all' || v.price < +state.max) &&
+               words.every(function(w){ return v.hay.indexOf(w) !== -1; });
       car.hidden = !ok;
       if (ok) { shown++; car.classList.add('in'); }
+      grid.appendChild(car);
     });
     $('#invCount').textContent = shown;
     $('#invEmpty').classList.toggle('show', shown === 0);
@@ -1062,13 +1196,23 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   }
   $$('.seg button').forEach(function(b){ b.addEventListener('click', function(){ update({body:b.dataset.body}); }); });
   $$('.chips .chip').forEach(function(c){ c.addEventListener('click', function(){ update({max:c.dataset.max}); }); });
-  $('#resetFilters').addEventListener('click', function(){ update({body:'all', max:'all'}); });
+  $('#invSort').addEventListener('change', function(e){ update({sort:e.target.value}); });
+  var searchTimer;
+  $('#invSearch').addEventListener('input', function(e){
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function(){ state.q = e.target.value.trim().toLowerCase(); applyFilters(); }, 150);
+  });
+  $('#resetFilters').addEventListener('click', function(){
+    $('#invSearch').value = '';
+    update({body:'all', max:'all', q:''});
+  });
   $('#quickSearch').addEventListener('submit', function(e){
     e.preventDefault();
     state.body = $('#qBody').value; state.max = $('#qPrice').value;
     applyFilters();
     $('#inventory').scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth'});
   });
+  applyFilters();
 
   /* Payment calculator */
   var rPrice = $('#rPrice'), rDown = $('#rDown'), rApr = $('#rApr');
@@ -1140,15 +1284,29 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   var dlg = $('#quickview'), current = null;
   function openCar(car){
     current = car;
-    var name = car.dataset.name, year = name.slice(0, 4);
-    $('#qvImg').src = car.dataset.img;
-    $('#qvImg').alt = name;
-    $('#qvYear').textContent = year;
-    $('#qvTitle').textContent = name.slice(5);
-    $('#qvPrice').textContent = money(+car.dataset.price);
-    $('#qvMiles').textContent = (+car.dataset.miles).toLocaleString('en-US') + ' mi';
-    $('#qvEst').textContent = money(estFor(+car.dataset.price)) + '/mo';
-    $('#qvBody').textContent = car.dataset.body === 'truck' ? 'Pickup truck' : 'Sedan';
+    var v = byId[car.dataset.id];
+    $('#qvImg').src = v.photo;
+    $('#qvImg').alt = fullName(v);
+    $('#qvYear').textContent = v.year + '  ·  Stock #' + v.stock;
+    $('#qvTitle').textContent = [v.make, v.model, v.trim].filter(Boolean).join(' ');
+    var rows = [
+      ['Price*', money(v.price), v.wasPrice ? money(v.wasPrice) : ''],
+      ['Est. payment', money(estFor(v.price)) + '/mo'],
+      ['Mileage', v.miles.toLocaleString('en-US') + ' mi'],
+      ['Body style', BODY[v.type]],
+      ['Engine', v.engine], ['Transmission', v.transmission],
+      ['Drivetrain', v.drivetrain], ['Fuel', v.fuel], ['Color', v.color]
+    ].filter(function(r){ return r[1]; });
+    var html = rows.map(function(r, i){
+      var wide = rows.length % 2 && i === rows.length - 1;
+      return '<div' + (wide ? ' class="wide"' : '') + '><dt>' + r[0] + '</dt><dd class="num">' + esc(r[1]) +
+        (r[2] ? '<s>' + esc(r[2]) + '</s>' : '') + '</dd></div>';
+    }).join('');
+    if (v.vin) html += '<div class="wide"><dt>VIN</dt><dd class="vin">' + esc(v.vin) + '</dd></div>';
+    $('#qvSpecs').innerHTML = html;
+    var link = $('#qvListing');
+    link.hidden = !v.listing;
+    if (v.listing) link.href = v.listing;
     if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
   }
   function closeDlg(){ if (dlg.open) dlg.close(); }
@@ -1201,19 +1359,157 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
     setTimeout(function(){ form.classList.add('done'); }, 700);
   });
 
-  /* Open / closed status (Mon-Fri 9-18, Sat 10-17, Pacific time) */
+  /* Lot map: Leaflet (self-hosted) with a pin on the lot, loaded only when the map nears the screen */
   (function(){
-    var el = $('#openStatus');
-    try {
-      var parts = new Intl.DateTimeFormat('en-US', {timeZone:'America/Los_Angeles', weekday:'short', hour:'numeric', hour12:false}).formatToParts(new Date());
-      var day = parts.find(function(p){ return p.type === 'weekday'; }).value;
-      var hour = +parts.find(function(p){ return p.type === 'hour'; }).value % 24;
-      var hrs = {Mon:[9,18],Tue:[9,18],Wed:[9,18],Thu:[9,18],Fri:[9,18],Sat:[10,17]}[day];
-      var open = !!hrs && hour >= hrs[0] && hour < hrs[1];
-      el.classList.add(open ? 'open' : 'closed');
-      $('span', el).textContent = open ? 'Open now' : 'Closed now';
-      el.hidden = false;
-    } catch (err) { /* leave hidden */ }
+    var LOT = [48.077763, -123.159544]; // 261861 US-101, Sequim
+    var mapEl = $('#lotMap');
+    var directions = $('#mapDirections');
+    var locateBtn = $('#mapLocate');
+    var narrowMq = window.matchMedia('(max-width:860px)');
+    var map = null, you = null;
+
+    function fallback(){
+      // Leaflet couldn't load: show a Google Maps embed with a pin on the lot instead
+      var f = document.createElement('iframe');
+      f.title = 'Map of Rocha Family Auto Sales, 261861 Highway 101, Sequim, WA';
+      f.src = 'https://www.google.com/maps?q=' + LOT.join(',') + '&z=15&output=embed';
+      f.loading = 'lazy';
+      f.referrerPolicy = 'no-referrer-when-downgrade';
+      mapEl.replaceWith(f);
+      locateBtn.hidden = true;
+    }
+
+    /* The contact card covers the left of the map on desktop and the bottom on phones,
+       so "home" puts the pin in the open part of the map */
+    function homeCenter(zoom){
+      var size = map.getSize();
+      var shift = narrowMq.matches ? L.point(0, -size.y * 0.05) : L.point(size.x * 0.2, 0);
+      return map.unproject(map.project(LOT, zoom).subtract(shift), zoom);
+    }
+    function goHome(animate){
+      if (animate && !reduceMotion) map.flyTo(homeCenter(16), 16, {duration:1.1});
+      else map.setView(homeCenter(16), 16);
+    }
+
+    function init(){
+      if (!window.L) { fallback(); return; }
+      var touch = L.Browser.mobile;
+      map = L.map(mapEl, {zoomControl:false, scrollWheelZoom:false, dragging:!touch, tap:false, zoomSnap:0.5});
+      map.attributionControl.setPrefix(false);
+      map.setView(LOT, reduceMotion ? 16 : 12);
+      if (!reduceMotion) setTimeout(function(){ map.flyTo(homeCenter(16), 16, {duration:2.2}); }, 300);
+      else goHome(false);
+
+      var layers = {
+        // OpenStreetMap, darkened with the same filter the site used on its old map embed
+        map: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+        }),
+        satellite: L.layerGroup([
+          L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom:19, attribution:'Imagery &copy; Esri, Maxar, Earthstar Geographics'
+          }),
+          L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}', {maxZoom:19}),
+          L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {maxZoom:19})
+        ])
+      };
+      var active = layers.map.addTo(map);
+      mapEl.classList.add('tiles-dark');
+
+      var narrow = narrowMq.matches;
+      var pin = L.marker(LOT, {
+        title:'Rocha Family Auto Sales', alt:'Rocha Family Auto Sales', riseOnHover:true, keyboard:true,
+        icon: L.divIcon({
+          className:'', iconSize:[56, 68], iconAnchor:[28, 66], popupAnchor:[0, -60],
+          tooltipAnchor: narrow ? [0, -62] : [22, -36],
+          html:'<div class="lot-marker"><span class="pulse"></span><span class="pin"><i class="ph ph-car"></i></span></div>'
+        })
+      }).addTo(map);
+      pin.bindTooltip('Rocha Family Auto Sales', {permanent:true, direction: narrow ? 'top' : 'right', className:'lot-label', interactive:false});
+      pin.bindPopup(
+        '<div class="lot-pop"><img src="assets/logo.webp" alt="Rocha Family Auto Sales">' +
+        '<p>261861 Highway 101<br>Sequim, WA 98382</p>' +
+        '<div class="row"><a class="go" href="' + directions.href + '" target="_blank" rel="noopener">Directions</a><a href="tel:+13607971202">Call</a></div></div>',
+        {minWidth:210, maxWidth:240, autoPanPaddingTopLeft:[24, 90], autoPanPaddingBottomRight:[90, 24]}
+      );
+
+      $('#mapUi').hidden = false;
+      $('.map-layers').addEventListener('click', function(e){
+        var b = e.target.closest('button');
+        if (!b || layers[b.dataset.layer] === active) return;
+        map.removeLayer(active);
+        active = layers[b.dataset.layer].addTo(map);
+        mapEl.classList.toggle('tiles-dark', b.dataset.layer === 'map');
+        $$('.map-layers button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); });
+      });
+      $('.map-tools').addEventListener('click', function(e){
+        var b = e.target.closest('button');
+        if (!b) return;
+        if (b.dataset.act === 'in') map.zoomIn();
+        else if (b.dataset.act === 'out') map.zoomOut();
+        else goHome(true);
+      });
+
+      /* Scroll-wheel zoom only after a click, so the page keeps scrolling past the map */
+      var hint = $('#mapHint'), hintTimer;
+      mapEl.addEventListener('wheel', function(){
+        if (map.scrollWheelZoom.enabled()) return;
+        hint.classList.add('show');
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(function(){ hint.classList.remove('show'); }, 1500);
+      }, {passive:true});
+      map.on('click', function(){ map.scrollWheelZoom.enable(); hint.classList.remove('show'); });
+      map.on('mouseout', function(){ map.scrollWheelZoom.disable(); });
+    }
+
+    /* "How far am I?": the visitor's spot, a line to the lot, and the distance */
+    if (!('geolocation' in navigator)) locateBtn.hidden = true;
+    locateBtn.addEventListener('click', function(){
+      var dist = $('#mapDist');
+      locateBtn.setAttribute('aria-busy', 'true');
+      navigator.geolocation.getCurrentPosition(function(pos){
+        locateBtn.removeAttribute('aria-busy');
+        var me = [pos.coords.latitude, pos.coords.longitude];
+        directions.href = 'https://www.google.com/maps/dir/?api=1&origin=' + me.join(',') + '&destination=' + LOT.join(',');
+        if (!map) return;
+        var miles = map.distance(me, LOT) / 1609.344;
+        dist.textContent = 'You’re about ' + (miles < 10 ? miles.toFixed(1) : Math.round(miles).toLocaleString('en-US')) + ' miles away (straight line)';
+        dist.hidden = false;
+        if (you) map.removeLayer(you);
+        you = L.layerGroup([
+          L.polyline([me, LOT], {color:'#e3a34a', weight:3, opacity:.9, dashArray:'2 9', lineCap:'round'}),
+          L.marker(me, {title:'You are here', icon:L.divIcon({className:'', iconSize:[18, 18], html:'<div class="you-dot"></div>'})})
+            .bindTooltip('You', {direction:'top', offset:[0, -10]})
+        ]).addTo(map);
+        var size = map.getSize();
+        map.flyToBounds(L.latLngBounds([me, LOT]), {
+          paddingTopLeft: narrowMq.matches ? [40, 90] : [Math.round(size.x * 0.45), 90],
+          paddingBottomRight: narrowMq.matches ? [70, 150] : [90, 60],
+          maxZoom:16, duration: reduceMotion ? 0 : 1.4
+        });
+      }, function(){
+        locateBtn.removeAttribute('aria-busy');
+        dist.textContent = 'Couldn’t get your location. Tap Get Directions instead.';
+        dist.hidden = false;
+      }, {timeout:10000, maximumAge:300000});
+    });
+
+    function load(){
+      if (window.L) { init(); return; }
+      var s = document.createElement('script');
+      s.src = 'assets/vendor/leaflet/leaflet.min.js';
+      s.onload = init;
+      s.onerror = fallback;
+      document.head.appendChild(s);
+    }
+    if ('IntersectionObserver' in window) {
+      var mapObs = new IntersectionObserver(function(entries){
+        if (entries[0].isIntersecting) { mapObs.disconnect(); load(); }
+      }, {rootMargin:'300px 0px'});
+      mapObs.observe(mapEl);
+    } else {
+      load();
+    }
   })();
 
   /* Hero video: hold on the poster frame for reduced-motion users */
