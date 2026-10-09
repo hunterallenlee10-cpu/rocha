@@ -52,7 +52,7 @@
   --safe-top:env(safe-area-inset-top,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + var(--safe-top) + 12px)}
+html{background-color:var(--bg);scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + var(--safe-top) + 12px)}
 body{
   background:var(--bg);color:var(--text);
   font-family:var(--font-body);font-size:16px;line-height:1.6;
@@ -68,9 +68,11 @@ button{font:inherit;color:inherit}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-/* Film grain, fixed and non-interactive */
-body::after{
-  content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.05;
+/* Film grain, fixed and non-interactive. A real element (not body::after) kept below the header:
+   iOS Safari colours the status-bar strip from the fixed element it finds at the top edge, and a
+   pseudo-element on top would count as <body>, so page content would show through above the header */
+.grain{
+  position:fixed;inset:0;z-index:45;pointer-events:none;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -678,6 +680,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 
 <header class="site-header" id="siteHeader">
   <div class="wrap nav-row">
