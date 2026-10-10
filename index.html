@@ -212,6 +212,7 @@ section{padding:120px 0}
 
 /* ---------- Inventory ---------- */
 .inv-head{display:flex;flex-direction:column;margin-bottom:40px}
+.inv-title{display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap}
 .inv-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:28px}
 .seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
 .seg button{
@@ -765,7 +766,10 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   <section id="inventory" aria-label="Inventory">
     <div class="wrap">
       <div class="inv-head reveal">
-        <h2>On the lot right now.</h2>
+        <div class="inv-title">
+          <h2>On the lot right now.</h2>
+          <a class="btn btn-primary" href="#calculator"><i class="ph ph-calculator"></i>Calculate your monthly payment</a>
+        </div>
         <p class="lead">Search by price, body style or make and find the right quality pre-owned vehicle for you.</p>
       </div>
 
@@ -960,8 +964,8 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       <div class="lot-map" id="lotMap" role="region" aria-label="Map showing Rocha Family Auto Sales at 261861 Highway 101, Sequim, WA"></div>
       <div class="map-ui" id="mapUi" hidden>
         <div class="map-layers" role="group" aria-label="Map style">
-          <button type="button" data-layer="map" aria-pressed="true">Map</button>
-          <button type="button" data-layer="satellite" aria-pressed="false">Satellite</button>
+          <button type="button" data-layer="map" aria-pressed="false">Map</button>
+          <button type="button" data-layer="satellite" aria-pressed="true">Satellite</button>
         </div>
         <div class="map-tools">
           <button type="button" data-act="in" aria-label="Zoom in"><i class="ph ph-plus"></i></button>
@@ -1382,7 +1386,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
       // Leaflet couldn't load: show a Google Maps embed with a pin on the lot instead
       var f = document.createElement('iframe');
       f.title = 'Map of Rocha Family Auto Sales, 261861 Highway 101, Sequim, WA';
-      f.src = 'https://www.google.com/maps?q=' + LOT.join(',') + '&z=15&output=embed';
+      f.src = 'https://www.google.com/maps?q=' + LOT.join(',') + '&z=15&t=k&output=embed';
       f.loading = 'lazy';
       f.referrerPolicy = 'no-referrer-when-downgrade';
       mapEl.replaceWith(f);
@@ -1423,8 +1427,7 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
           L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {maxZoom:19})
         ])
       };
-      var active = layers.map.addTo(map);
-      mapEl.classList.add('tiles-dark');
+      var active = layers.satellite.addTo(map);
 
       var narrow = narrowMq.matches;
       var pin = L.marker(LOT, {
