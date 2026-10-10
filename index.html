@@ -212,6 +212,7 @@ section{padding:120px 0}
 
 /* ---------- Inventory ---------- */
 .inv-head{display:flex;flex-direction:column;margin-bottom:40px}
+.inv-title{display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap}
 .inv-tools{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:28px}
 .seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
 .seg button{
@@ -765,7 +766,10 @@ footer{padding:88px 0 40px;border-top:1px solid var(--line)}
   <section id="inventory" aria-label="Inventory">
     <div class="wrap">
       <div class="inv-head reveal">
-        <h2>On the lot right now.</h2>
+        <div class="inv-title">
+          <h2>On the lot right now.</h2>
+          <a class="btn btn-primary" href="#calculator"><i class="ph ph-calculator"></i>Calculate your monthly payment</a>
+        </div>
         <p class="lead">Search by price, body style or make and find the right quality pre-owned vehicle for you.</p>
       </div>
 
