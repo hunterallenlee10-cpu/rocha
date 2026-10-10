@@ -71,6 +71,6 @@ Inventory photos are the dealership's own. The About-section vehicle photos are 
 - Hero video: Mixkit clips 50267, 52427, 41393, 41537, 506 and 52452, under the [Mixkit Stock Video Free License](https://mixkit.co/license/#videoFree). Commercial use is allowed and attribution is not required.
 - Hurricane Ridge, Olympic Mountains: [Nick Mealey](https://commons.wikimedia.org/wiki/File:Hurricane_Ridge_(15189120833).jpg), CC BY 2.0 (converted to black and white)
 - Dodge Ram 3500 Quad Cab: [Mr.choppers](https://commons.wikimedia.org/wiki/File:2000_Dodge_Ram_3500_Sport_Quad_Cab_Long_Bed_2WD_in_White,_front_left.jpg), CC BY-SA 3.0 (background removed)
-- Mazda 626: [Elise240SX](https://commons.wikimedia.org/wiki/File:1999_Mazda_626_LX_in_Mojave_Beige_Mica,_Front_Right,_05-08-2023.jpg), CC BY-SA 4.0 (background removed)
+- BMW 330Ci coupe: [OSX](https://commons.wikimedia.org/wiki/File:2001_BMW_330Ci_(E46_MY2002)_coupe_(2010-12-10)_01.jpg), public domain (background removed)
 
 The same credits appear in the site footer under "Photo credits". Keep them if you reuse these images.
