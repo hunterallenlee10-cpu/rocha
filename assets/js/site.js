@@ -671,7 +671,7 @@
     function fallback(){
       var f = document.createElement('iframe');
       f.title = 'Map of Marque & Mile, Denver';
-      f.src = 'https://www.google.com/maps?q=' + LOT.join(',') + '&z=15&output=embed';
+      f.src = 'https://www.google.com/maps?q=' + LOT.join(',') + '&z=15&t=k&output=embed';
       f.loading = 'lazy';
       f.referrerPolicy = 'no-referrer-when-downgrade';
       mapEl.replaceWith(f);
@@ -707,8 +707,7 @@
           L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {maxZoom:19})
         ])
       };
-      var active = layers.map.addTo(map);
-      mapEl.classList.add('tiles-dark');
+      var active = layers.satellite.addTo(map);
       var narrow = narrowMq.matches;
       var pin = L.marker(LOT, {
         title:'Marque & Mile', alt:'Marque & Mile', riseOnHover:true, keyboard:true,

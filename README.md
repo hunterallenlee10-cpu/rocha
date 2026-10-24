@@ -18,12 +18,12 @@ Open `index.html` in a browser, or serve the folder (`python3 -m http.server`). 
 2. **Story**: 242-frame scroll film with four chapters (Lights, Marque, Mile, The floor), chapter rail, progress line, and car callouts that open the car sheet.
 3. **Makes**: a marquee of every make on the floor that speeds up with your scroll.
 4. **Spectrum**: a pinned, sideways-scrolling run of cars from most to least expensive. The car in focus is "lit", a rolling odometer shows its price, and a needle moves along a log-scale Marque-to-Mile gauge. On phones it becomes a swipe carousel.
-5. **The floor (collection)**: 24 cars with search, budget, sort, tier (All / Marque / Mile with counts) and body-style filters, View Transitions, an odometer result count, an empty state, a light-sweep hover and a "View" cursor.
+5. **The floor (collection)**: a "Calculate your monthly payment" button that jumps to the calculator, then 24 cars with search, budget, sort, tier (All / Marque / Mile with counts) and body-style filters, View Transitions, an odometer result count, an empty state, a light-sweep hover and a "View" cursor.
 6. **Car sheet**: price, estimated payment, specs, VIN, and buttons to apply for finance (pre-fills the form and calculator), estimate a payment, or book a viewing.
 7. **The standard** (racing green): four steps with a sticky photo that wipes to the next image as you read.
 8. **Finance**: the payment calculator (unchanged from the previous version of this site) next to the finance application with inline validation.
 9. **Sell your car**: an offer form over a shot of an everyday car rolling into the Light Room.
-10. **Visit**: an interactive Leaflet map (Map / Satellite, zoom, re-center, "How far am I?"), live open/closed status in Denver time, address, phone, email.
+10. **Visit**: an interactive Leaflet map that opens in satellite view (Map / Satellite toggle, zoom, re-center, "How far am I?"), live open/closed status in Denver time, address, phone, email.
 11. **Footer**: a giant wordmark that stretches from condensed to wide as it scrolls in (variable font width axis).
 
 Also: Lenis smooth scrolling, a header that hides on scroll down, a sticky Call / Apply bar on phones, keyboard focus styles, a skip link, `prefers-reduced-motion` support (no intro, no smoothing, no easing), LocalBusiness (AutoDealer) JSON-LD, and no horizontal scroll at 390px.

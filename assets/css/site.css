@@ -269,7 +269,8 @@ section.story{padding:0}
 /* ---------- Collection ---------- */
 .col-head{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:20px 48px;margin-bottom:44px}
 .col-head h2{font-size:clamp(3rem,7.5vw,6rem)}
-.col-head .lead{margin:0 0 8px}
+.col-head-side{display:grid;justify-items:start;gap:22px;padding-bottom:8px}
+.col-head .lead{margin:0}
 .col-find{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .col-search{position:relative;flex:1 1 360px}
 .col-search .ph{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--dim);pointer-events:none}
