@@ -509,7 +509,7 @@
     var capped = Math.min(down, price);
     if (!typing) down = capped;
     rPrice.value = price;
-    rDown.max = Math.min(price, 15000);
+    rDown.max = Math.min(price, MAX_PRICE);
     rDown.value = capped;
     var apr = +rApr.value;
     var financed = Math.max(0, price - capped);
