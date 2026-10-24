@@ -1,153 +1,165 @@
 /*
-  Rocha Family Auto Sales — current inventory
+  Marque & Mile: the collection
   ------------------------------------------------------------
-  To update the lot: add, edit, or remove an entry below.
+  Every card, filter, the Spectrum, the quick view and the finance
+  form's "Vehicle of interest" list are built from this file.
+
+  To update the floor: add, edit or remove an entry below.
+  - tier is "marque" (luxury and performance) or "mile" (everyday)
+  - type is one of: "suv", "sedan", "coupe" (coupes and convertibles),
+    "truck", "hatch" (hatchbacks and wagons)
   - price / wasPrice are in dollars and include dealer fees
-    (wasPrice is optional — set it to show a "Price Drop" badge)
-  - type is one of: "truck", "suv", "car", "wagon"
-  - photo is a path under assets/inventory/
-  - listing (optional) links to the full photo gallery
+    (wasPrice is optional; set it to show a "Price drop" tag)
+  - badge is optional ("Just arrived", "Manual", ...)
+  - photo is a path under assets/cars/ (3:2, studio shot, named by stock number)
+
+  This is a template: the dealership, the cars, prices and VINs are fictional
+  and the photos are AI-generated illustrations.
 */
-window.ROCHA_INVENTORY_UPDATED = "2026-10-09";
-window.ROCHA_INVENTORY = [
+window.MM_INVENTORY_UPDATED = "2026-10-24";
+window.MM_INVENTORY = [
   {
-    stock: "26111", year: 2017, make: "Jeep", model: "Cherokee", trim: "Latitude 4WD",
-    type: "suv", price: 16190, miles: 60331, color: "Silver",
-    engine: "2.4L I4", transmission: "9-Speed Automatic", drivetrain: "4WD", fuel: "Gasoline",
-    vin: "1C4PJMCB8HW651546", photo: "assets/inventory/26111.webp",
-    listing: "https://www.cargurus.com/details/457326098"
+    stock: "MM-2412", year: 2021, make: "Lamborghini", model: "Urus", trim: "",
+    tier: "marque", type: "suv", price: 214900, miles: 18420, color: "Arancio Borealis",
+    engine: "4.0L twin-turbo V8", transmission: "8-speed automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "ZPBUA1ZLXK2DEG0D9", photo: "assets/cars/MM-2412.webp", badge: "Just arrived"
   },
   {
-    stock: "25130", year: 2011, make: "Ford", model: "F-150", trim: "Lariat SuperCrew 4WD",
-    type: "truck", price: 14190, miles: 166745, color: "Red",
-    engine: "3.5L V6", transmission: "6-Speed Automatic", drivetrain: "4WD", fuel: "Gasoline",
-    vin: "1FTFW1ET3BKD48478", photo: "assets/inventory/25130.webp",
-    listing: "https://www.cargurus.com/details/429614489"
+    stock: "MM-2431", year: 2022, make: "Honda", model: "Civic", trim: "Sport Sedan",
+    tier: "mile", type: "sedan", price: 23490, miles: 21830, color: "Aegean Blue Metallic",
+    engine: "2.0L I4", transmission: "CVT automatic", drivetrain: "FWD", fuel: "Gasoline",
+    vin: "2HGFE2F5PCF43ESF4", photo: "assets/cars/MM-2431.webp"
   },
   {
-    stock: "26087", year: 2019, make: "RAM", model: "1500", trim: "Classic SLT Crew Cab 4WD",
-    type: "truck", price: 13190, wasPrice: 14190, miles: 167097,
-    engine: "5.7L V8", transmission: "8-Speed Automatic", drivetrain: "4WD", fuel: "Gasoline",
-    vin: "1C6RR7LT2KS644500", photo: "assets/inventory/26087.webp",
-    listing: "https://www.cargurus.com/details/455511155"
+    stock: "MM-2406", year: 2023, make: "Porsche", model: "911", trim: "Carrera S",
+    tier: "marque", type: "coupe", price: 142900, miles: 8940, color: "GT Silver Metallic",
+    engine: "3.0L twin-turbo flat-6", transmission: "8-speed PDK", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "WP0AB2A9DHRD2DRCJ", photo: "assets/cars/MM-2406.webp"
   },
   {
-    stock: "26100", year: 2001, make: "Ford", model: "F-250 Super Duty", trim: "Super Cab",
-    type: "truck", price: 11190, wasPrice: 13190, miles: 183872,
-    engine: "7.3L V8 Diesel", transmission: "Automatic", fuel: "Diesel",
-    vin: "1FTNX20F01EA44876", photo: "assets/inventory/26100.webp",
-    listing: "https://www.cargurus.com/details/455616801"
+    stock: "MM-2427", year: 2022, make: "Toyota", model: "RAV4", trim: "XLE Premium AWD",
+    tier: "mile", type: "suv", price: 29900, miles: 27410, color: "Lunar Rock",
+    engine: "2.5L I4", transmission: "8-speed automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "2T3A1RFVV3KHWMGN0", photo: "assets/cars/MM-2427.webp"
   },
   {
-    stock: "25140", year: 2010, make: "BMW", model: "535i xDrive", trim: "Wagon AWD",
-    type: "wagon", price: 10190, miles: 128121, color: "Gold",
-    engine: "3.0L I6", transmission: "6-Speed Automatic", drivetrain: "AWD", fuel: "Gasoline",
-    vin: "WBAPT7C58ACX02926", photo: "assets/inventory/25140.webp",
-    listing: "https://www.cargurus.com/details/460928662"
+    stock: "MM-2409", year: 2022, make: "Mercedes-AMG", model: "G 63", trim: "",
+    tier: "marque", type: "suv", price: 172900, miles: 21300, color: "Polar White",
+    engine: "4.0L twin-turbo V8", transmission: "9-speed automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "W1NYC7HJGEDP84X66", photo: "assets/cars/MM-2409.webp"
   },
   {
-    stock: "26109", year: 2007, make: "Ford", model: "Explorer Sport Trac", trim: "Limited 4WD",
-    type: "truck", price: 10190, miles: 132738, color: "Gray",
-    engine: "4.6L V8", transmission: "Automatic", drivetrain: "4WD", fuel: "Gasoline",
-    vin: "1FMEU53847UA66333", photo: "assets/inventory/26109.webp",
-    listing: "https://www.cargurus.com/details/457339019"
+    stock: "MM-2422", year: 2022, make: "Ford", model: "F-150", trim: "XLT SuperCrew 4x4",
+    tier: "mile", type: "truck", price: 41900, miles: 31560, color: "Antimatter Blue",
+    engine: "3.5L EcoBoost V6", transmission: "10-speed automatic", drivetrain: "4WD", fuel: "Gasoline",
+    vin: "1FTFW1E80WSMSFW8Y", photo: "assets/cars/MM-2422.webp"
   },
   {
-    stock: "25076", year: 2001, make: "Ford", model: "F-350 Super Duty", trim: "XL Long Bed 4WD",
-    type: "truck", price: 10190, miles: 148133, color: "White",
-    engine: "6.8L V10", transmission: "Automatic", drivetrain: "4WD", fuel: "Gasoline",
-    vin: "1FTSX31S91EC67132", photo: "assets/inventory/25076.webp",
-    listing: "https://www.cargurus.com/details/419407666"
+    stock: "MM-2402", year: 2022, make: "Ferrari", model: "Roma", trim: "",
+    tier: "marque", type: "coupe", price: 219500, miles: 6180, color: "Rosso Portofino",
+    engine: "3.9L twin-turbo V8", transmission: "8-speed dual-clutch", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "ZFF98RNA5VEH93LYK", photo: "assets/cars/MM-2402.webp"
   },
   {
-    stock: "26032", year: 2009, make: "Mercedes-Benz", model: "ML 320", trim: "BlueTEC 4MATIC",
-    type: "suv", price: 10190, miles: 145981, color: "White",
-    engine: "3.0L V6 Diesel", transmission: "7-Speed Automatic", drivetrain: "AWD", fuel: "Diesel",
-    vin: "4JGBB25E89A472467", photo: "assets/inventory/26032.webp",
-    listing: "https://www.cargurus.com/details/441932839"
+    stock: "MM-2425", year: 2023, make: "Tesla", model: "Model 3", trim: "Long Range AWD",
+    tier: "mile", type: "sedan", price: 31900, miles: 18240, color: "Pearl White",
+    engine: "Dual-motor electric", transmission: "Single-speed", drivetrain: "AWD", fuel: "Electric",
+    vin: "5YJ3E1EB83CEXYZ86", photo: "assets/cars/MM-2425.webp"
   },
   {
-    stock: "26091", year: 2012, make: "MINI", model: "Countryman", trim: "S ALL4 AWD",
-    type: "suv", price: 10190, miles: 89554,
-    engine: "1.6L I4", transmission: "6-Speed Automatic", drivetrain: "AWD", fuel: "Gasoline",
-    vin: "WMWZC5C52CWL57861", photo: "assets/inventory/26091.webp",
-    listing: "https://www.cargurus.com/details/460657305"
+    stock: "MM-2404", year: 2021, make: "Bentley", model: "Continental GT", trim: "V8",
+    tier: "marque", type: "coupe", price: 189900, miles: 14820, color: "British Racing Green",
+    engine: "4.0L twin-turbo V8", transmission: "8-speed dual-clutch", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "SCBCG2ZGEFU7EDW5V", photo: "assets/cars/MM-2404.webp"
   },
   {
-    stock: "26120", year: 2008, make: "Nissan", model: "Altima", trim: "2.5 S",
-    type: "car", price: 9190, miles: 160747,
-    engine: "2.5L I4", transmission: "CVT", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "1N4AL21E58N501178", photo: "assets/inventory/26120.webp",
-    listing: "https://www.cargurus.com/details/460928661"
+    stock: "MM-2424", year: 2022, make: "Jeep", model: "Wrangler", trim: "Unlimited Sahara",
+    tier: "mile", type: "suv", price: 38900, wasPrice: 40900, miles: 26310, color: "Firecracker Red",
+    engine: "3.6L V6", transmission: "8-speed automatic", drivetrain: "4WD", fuel: "Gasoline",
+    vin: "1C4HJXEN1ZB6ZLH8D", photo: "assets/cars/MM-2424.webp"
   },
   {
-    stock: "26011", year: 2014, make: "Volkswagen", model: "Passat", trim: "TDI SE with Sunroof",
-    type: "car", price: 8190, miles: 156045, color: "Gray",
-    engine: "2.0L I4 Diesel", transmission: "6-Speed Dual Clutch", drivetrain: "FWD", fuel: "Diesel",
-    vin: "1VWBN7A34EC052391", photo: "assets/inventory/26011.webp",
-    listing: "https://www.cargurus.com/details/460928663"
+    stock: "MM-2408", year: 2023, make: "Land Rover", model: "Range Rover", trim: "SE P400",
+    tier: "marque", type: "suv", price: 129900, miles: 12140, color: "Carpathian Grey",
+    engine: "3.0L turbo I6 mild hybrid", transmission: "8-speed automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "SALKP9E7PVJS228FL", photo: "assets/cars/MM-2408.webp"
   },
   {
-    stock: "26106", year: 2012, make: "Ford", model: "Escape", trim: "XLT AWD",
-    type: "suv", price: 8190, miles: 149403, color: "Gray",
-    engine: "2.5L I4", transmission: "6-Speed Automatic", drivetrain: "AWD", fuel: "Gasoline",
-    vin: "1FMCU9D78CKA69777", photo: "assets/inventory/26106.webp",
-    listing: "https://www.cargurus.com/details/458371688"
+    stock: "MM-2428", year: 2020, make: "Mazda", model: "MX-5 Miata", trim: "Club",
+    tier: "mile", type: "coupe", price: 25900, miles: 22180, color: "Soul Red Crystal",
+    engine: "2.0L I4", transmission: "6-speed manual", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "JM1NDAD752UJ4U3Z1", photo: "assets/cars/MM-2428.webp", badge: "Manual"
   },
   {
-    stock: "26103", year: 2009, make: "Toyota", model: "Sienna", trim: "LE 8-Passenger",
-    type: "wagon", price: 7190, wasPrice: 8190, miles: 158755, color: "Silver",
-    engine: "3.5L V6", transmission: "5-Speed Automatic", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "5TDZK23C29S278265", photo: "assets/inventory/26103.webp",
-    listing: "https://www.cargurus.com/details/456200142"
+    stock: "MM-2411", year: 2023, make: "Porsche", model: "Taycan", trim: "4S",
+    tier: "marque", type: "sedan", price: 89900, miles: 15420, color: "Frozen Blue Metallic",
+    engine: "Dual-motor electric", transmission: "2-speed automatic", drivetrain: "AWD", fuel: "Electric",
+    vin: "WP0AB2Y1RKFMKRRA8", photo: "assets/cars/MM-2411.webp", badge: "Just arrived"
   },
   {
-    stock: "26101", year: 2006, make: "BMW", model: "330Ci", trim: "Coupe RWD",
-    type: "car", price: 7190, wasPrice: 8190, miles: 124221, color: "Black",
-    engine: "3.0L I6", transmission: "Automatic", drivetrain: "RWD", fuel: "Gasoline",
-    vin: "WBABD53466PL18386", photo: "assets/inventory/26101.webp",
-    listing: "https://www.cargurus.com/details/455874419"
+    stock: "MM-2429", year: 2023, make: "Toyota", model: "Camry", trim: "SE",
+    tier: "mile", type: "sedan", price: 26900, miles: 19650, color: "Celestial Silver",
+    engine: "2.5L I4", transmission: "8-speed automatic", drivetrain: "FWD", fuel: "Gasoline",
+    vin: "4T1G11AKMTVAK30XJ", photo: "assets/cars/MM-2429.webp"
   },
   {
-    stock: "26086", year: 2013, make: "Hyundai", model: "Elantra GT", trim: "GLS",
-    type: "car", price: 6190, miles: 157626,
-    transmission: "6-Speed Automatic", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "KMHD35LE0DU057984", photo: "assets/inventory/26086.webp",
-    listing: "https://www.cargurus.com/details/459860323"
+    stock: "MM-2407", year: 2022, make: "Aston Martin", model: "Vantage", trim: "",
+    tier: "marque", type: "coupe", price: 112900, miles: 9610, color: "Lime Essence",
+    engine: "4.0L twin-turbo V8", transmission: "8-speed automatic", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "SCFSMGAW9D62222G7", photo: "assets/cars/MM-2407.webp"
   },
   {
-    stock: "26015", year: 2008, make: "Subaru", model: "Outback", trim: "2.5i Limited",
-    type: "wagon", price: 5190, miles: 255980, color: "Gold",
-    engine: "2.5L H4", transmission: "4-Speed Automatic", drivetrain: "AWD", fuel: "Gasoline",
-    vin: "4S4BP62C987325095", photo: "assets/inventory/26015.webp",
-    listing: "https://www.cargurus.com/details/441932842"
+    stock: "MM-2423", year: 2020, make: "Toyota", model: "4Runner", trim: "TRD Off-Road",
+    tier: "mile", type: "suv", price: 39900, miles: 41820, color: "Army Green",
+    engine: "4.0L V6", transmission: "5-speed automatic", drivetrain: "4WD", fuel: "Gasoline",
+    vin: "JTEBU5JR2DNEP5LHY", photo: "assets/cars/MM-2423.webp"
   },
   {
-    stock: "26036", year: 2012, make: "Ford", model: "Fusion", trim: "SEL V6",
-    type: "car", price: 5190, miles: 174834, color: "White",
-    engine: "3.0L V6 Flex Fuel", transmission: "6-Speed Automatic", drivetrain: "FWD", fuel: "Flex Fuel",
-    vin: "3FAHP0JG4CR109761", photo: "assets/inventory/26036.webp",
-    listing: "https://www.cargurus.com/details/447769284"
+    stock: "MM-2410", year: 2022, make: "Lexus", model: "LC 500", trim: "Convertible",
+    tier: "marque", type: "coupe", price: 92500, miles: 11830, color: "Flare Yellow",
+    engine: "5.0L V8", transmission: "10-speed automatic", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "JTHKPAAYDGAKG0BEP", photo: "assets/cars/MM-2410.webp"
   },
   {
-    stock: "25124", year: 2011, make: "Ford", model: "Fusion", trim: "SE",
-    type: "car", price: 5190, miles: 190922, color: "Silver",
-    engine: "2.5L I4", transmission: "6-Speed Automatic", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "3FAHP0HA2BR167495", photo: "assets/inventory/25124.webp",
-    listing: "https://www.cargurus.com/details/452639309"
+    stock: "MM-2430", year: 2021, make: "Subaru", model: "Outback", trim: "Premium",
+    tier: "mile", type: "hatch", price: 24900, miles: 38240, color: "Autumn Green Metallic",
+    engine: "2.5L flat-4", transmission: "CVT automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "4S4BTAFC1KTZ07HH8", photo: "assets/cars/MM-2430.webp"
   },
   {
-    stock: "26113", year: 2000, make: "Chrysler", model: "300M", trim: "",
-    type: "car", price: 4190, miles: 170490,
-    engine: "3.5L V6", transmission: "Automatic", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "2C3HE66G4YH338086", photo: "assets/inventory/26113.webp",
-    listing: "https://www.cargurus.com/details/458478406"
+    stock: "MM-2405", year: 2021, make: "Mercedes-Benz", model: "S 580", trim: "4MATIC",
+    tier: "marque", type: "sedan", price: 84900, wasPrice: 89900, miles: 24310, color: "Obsidian Black",
+    engine: "4.0L twin-turbo V8 mild hybrid", transmission: "9-speed automatic", drivetrain: "AWD", fuel: "Gasoline",
+    vin: "W1KG6FB1677WFKGYT", photo: "assets/cars/MM-2405.webp"
   },
   {
-    stock: "26066", year: 1999, make: "Mazda", model: "626", trim: "ES V6",
-    type: "car", price: 4190, miles: 193311,
-    engine: "2.5L V6", transmission: "Automatic", drivetrain: "FWD", fuel: "Gasoline",
-    vin: "1YVGF22D7X5815280", photo: "assets/inventory/26066.webp",
-    listing: "https://www.cargurus.com/details/456905985"
+    stock: "MM-2432", year: 2019, make: "Volkswagen", model: "Golf GTI", trim: "SE",
+    tier: "mile", type: "hatch", price: 21900, miles: 44720, color: "Pure White",
+    engine: "2.0L turbo I4", transmission: "6-speed manual", drivetrain: "FWD", fuel: "Gasoline",
+    vin: "3VW6T7AU7LBP0KBWF", photo: "assets/cars/MM-2432.webp", badge: "Manual"
+  },
+  {
+    stock: "MM-2413", year: 2022, make: "BMW", model: "M4", trim: "Competition",
+    tier: "marque", type: "coupe", price: 72900, miles: 16750, color: "Brooklyn Grey",
+    engine: "3.0L twin-turbo I6", transmission: "8-speed automatic", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "WBS33AZ0T0LZR9YRN", photo: "assets/cars/MM-2413.webp"
+  },
+  {
+    stock: "MM-2433", year: 2017, make: "Toyota", model: "Prius", trim: "Two",
+    tier: "mile", type: "hatch", price: 16900, miles: 71240, color: "Sea Glass Pearl",
+    engine: "1.8L I4 hybrid", transmission: "CVT automatic", drivetrain: "FWD", fuel: "Hybrid",
+    vin: "JTDKARFUS2RN8ZBBU", photo: "assets/cars/MM-2433.webp"
+  },
+  {
+    stock: "MM-2401", year: 2020, make: "Rolls-Royce", model: "Wraith", trim: "",
+    tier: "marque", type: "coupe", price: 229900, miles: 11240, color: "Salamanca Blue",
+    engine: "6.6L twin-turbo V12", transmission: "8-speed automatic", drivetrain: "RWD", fuel: "Gasoline",
+    vin: "SCA665C57TNZ5Z0FR", photo: "assets/cars/MM-2401.webp"
+  },
+  {
+    stock: "MM-2434", year: 2018, make: "Honda", model: "Fit", trim: "Sport",
+    tier: "mile", type: "hatch", price: 12900, wasPrice: 13900, miles: 52410, color: "Orange Fury",
+    engine: "1.5L I4", transmission: "CVT automatic", drivetrain: "FWD", fuel: "Gasoline",
+    vin: "3HGGK5H8GR7NYP7A7", photo: "assets/cars/MM-2434.webp"
   }
 ];
