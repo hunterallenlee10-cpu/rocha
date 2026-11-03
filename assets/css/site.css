@@ -604,6 +604,8 @@ form.done .form-success{display:block;animation:fadeUp .7s var(--ease) both}
 .credits summary:hover{color:var(--text)}
 .credits ul{list-style:none;margin-top:12px;display:grid;gap:6px;font-size:.8rem}
 .to-top{display:inline-flex;align-items:center;gap:6px;color:var(--text)}
+.foot-credit{flex-basis:100%}
+.foot-credit a:hover{color:var(--text)}
 
 /* ---------- Mobile action bar ---------- */
 .mobile-bar{display:none}
